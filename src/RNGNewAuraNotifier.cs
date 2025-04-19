@@ -1,0 +1,58 @@
+﻿using System;
+using System.Windows.Forms;
+
+namespace RNGNewAuraNotifier
+{
+    public class RNGNewAuraNotifier : ApplicationContext
+    {
+        private readonly NotifyIcon trayIcon;
+        private SettingsForm settingsForm;
+
+        public RNGNewAuraNotifier()
+        {
+            // システムトレイアイコンの設定
+            trayIcon = new NotifyIcon()
+            {
+                Icon = Properties.Resources.AppIcon,
+                ContextMenu = new ContextMenu(new MenuItem[]
+                {
+                    new MenuItem("設定", ShowSettings),
+                    new MenuItem("終了", Exit)
+                }),
+                Visible = true,
+                Text = "RNGNewAuraNotifier"
+            };
+            // トレイアイコンのクリックイベントを設定。クリックで設定画面を表示
+            trayIcon.MouseClick += (sender, e) =>
+            {
+                if (e.Button == MouseButtons.Left)
+                {
+                    ShowSettings(sender, e);
+                }
+            };
+        }
+
+        /// <summary>
+        /// 設定画面を表示する
+        /// </summary>
+        private void ShowSettings(object sender, EventArgs e)
+        {
+            if (settingsForm == null || settingsForm.IsDisposed)
+            {
+                settingsForm = new SettingsForm();
+            }
+
+            settingsForm.Show();
+            settingsForm.BringToFront();
+        }
+
+        /// <summary>
+        /// アプリケーションを終了する
+        /// </summary>
+        private void Exit(object sender, EventArgs e)
+        {
+            trayIcon.Visible = false;
+            Application.Exit();
+        }
+    }
+}
