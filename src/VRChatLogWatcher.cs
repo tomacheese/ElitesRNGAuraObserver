@@ -46,12 +46,21 @@ namespace RNGNewAuraNotifier
         /// <summary>
         /// VRChatログイン時のログパターン
         /// </summary>
-        private readonly string vrchatuserAuthenticatedLogPattern = @"(?<datetime>[0-9]{4}\.[0-9]{2}.[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}) (?<Level>.[A-z]+) *- *User Authenticated: (?<UserName>.+) \((?<UserId>usr_[A-z0-9\-]+)\)";
+        private static readonly Regex VrchatUserAuthenticatedRegex = new Regex(
+            @"(?<datetime>[0-9]{4}\.[0-9]{2}.[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}) (?<Level>.[A-z]+) *- *User Authenticated: (?<UserName>.+) \((?<UserId>usr_[A-z0-9\-]+)\)",
+            RegexOptions.Compiled
+        );
 
         /// <summary>
         /// Aura取得時のログパターン
         /// </summary>
-        private readonly string auraLogPattern = @"(?<datetime>[0-9]{4}\.[0-9]{2}.[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}) (?<Level>.[A-z]+) *- *\[<color=green>Elite's RNG Land</color>\] Successfully legitimized Aura #(?<AuraId>[0-9]{2})\.";
+        private static readonly Regex AuraLogRegex = new Regex(
+            @"(?<datetime>[0-9]{4}\.[0-9]{2}.[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}) (?<Level>.[A-z]+) *- *\[<color=green>Elite's RNG Land</color>\] Successfully legitimized Aura #(?<AuraId>[0-9]{2})\.",
+            RegexOptions.Compiled
+        );
+
+        private const string NotifyTitle = "Successfully legitimized Aura!";
+        private const int AuraIdLength = 2;
 
         public VRChatLogWatcher(string logDirectory)
         {
@@ -117,7 +126,7 @@ namespace RNGNewAuraNotifier
         private string GetNewestLogFile()
         {
             var files = Directory.GetFiles(logDir, "output_log_*.txt");
-            if(files.Length == 0)
+            if (files.Length == 0)
             {
                 return null;
             }
@@ -126,27 +135,40 @@ namespace RNGNewAuraNotifier
 
         private async Task ReadNewLines(string filePath)
         {
-            if (filePath == null) return;
-            if (!File.Exists(filePath)) return;
+            if (string.IsNullOrEmpty(filePath) || !File.Exists(filePath)) return;
 
-            var fi = new FileInfo(filePath);
-            if (fi.Length < lastOffset)
+            try
             {
-                lastOffset = 0;
-            }
-
-            using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            {
-                fs.Seek(lastOffset, SeekOrigin.Begin);
-                using (var sr = new StreamReader(fs, Encoding.UTF8))
+                var fi = new FileInfo(filePath);
+                if (fi.Length < lastOffset)
                 {
-                    string line;
-                    while ((line = await sr.ReadLineAsync()) != null)
-                    {
-                        HandleLine(line);
-                    }
-                    lastOffset = fs.Position;
+                    lastOffset = 0;
                 }
+
+                using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
+                    fs.Seek(lastOffset, SeekOrigin.Begin);
+                    using (var sr = new StreamReader(fs, Encoding.UTF8))
+                    {
+                        string line;
+                        while ((line = await sr.ReadLineAsync()) != null)
+                        {
+                            try
+                            {
+                                HandleLine(line);
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"[ERROR] HandleLine: {ex.Message}");
+                            }
+                        }
+                        lastOffset = fs.Position;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ERROR] ReadNewLines: {ex.Message}");
             }
         }
 
@@ -155,7 +177,7 @@ namespace RNGNewAuraNotifier
             Console.WriteLine($"[LOG|{isFirstLoading}] {line}");
 
             // 2025.04.19 14:10:45 Debug      -  User Authenticated: Tomachi (usr_0b83d9be-9852-42dd-98e2-625062400acc)
-            var matchUserLogPattern = Regex.Match(line, vrchatuserAuthenticatedLogPattern);
+            var matchUserLogPattern = VrchatUserAuthenticatedRegex.Match(line);
             if (matchUserLogPattern.Success)
             {
                 string datetime = matchUserLogPattern.Groups["datetime"].Value;
@@ -172,7 +194,7 @@ namespace RNGNewAuraNotifier
             }
 
             // 2025.04.16 18:07:07 Debug      -  [<color=green>Elite's RNG Land</color>] Successfully legitimized Aura #60.
-            var matchAuraLogPattern = Regex.Match(line, auraLogPattern);
+            var matchAuraLogPattern = AuraLogRegex.Match(line);
             if (matchAuraLogPattern.Success)
             {
                 string datetime = matchAuraLogPattern.Groups["datetime"].Value;
@@ -185,14 +207,20 @@ namespace RNGNewAuraNotifier
 
                 if (!isFirstLoading)
                 {
-                    Notifier.ShowToast("Successfully legitimized Aura!", $"{auraName} (#{auraId})");
+                    Notifier.ShowToast(NotifyTitle, $"{auraName} (#{auraId})");
                     Task.Run(async () =>
                     {
-                        await Notifier.SendDiscordWebhook("Successfully legitimized Aura!", $"{auraName} (#{auraId})", vrchatUser);
+                        try
+                        {
+                            await Notifier.SendDiscordWebhook(NotifyTitle, $"{auraName} (#{auraId})", vrchatUser);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"[ERROR] DiscordWebhook: {ex.Message}");
+                        }
                     });
                 }
             }
-
         }
     }
 }
