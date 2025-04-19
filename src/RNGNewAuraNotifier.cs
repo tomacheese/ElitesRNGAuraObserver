@@ -52,6 +52,7 @@ namespace RNGNewAuraNotifier
         private void Exit(object sender, EventArgs e)
         {
             trayIcon.Visible = false;
+            trayIcon.Dispose();
             Application.Exit();
         }
     }
