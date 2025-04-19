@@ -3,7 +3,7 @@
     /// <summary>
     /// VRChatのユーザ情報を格納するクラス
     /// <summary>
-    public class VRChatUser
+    internal class VRChatUser
     {
         /// <summary>
         /// ユーザ名

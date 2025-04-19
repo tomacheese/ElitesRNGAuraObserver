@@ -11,7 +11,7 @@ namespace RNGNewAuraNotifier
     /// <summary>
     /// VRChatのログファイルを監視するクラス
     /// summary>
-    class VRChatLogWatcher
+    internal class VRChatLogWatcher
     {
         /// <summary>
         /// 監視対象のログディレクトリパス

@@ -10,7 +10,7 @@ namespace RNGNewAuraNotifier
     /// <summary>
     /// 通知を管理するクラス
     /// </summary>
-    public static class Notifier
+    internal static class Notifier
     {
         /// <summary>
         /// Windowsのトースト通知を表示する

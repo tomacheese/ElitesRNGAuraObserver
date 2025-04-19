@@ -4,6 +4,8 @@ namespace RNGNewAuraNotifier
 {
     public partial class SettingsForm : Form
     {
+        private Timer timer;
+
         public SettingsForm()
         {
             InitializeComponent();
@@ -11,7 +13,7 @@ namespace RNGNewAuraNotifier
 
         /// <summary>
         /// 設定画面がロードされたときの処理
-        /// <summary>
+        /// </summary>
         private void OnLoad(object sender, System.EventArgs e)
         {
             // 設定ファイルから値を読み込む
@@ -19,8 +21,10 @@ namespace RNGNewAuraNotifier
             textBoxDiscordWebhookUrl.Text = AppConfig.DiscordWebhookUrl;
 
             // 1秒ごとに監視対象パスの更新を行う
-            var timer = new Timer();
-            timer.Interval = 1000; // 1 sec
+            timer = new Timer
+            {
+                Interval = 1000 // 1 sec
+            };
             timer.Tick += (s, args) =>
             {
                 textBoxWatchingFilePath.Text = Program.Watcher.GetCurrentFile();
@@ -39,6 +43,12 @@ namespace RNGNewAuraNotifier
 
             Program.Watcher.Stop();
             Program.Watcher = new VRChatLogWatcher(textBoxLogDir.Text);
+            Program.Watcher.Start();
+        }
+
+        private void OnFormClosed(object sender, FormClosedEventArgs e)
+        {
+            timer.Dispose();
         }
     }
 }

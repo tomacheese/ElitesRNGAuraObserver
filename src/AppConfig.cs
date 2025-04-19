@@ -8,7 +8,7 @@ namespace RNGNewAuraNotifier
     /// <summary>
     /// アプリケーションの設定を管理するクラス
     /// </summary>
-    public class AppConfig
+    internal class AppConfig
     {
         /// <summary>
         /// 設定ファイルのパス

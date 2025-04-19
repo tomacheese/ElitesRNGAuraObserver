@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace RNGNewAuraNotifier
 {
-    public class RNGNewAuraNotifier : ApplicationContext
+    internal class RNGNewAuraNotifier : ApplicationContext
     {
         private readonly NotifyIcon trayIcon;
         private SettingsForm settingsForm;
