@@ -38,8 +38,8 @@ namespace RNGNewAuraNotifier
         /// <remarks>設定ファイルに値を保存し、VRChatのログ監視を再起動する</remarks>
         private void OnSaveButtonClicked(object sender, System.EventArgs e)
         {
-            AppConfig.LogDir = textBoxLogDir.Text != "" ? textBoxLogDir.Text : null;
-            AppConfig.DiscordWebhookUrl = textBoxDiscordWebhookUrl.Text != "" ? textBoxDiscordWebhookUrl.Text : null;
+            AppConfig.LogDir = !string.IsNullOrEmpty(textBoxLogDir.Text) ? textBoxLogDir.Text : null;
+            AppConfig.DiscordWebhookUrl = !string.IsNullOrEmpty(textBoxDiscordWebhookUrl.Text) ? textBoxDiscordWebhookUrl.Text : null;
 
             Program.Watcher.Stop();
             Program.Watcher = new VRChatLogWatcher(textBoxLogDir.Text);
