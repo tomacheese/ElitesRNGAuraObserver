@@ -83,7 +83,7 @@ namespace RNGNewAuraNotifier
             }
             set
             {
-                _config.LogDir = value;
+                _config.LogDir = value.Trim();
                 Save();
             }
         }
@@ -101,7 +101,7 @@ namespace RNGNewAuraNotifier
             }
             set
             {
-                _config.DiscordWebhookUrl = value;
+                _config.DiscordWebhookUrl = value.Trim();
                 Save();
             }
         }

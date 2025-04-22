@@ -34,7 +34,7 @@ namespace RNGNewAuraNotifier
         public static async Task SendDiscordWebhook(string title, string message, VRChatUser vrchatUser)
         {
             var url = AppConfig.DiscordWebhookUrl;
-            if (url == null) return;
+            if (string.IsNullOrEmpty(url)) return;
 
             var version = Assembly.GetExecutingAssembly().GetName().Version;
 
