@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  release:
+    if: startsWith(github.event.release.tag_name, 'v')
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Set version from tag
+        run: |
+          $tag = "${{ github.ref_name }}"
+          $version = $tag -replace '^v', ''
+          $versionWithRevision = ($version.Split('.') + '0')[0..3] -join '.'
+          (Get-Content .\Properties\AssemblyInfo.cs) -replace '(\[assembly: AssemblyVersion\(")[^"]*("\)\])', "`$1$versionWithRevision`$2" | Set-Content .\Properties\AssemblyInfo.cs
+          (Get-Content .\Properties\AssemblyInfo.cs) -replace '(\[assembly: AssemblyFileVersion\(")[^"]*("\)\])', "`$1$versionWithRevision`$2" | Set-Content .\Properties\AssemblyInfo.cs
+        shell: pwsh
+
+      - name: Restore NuGet packages
+        run: nuget restore RNGNewAuraNotifier.sln
+
+      - name: Build solution
+        run: msbuild RNGNewAuraNotifier.sln /p:Configuration=Release
+
+      - name: Upload exe to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: bin/Release/RNGNewAuraNotifier.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
