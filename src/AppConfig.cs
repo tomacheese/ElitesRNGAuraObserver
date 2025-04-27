@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Windows.Storage.Search;
 
 namespace RNGNewAuraNotifier
 {
@@ -83,7 +84,13 @@ namespace RNGNewAuraNotifier
             }
             set
             {
-                _config.LogDir = value.Trim();
+                // required exists path
+                var trimmedValue = value?.Trim();
+                if (trimmedValue != null && !Directory.Exists(trimmedValue))
+                {
+                    throw new DirectoryNotFoundException($"The specified directory does not exist: {trimmedValue}");
+                }
+                _config.LogDir = trimmedValue;
                 Save();
             }
         }
@@ -101,7 +108,13 @@ namespace RNGNewAuraNotifier
             }
             set
             {
-                _config.DiscordWebhookUrl = value.Trim();
+                // required http or https
+                var trimmedValue = value?.Trim();
+                if (trimmedValue != null && !trimmedValue.StartsWith("http://") && !trimmedValue.StartsWith("https://"))
+                {
+                    throw new ArgumentException("DiscordWebhookUrl must start with http or https.");
+                }
+                _config.DiscordWebhookUrl = trimmedValue;
                 Save();
             }
         }
