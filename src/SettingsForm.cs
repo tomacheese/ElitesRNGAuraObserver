@@ -73,7 +73,7 @@ namespace RNGNewAuraNotifier
 
         private void OnFormClosing(object sender, FormClosingEventArgs e)
         {
-            var changed = lastSavedLogDir != textBoxLogDir.Text || lastSavedDiscordWebhookUrl != textBoxDiscordWebhookUrl.Text;
+            var changed = lastSavedLogDir != textBoxLogDir.Text.Trim() || lastSavedDiscordWebhookUrl != textBoxDiscordWebhookUrl.Text.Trim();
             if (!changed)
             {
                 return;
