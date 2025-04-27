@@ -60,7 +60,6 @@ namespace RNGNewAuraNotifier
         );
 
         private const string NotifyTitle = "Successfully legitimized Aura!";
-        private const int AuraIdLength = 2;
 
         public VRChatLogWatcher(string logDirectory)
         {
