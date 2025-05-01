@@ -21,11 +21,14 @@ jobs:
         run: nuget restore RNGNewAuraNotifier.sln
 
       - name: Build solution
-        run: msbuild RNGNewAuraNotifier.sln /p:Configuration=Release
+        run: dotnet build RNGNewAuraNotifier.sln /p:Configuration=Release
+
+      - name: Publish solution
+        run: dotnet publish RNGNewAuraNotifier.sln -p:PublishProfile=Publish
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: RNGNewAuraNotifier
           path: |
-            bin/Release/
+            **/bin/
