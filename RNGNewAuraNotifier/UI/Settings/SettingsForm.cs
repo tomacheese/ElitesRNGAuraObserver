@@ -38,8 +38,8 @@ public partial class SettingsForm : Form
         };
         _timer.Start();
 
-        _lastSavedLogDir = textBoxLogDir.Text;
-        _lastSavedDiscordWebhookUrl = textBoxDiscordWebhookUrl.Text;
+        _lastSavedLogDir = textBoxLogDir.Text.Trim();
+        _lastSavedDiscordWebhookUrl = textBoxDiscordWebhookUrl.Text.Trim();
     }
 
     /// <summary>

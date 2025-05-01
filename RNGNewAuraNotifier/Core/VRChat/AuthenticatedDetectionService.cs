@@ -35,7 +35,7 @@ internal partial class AuthenticatedDetectionService
     private void HandleLogLine(string line, bool isFirstReading)
     {
         var matchUserLogPattern = UserAuthenticatedRegex().Match(line);
-        Debug.WriteLine($"AuthenticatedDetectionService.HandleLogLine/matchUserLogPattern.Success: ${matchUserLogPattern.Success}");
+        Debug.WriteLine($"AuthenticatedDetectionService.HandleLogLine/matchUserLogPattern.Success: {matchUserLogPattern.Success}");
         if (!matchUserLogPattern.Success)
         {
             return;

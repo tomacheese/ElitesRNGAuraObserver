@@ -109,7 +109,7 @@ internal class RNGNewAuraController
     /// <param name="isFirstReading">初回読み込みかどうか</param>
     private void OnNewAura(Aura.Aura aura, bool isFirstReading)
     {
-        Debug.WriteLine($"New Aura: {aura.Name} (#{aura.Id}) - ${isFirstReading}");
+        Debug.WriteLine($"New Aura: {aura.Name} (#{aura.Id}) - {isFirstReading}");
         if (isFirstReading)
         {
             return;
