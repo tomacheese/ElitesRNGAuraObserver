@@ -1,5 +1,4 @@
 using RNGNewAuraNotifier.Core.VRChat;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace RNGNewAuraNotifier.Core.Aura;

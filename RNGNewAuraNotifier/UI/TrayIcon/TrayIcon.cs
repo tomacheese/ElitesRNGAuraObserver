@@ -36,9 +36,9 @@ internal class TrayIcon : ApplicationContext
         };
     }
 
-    /// <summary>  
-    /// 設定画面を表示する  
-    /// </summary>  
+    /// <summary>
+    /// 設定画面を表示する
+    /// </summary>
     private void ShowSettings(object? sender, EventArgs e)
     {
         if (_settingsForm == null || _settingsForm.IsDisposed)
@@ -50,9 +50,9 @@ internal class TrayIcon : ApplicationContext
         _settingsForm.BringToFront();
     }
 
-    /// <summary>  
-    /// アプリケーションを終了する  
-    /// </summary>  
+    /// <summary>
+    /// アプリケーションを終了する
+    /// </summary>
     private void Exit(object? sender, EventArgs e)
     {
         _trayIcon.Visible = false;

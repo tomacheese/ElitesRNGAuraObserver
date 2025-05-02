@@ -27,14 +27,14 @@ public partial class SettingsForm : Form
         textBoxLogDir.Text = AppConfig.LogDir;
         if (string.IsNullOrWhiteSpace(textBoxLogDir.Text))
         {
-            textBoxLogDir.Text = Program.Controller.GetLogDirectory();
+            textBoxLogDir.Text = Program.Controller?.GetLogDirectory() ?? string.Empty;
         }
         textBoxDiscordWebhookUrl.Text = AppConfig.DiscordWebhookUrl;
 
         // 1秒ごとに監視対象パスの更新を行う
         _timer.Tick += (s, args) =>
         {
-            textBoxWatchingFilePath.Text = Program.Controller.GetLastReadFilePath();
+            textBoxWatchingFilePath.Text = Program.Controller?.GetLastReadFilePath() ?? string.Empty;
         };
         _timer.Start();
 
@@ -53,7 +53,7 @@ public partial class SettingsForm : Form
             AppConfig.LogDir = textBoxLogDir.Text;
             AppConfig.DiscordWebhookUrl = textBoxDiscordWebhookUrl.Text;
 
-            Program.Controller.Dispose();
+            Program.Controller?.Dispose();
             Program.Controller = new RNGNewAuraController(textBoxLogDir.Text);
             Program.Controller.Start();
 
