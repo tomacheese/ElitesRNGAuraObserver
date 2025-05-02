@@ -94,8 +94,7 @@ internal static partial class Program
 
     public static void Application_UnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
-        Exception? ex = e.ExceptionObject as Exception;
-        if (ex == null)
+        if (e.ExceptionObject is not Exception ex)
         {
             return;
         }
