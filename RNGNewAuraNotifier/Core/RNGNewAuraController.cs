@@ -124,6 +124,6 @@ internal class RNGNewAuraController
             {
                 Console.WriteLine($"[ERROR] DiscordWebhook: {ex.Message}");
             }
-        });
+        }).Wait();
     }
 }

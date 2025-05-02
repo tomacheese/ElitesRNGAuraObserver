@@ -16,12 +16,9 @@ internal static partial class Program
     [STAThread]
     static void Main()
     {
-        Application.ThreadException += new
-            ThreadExceptionEventHandler(Application_ThreadException);
-
-        // UnhandledExceptionイベント・ハンドラを登録する
-        Thread.GetDomain().UnhandledException += new
-            UnhandledExceptionEventHandler(Application_UnhandledException);
+        Application.ThreadException += OnThreadException;
+        Thread.GetDomain().UnhandledException += OnUnhandledException;
+        TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
 
         string[] cmds = Environment.GetCommandLineArgs();
         bool isDebugMode = false;
@@ -63,60 +60,61 @@ internal static partial class Program
         Application.Run(new TrayIcon());
     }
 
-    public static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
-    {
-        DialogResult result = MessageBox.Show(
-            "An error has occurred and the operation has stopped.\n" +
-            "It would be helpful if you could report this bug using GitHub issues!\n" +
-            "https://github.com/tomacheese/RNGNewAuraNotifier/issues\n" +
-            "\n" +
-            "----- Error Details -----\n" +
-            e.Exception.Message + "\n" +
-            e.Exception.InnerException?.Message + "\n" +
-            "\n" +
-            "----- StackTrace -----\n" +
-            e.Exception.StackTrace + "\n" +
-            "\n" +
-            "Click OK to open the Create GitHub issue page.\n" +
-            "Click Cancel to close this application.",
-            "Error (ThreadException)",
-            MessageBoxButtons.OKCancel,
-            MessageBoxIcon.Error);
 
-        if (result == DialogResult.OK)
-        {
-            Process.Start("https://github.com/tomacheese/RNGNewAuraNotifier/issues/new");
-        }
-        Application.Exit();
+    public static void OnThreadException(object sender, ThreadExceptionEventArgs e)
+    {
+        OnException(e.Exception, "ThreadException");
     }
 
-    public static void Application_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+    public static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
         if (e.ExceptionObject is not Exception ex)
         {
             return;
         }
+        OnException(ex, "UnhandledException");
+    }
+
+    public static void OnUnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
+    {
+        OnException(e.Exception, "UnobservedTaskException");
+    }
+
+
+    public static void OnException(Exception e, string exceptionType)
+    {
+        Console.WriteLine($"Exception: {exceptionType}");
+        Console.WriteLine($"Message: {e.Message}");
+        Console.WriteLine($"InnerException: {e.InnerException?.Message}");
+        Console.WriteLine($"StackTrace: {e.StackTrace}");
+
+        string errorDetailAndStacktrace = "----- Error Details -----\n" +
+            e.Message + "\n" +
+            e.InnerException?.Message + "\n" +
+            "\n" +
+            "----- StackTrace -----\n" +
+            e.StackTrace + "\n";
+
         DialogResult result = MessageBox.Show(
             "An error has occurred and the operation has stopped.\n" +
             "It would be helpful if you could report this bug using GitHub issues!\n" +
             "https://github.com/tomacheese/RNGNewAuraNotifier/issues\n" +
             "\n" +
-            "----- Error Details -----\n" +
-            ex.Message + "\n" +
-            ex.InnerException?.Message + "\n" +
-            "\n" +
-            "----- StackTrace -----\n" +
-            ex.StackTrace + "\n" +
+            errorDetailAndStacktrace +
             "\n" +
             "Click OK to open the Create GitHub issue page.\n" +
             "Click Cancel to close this application.",
-            "Error (UnhandledException)",
+            $"Error ({exceptionType})",
             MessageBoxButtons.OKCancel,
             MessageBoxIcon.Error);
 
         if (result == DialogResult.OK)
         {
-            Process.Start("https://github.com/tomacheese/RNGNewAuraNotifier/issues/new");
+            Process.Start(new ProcessStartInfo()
+            {
+                FileName = "https://github.com/tomacheese/RNGNewAuraNotifier/issues/new?body=" + Uri.EscapeDataString(errorDetailAndStacktrace),
+                UseShellExecute = true,
+            });
         }
         Application.Exit();
     }
