@@ -39,6 +39,7 @@ internal static partial class Program
         }
 
         Console.WriteLine("Program.Main");
+        ApplicationConfiguration.Initialize();
 
         // ログディレクトリのパス対象が存在しない場合はメッセージを出してリセットする
         if (!Directory.Exists(AppConfig.LogDir))
@@ -59,7 +60,6 @@ internal static partial class Program
         Controller = new RNGNewAuraController(AppConfig.LogDir);
         Controller.Start();
 
-        ApplicationConfiguration.Initialize();
         Application.Run(new TrayIcon());
     }
 
