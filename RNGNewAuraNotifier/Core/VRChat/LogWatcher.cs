@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Text;
 
 namespace RNGNewAuraNotifier.Core.VRChat;
@@ -49,7 +48,7 @@ internal class LogWatcher
     /// </summary>
     public void Start()
     {
-        Debug.WriteLine($"LogWatcher.Start: {_fsw.Path} | {_fsw.Filter} | {_lastReadFilePath}");
+        Console.WriteLine($"LogWatcher.Start: {_fsw.Path} | {_fsw.Filter} | {_lastReadFilePath}");
 
         _fsw.EnableRaisingEvents = true;
 
@@ -69,18 +68,18 @@ internal class LogWatcher
 
     private void ReadNewLine(string path)
     {
-        Debug.WriteLine($"ReadNewLine: {path} ({_lastPosition})");
+        Console.WriteLine($"ReadNewLine: {path} ({_lastPosition})");
         try
         {
             using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             if (stream.Length == 0)
             {
-                Debug.WriteLine($"File is empty: {path}");
+                Console.WriteLine($"File is empty: {path}");
                 return;
             }
             if (_lastReadFilePath != path || stream.Length < _lastPosition)
             {
-                Debug.WriteLine($"File changed: {_lastReadFilePath} -> {path} | {_lastPosition} -> {stream.Length}");
+                Console.WriteLine($"File changed: {_lastReadFilePath} -> {path} | {_lastPosition} -> {stream.Length}");
                 _lastPosition = 0;
             }
 
@@ -98,14 +97,14 @@ internal class LogWatcher
                     continue;
                 }
 
-                Debug.WriteLine($"Log line: {line}");
+                Console.WriteLine($"Log line: {line}");
                 try
                 {
                     OnNewLogLine.Invoke(line, isFirstReading);
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Error processing log line: {ex.Message}");
+                    Console.WriteLine($"Error processing log line: {ex.Message}");
                 }
 
                 _lastReadFilePath = path;
@@ -114,7 +113,7 @@ internal class LogWatcher
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Failed to read log file: {ex.Message}");
+            Console.WriteLine($"Failed to read log file: {ex.Message}");
         }
     }
 

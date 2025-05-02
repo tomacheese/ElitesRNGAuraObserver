@@ -1,7 +1,6 @@
 using RNGNewAuraNotifier.Core.Aura;
 using RNGNewAuraNotifier.Core.Notification;
 using RNGNewAuraNotifier.Core.VRChat;
-using System.Diagnostics;
 
 namespace RNGNewAuraNotifier.Core;
 internal class RNGNewAuraController
@@ -48,7 +47,7 @@ internal class RNGNewAuraController
     /// </summary>
     public void Start()
     {
-        Debug.WriteLine("RNGNewAuraController.Start");
+        Console.WriteLine("RNGNewAuraController.Start");
         new AuthenticatedDetectionService(_logWatcher).OnDetected += OnAuthenticatedUser;
         new NewAuraDetectionService(_logWatcher).OnDetected += OnNewAura;
         _logWatcher.Start();
@@ -59,7 +58,7 @@ internal class RNGNewAuraController
     /// </summary>
     public void Stop()
     {
-        Debug.WriteLine("RNGNewAuraController.Stop");
+        Console.WriteLine("RNGNewAuraController.Stop");
         _logWatcher.Stop();
     }
 
@@ -68,7 +67,7 @@ internal class RNGNewAuraController
     /// </summary>
     public void Dispose()
     {
-        Debug.WriteLine("RNGNewAuraController.Dispose");
+        Console.WriteLine("RNGNewAuraController.Dispose");
         _logWatcher.Stop();
         _logWatcher.Dispose();
     }
@@ -98,7 +97,7 @@ internal class RNGNewAuraController
     /// <param name="isFirstReading">初回読み込みかどうか</param>
     private void OnAuthenticatedUser(VRChatUser user, bool isFirstReading)
     {
-        Debug.WriteLine($"Authenticated User: {user.UserName} ({user.UserId})");
+        Console.WriteLine($"Authenticated User: {user.UserName} ({user.UserId})");
         _vrchatUser = user;
     }
 
@@ -109,7 +108,7 @@ internal class RNGNewAuraController
     /// <param name="isFirstReading">初回読み込みかどうか</param>
     private void OnNewAura(Aura.Aura aura, bool isFirstReading)
     {
-        Debug.WriteLine($"New Aura: {aura.Name} (#{aura.Id}) - {isFirstReading}");
+        Console.WriteLine($"New Aura: {aura.Name} (#{aura.Id}) - {isFirstReading}");
         if (isFirstReading)
         {
             return;

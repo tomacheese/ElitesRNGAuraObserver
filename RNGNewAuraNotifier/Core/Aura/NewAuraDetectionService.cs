@@ -40,7 +40,7 @@ internal partial class NewAuraDetectionService
     private void HandleLogLine(string line, bool isFirstReading)
     {
         var matchAuraLogPattern = AuraLogRegex().Match(line);
-        Debug.WriteLine($"NewAuraDetectionService.HandleLogLine/matchAuraLogPattern.Success: {matchAuraLogPattern.Success}");
+        Console.WriteLine($"NewAuraDetectionService.HandleLogLine/matchAuraLogPattern.Success: {matchAuraLogPattern.Success}");
         if (!matchAuraLogPattern.Success)
         {
             return;
