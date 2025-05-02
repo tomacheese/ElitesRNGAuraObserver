@@ -16,8 +16,6 @@ internal static partial class Program
     [STAThread]
     static void Main()
     {
-        Console.WriteLine("RNGNewAuraNotifier.Main");
-
         Application.ThreadException += new
             ThreadExceptionEventHandler(Application_ThreadException);
 
@@ -40,7 +38,7 @@ internal static partial class Program
             Console.SetOut(new StreamWriter(Console.OpenStandardOutput()) { AutoFlush = true });
         }
 
-        Console.WriteLine("hoge");
+        Console.WriteLine("Program.Main");
 
         // ログディレクトリのパス対象が存在しない場合はメッセージを出してリセットする
         if (!Directory.Exists(AppConfig.LogDir))
