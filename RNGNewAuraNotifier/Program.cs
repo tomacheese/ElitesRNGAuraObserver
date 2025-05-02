@@ -68,7 +68,7 @@ internal static partial class Program
         DialogResult result = MessageBox.Show(
             "An error has occurred and the operation has stopped.\n" +
             "It would be helpful if you could report this bug using GitHub issues!\n" +
-            "https://github.com/tomacheese/VRCXDiscordTracker/issues\n" +
+            "https://github.com/tomacheese/RNGNewAuraNotifier/issues\n" +
             "\n" +
             "----- Error Details -----\n" +
             e.Exception.Message + "\n" +
@@ -85,7 +85,7 @@ internal static partial class Program
 
         if (result == DialogResult.OK)
         {
-            Process.Start("https://github.com/tomacheese/VRCXDiscordTracker/issues/new");
+            Process.Start("https://github.com/tomacheese/RNGNewAuraNotifier/issues/new");
         }
         Application.Exit();
     }
@@ -99,7 +99,7 @@ internal static partial class Program
         DialogResult result = MessageBox.Show(
             "An error has occurred and the operation has stopped.\n" +
             "It would be helpful if you could report this bug using GitHub issues!\n" +
-            "https://github.com/tomacheese/VRCXDiscordTracker/issues\n" +
+            "https://github.com/tomacheese/RNGNewAuraNotifier/issues\n" +
             "\n" +
             "----- Error Details -----\n" +
             ex.Message + "\n" +
@@ -116,7 +116,7 @@ internal static partial class Program
 
         if (result == DialogResult.OK)
         {
-            Process.Start("https://github.com/tomacheese/VRCXDiscordTracker/issues/new");
+            Process.Start("https://github.com/tomacheese/RNGNewAuraNotifier/issues/new");
         }
         Application.Exit();
     }
