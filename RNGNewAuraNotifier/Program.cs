@@ -16,9 +16,9 @@ internal static partial class Program
     [STAThread]
     static void Main()
     {
-        Application.ThreadException += OnThreadException;
-        Thread.GetDomain().UnhandledException += OnUnhandledException;
-        TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
+        Application.ThreadException += (s, e) => OnException(e.Exception, "ThreadException");
+        Thread.GetDomain().UnhandledException += (s, e) => OnException((Exception)e.ExceptionObject, "UnhandledException");
+        TaskScheduler.UnobservedTaskException += (s, e) => OnException(e.Exception, "UnobservedTaskException");
 
         string[] cmds = Environment.GetCommandLineArgs();
         bool isDebugMode = false;
@@ -59,27 +59,6 @@ internal static partial class Program
 
         Application.Run(new TrayIcon());
     }
-
-
-    public static void OnThreadException(object sender, ThreadExceptionEventArgs e)
-    {
-        OnException(e.Exception, "ThreadException");
-    }
-
-    public static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
-    {
-        if (e.ExceptionObject is not Exception ex)
-        {
-            return;
-        }
-        OnException(ex, "UnhandledException");
-    }
-
-    public static void OnUnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
-    {
-        OnException(e.Exception, "UnobservedTaskException");
-    }
-
 
     public static void OnException(Exception e, string exceptionType)
     {
