@@ -1,6 +1,6 @@
+using System.Text;
 using Newtonsoft.Json;
 using RNGNewAuraNotifier.Properties;
-using System.Text;
 
 namespace RNGNewAuraNotifier.Core.Aura;
 internal class Aura

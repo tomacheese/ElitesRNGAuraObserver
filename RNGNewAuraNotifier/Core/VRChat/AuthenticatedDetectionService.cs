@@ -33,7 +33,7 @@ internal partial class AuthenticatedDetectionService
     /// <param name="isFirstReading">初回読み込みかどうか</param>
     private void HandleLogLine(string line, bool isFirstReading)
     {
-        var matchUserLogPattern = UserAuthenticatedRegex().Match(line);
+        Match matchUserLogPattern = UserAuthenticatedRegex().Match(line);
         Console.WriteLine($"AuthenticatedDetectionService.HandleLogLine/matchUserLogPattern.Success: {matchUserLogPattern.Success}");
         if (!matchUserLogPattern.Success)
         {

@@ -1,5 +1,5 @@
-using RNGNewAuraNotifier.Core.VRChat;
 using System.Text.RegularExpressions;
+using RNGNewAuraNotifier.Core.VRChat;
 
 namespace RNGNewAuraNotifier.Core.Aura;
 internal partial class NewAuraDetectionService
@@ -38,7 +38,7 @@ internal partial class NewAuraDetectionService
     /// <param name="isFirstReading">初回読み込みかどうか</param>
     private void HandleLogLine(string line, bool isFirstReading)
     {
-        var matchAuraLogPattern = AuraLogRegex().Match(line);
+        Match matchAuraLogPattern = AuraLogRegex().Match(line);
         Console.WriteLine($"NewAuraDetectionService.HandleLogLine/matchAuraLogPattern.Success: {matchAuraLogPattern.Success}");
         if (!matchAuraLogPattern.Success)
         {

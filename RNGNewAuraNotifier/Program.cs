@@ -1,9 +1,9 @@
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using RNGNewAuraNotifier.Core;
 using RNGNewAuraNotifier.Core.Config;
 using RNGNewAuraNotifier.Core.VRChat;
 using RNGNewAuraNotifier.UI.TrayIcon;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
 
 namespace RNGNewAuraNotifier;
 internal static partial class Program

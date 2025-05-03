@@ -1,8 +1,8 @@
+using System.Reflection;
 using Discord;
 using Discord.Webhook;
 using RNGNewAuraNotifier.Core.Config;
 using RNGNewAuraNotifier.Core.VRChat;
-using System.Reflection;
 using Color = Discord.Color;
 
 namespace RNGNewAuraNotifier.Core.Notification;
@@ -19,7 +19,7 @@ internal class DiscordNotificationService
         var url = AppConfig.DiscordWebhookUrl;
         if (string.IsNullOrEmpty(url)) return;
 
-        var version = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0);
+        Version version = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0);
 
         using var client = new DiscordWebhookClient(url);
         var embed = new EmbedBuilder

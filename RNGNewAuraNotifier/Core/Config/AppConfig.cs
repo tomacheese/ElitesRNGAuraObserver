@@ -1,5 +1,5 @@
-using RNGNewAuraNotifier.Core.VRChat;
 using System.Text.Json;
+using RNGNewAuraNotifier.Core.VRChat;
 
 namespace RNGNewAuraNotifier.Core.Config;
 /// <summary>
@@ -30,10 +30,7 @@ internal class AppConfig
     /// <summary>
     /// 静的コンストラクタ。設定ファイルを読み込む
     /// </summary>
-    static AppConfig()
-    {
-        Load();
-    }
+    static AppConfig() => Load();
 
     /// <summary>
     /// 設定ファイルを読み込む
@@ -46,7 +43,7 @@ internal class AppConfig
         }
 
         var json = File.ReadAllText(_configFilePath);
-        var config = JsonSerializer.Deserialize<ConfigData>(json) ?? throw new InvalidOperationException("Failed to deserialize config file.");
+        ConfigData config = JsonSerializer.Deserialize<ConfigData>(json) ?? throw new InvalidOperationException("Failed to deserialize config file.");
         _config = config;
     }
 
