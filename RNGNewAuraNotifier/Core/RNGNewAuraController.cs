@@ -29,7 +29,7 @@ internal class RNGNewAuraController
     {
 
         // ログディレクトリが指定されていない場合は、デフォルトのVRChatログディレクトリを使用する
-        var defaultLogDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "AppData", "LocalLow", "VRChat", "VRChat");
+        var defaultLogDir = LogWatcher.GetDefaultVRChatLogDirectory();
         _logDir = logDirectory ?? defaultLogDir;
         if (string.IsNullOrEmpty(_logDir))
         {
@@ -46,17 +46,8 @@ internal class RNGNewAuraController
     {
         Console.WriteLine("RNGNewAuraController.Start");
         new AuthenticatedDetectionService(_logWatcher).OnDetected += OnAuthenticatedUser;
-        new NewAuraDetectionService(_logWatcher).OnDetected += OnNewAura;
+        new NewAuraDetectionService(_logWatcher).OnDetected += OnNewAuraDetected;
         _logWatcher.Start();
-    }
-
-    /// <summary>
-    /// ログ監視を停止する
-    /// </summary>
-    public void Stop()
-    {
-        Console.WriteLine("RNGNewAuraController.Stop");
-        _logWatcher.Stop();
     }
 
     /// <summary>

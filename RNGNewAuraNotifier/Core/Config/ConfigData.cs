@@ -10,7 +10,7 @@ internal class ConfigData
     /// <summary>
     /// VRChatのログディレクトリのパス
     /// </summary>
-    /// <remarks>デフォルトは %LOCALAPPDATA%\..\LocalLow\VRChat\VRChat</remarks>
+    /// <remarks>デフォルトは %USERPROFILE%\AppData\LocalLow\VRChat\VRChat</remarks>
     [JsonPropertyName("logDir")]
     public string LogDir { get; set; } = string.Empty;
 

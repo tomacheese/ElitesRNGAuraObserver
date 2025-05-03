@@ -1,3 +1,4 @@
+using RNGNewAuraNotifier.Core.VRChat;
 using System.Text.Json;
 
 namespace RNGNewAuraNotifier.Core.Config;
@@ -61,7 +62,7 @@ internal class AppConfig
     /// <summary>
     /// VRChatのログディレクトリのパスを取得または設定するプロパティ
     /// </summary>
-    /// <remarks>空白を設定すると、デフォルトのログディレクトリ（%LOCALAPPDATA%\..\LocalLow\VRChat\VRChat）が使用される</remarks>
+    /// <remarks>空白を設定すると、デフォルトのログディレクトリ（%USERPROFILE%\AppData\LocalLow\VRChat\VRChat）が使用される</remarks>
     public static string LogDir
     {
         get
@@ -75,7 +76,7 @@ internal class AppConfig
             if (string.IsNullOrEmpty(trimmedValue))
             {
                 // 空白の場合はデフォルトのログディレクトリを使用する
-                _config.LogDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "AppData", "LocalLow", "VRChat", "VRChat");
+                _config.LogDir = LogWatcher.GetDefaultVRChatLogDirectory();
             }
             if (!Directory.Exists(trimmedValue))
             {

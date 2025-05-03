@@ -66,6 +66,11 @@ internal class LogWatcher
 
     public long GetLastPosition() => _lastPosition;
 
+    public static string GetDefaultVRChatLogDirectory()
+    {
+        return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "AppData", "LocalLow", "VRChat", "VRChat");
+    }
+
     private void ReadNewLine(string path)
     {
         Console.WriteLine($"ReadNewLine: {path} ({_lastPosition})");

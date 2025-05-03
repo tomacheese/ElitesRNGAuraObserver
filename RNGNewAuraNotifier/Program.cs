@@ -1,5 +1,6 @@
 using RNGNewAuraNotifier.Core;
 using RNGNewAuraNotifier.Core.Config;
+using RNGNewAuraNotifier.Core.VRChat;
 using RNGNewAuraNotifier.UI.TrayIcon;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -21,15 +22,7 @@ internal static partial class Program
         TaskScheduler.UnobservedTaskException += (s, e) => OnException(e.Exception, "UnobservedTaskException");
 
         var cmds = Environment.GetCommandLineArgs();
-        var isDebugMode = false;
-        foreach (var cmd in cmds)
-        {
-            if (cmd.Equals("--debug"))
-            {
-                isDebugMode = true;
-            }
-        }
-        if (isDebugMode)
+        if (cmds.Any(cmd => cmd.Equals("--debug")))
         {
             AllocConsole();
             Console.SetOut(new StreamWriter(Console.OpenStandardOutput()) { AutoFlush = true });
@@ -48,7 +41,7 @@ internal static partial class Program
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
 
-            AppConfig.LogDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "AppData", "LocalLow", "VRChat", "VRChat");
+            AppConfig.LogDir = LogWatcher.GetDefaultVRChatLogDirectory();
         }
 
         Controller = new RNGNewAuraController(AppConfig.LogDir);
