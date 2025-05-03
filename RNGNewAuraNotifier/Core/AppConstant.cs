@@ -1,4 +1,4 @@
-﻿namespace RNGNewAuraNotifier.Core;
+namespace RNGNewAuraNotifier.Core;
 internal class AppConstant
 {
     /// <summary>
