@@ -29,10 +29,7 @@ internal class RNGNewAuraController
     {
 
         // ログディレクトリが指定されていない場合は、デフォルトのVRChatログディレクトリを使用する
-        var defaultLogDir = Path.GetFullPath(Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            @"..\LocalLow\VRChat\VRChat"
-        ));
+        var defaultLogDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "AppData", "LocalLow", "VRChat", "VRChat");
         _logDir = logDirectory ?? defaultLogDir;
         if (string.IsNullOrEmpty(_logDir))
         {
@@ -100,7 +97,7 @@ internal class RNGNewAuraController
     /// </summary>
     /// <param name="aura">取得したAura</param>
     /// <param name="isFirstReading">初回読み込みかどうか</param>
-    private void OnNewAura(Aura.Aura aura, bool isFirstReading)
+    private void OnNewAuraDetected(Aura.Aura aura, bool isFirstReading)
     {
         Console.WriteLine($"New Aura: {aura.Name} (#{aura.Id}) - {isFirstReading}");
         if (isFirstReading)

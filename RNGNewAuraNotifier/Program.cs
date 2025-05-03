@@ -48,10 +48,7 @@ internal static partial class Program
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
 
-            AppConfig.LogDir = Path.GetFullPath(Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                @"..\LocalLow\VRChat\VRChat"
-            ));
+            AppConfig.LogDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "AppData", "LocalLow", "VRChat", "VRChat");
         }
 
         Controller = new RNGNewAuraController(AppConfig.LogDir);

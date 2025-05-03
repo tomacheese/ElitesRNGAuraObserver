@@ -75,7 +75,7 @@ internal class AppConfig
             if (string.IsNullOrEmpty(trimmedValue))
             {
                 // 空白の場合はデフォルトのログディレクトリを使用する
-                _config.LogDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"..\LocalLow\VRChat\VRChat");
+                _config.LogDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "AppData", "LocalLow", "VRChat", "VRChat");
             }
             if (!Directory.Exists(trimmedValue))
             {
