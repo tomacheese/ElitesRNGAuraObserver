@@ -72,7 +72,7 @@ internal class AppConfig
         set
         {
             var trimmedValue = value.Trim();
-            if (trimmedValue == string.Empty)
+            if (string.IsNullOrEmpty(trimmedValue))
             {
                 // 空白の場合はデフォルトのログディレクトリを使用する
                 _config.LogDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"..\LocalLow\VRChat\VRChat");
@@ -101,7 +101,7 @@ internal class AppConfig
         set
         {
             var trimmedValue = value.Trim();
-            if (trimmedValue != string.Empty && !trimmedValue.StartsWith("http://") && !trimmedValue.StartsWith("https://"))
+            if (!string.IsNullOrEmpty(trimmedValue) && !trimmedValue.StartsWith("http://") && !trimmedValue.StartsWith("https://"))
             {
                 throw new ArgumentException("DiscordWebhookUrl must start with http or https.");
             }

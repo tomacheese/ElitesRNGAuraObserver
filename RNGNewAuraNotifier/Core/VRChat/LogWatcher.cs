@@ -53,7 +53,7 @@ internal class LogWatcher
         _fsw.EnableRaisingEvents = true;
 
         // 監視対象の最新ログファイルが存在する場合は、最初に処理する
-        if (_lastReadFilePath != string.Empty)
+        if (!string.IsNullOrEmpty(_lastReadFilePath))
         {
             ReadNewLine(_lastReadFilePath);
         }

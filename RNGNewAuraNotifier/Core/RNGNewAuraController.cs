@@ -29,7 +29,7 @@ internal class RNGNewAuraController
     {
 
         // ログディレクトリが指定されていない場合は、デフォルトのVRChatログディレクトリを使用する
-        string defaultLogDir = Path.GetFullPath(Path.Combine(
+        var defaultLogDir = Path.GetFullPath(Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
             @"..\LocalLow\VRChat\VRChat"
         ));
@@ -76,19 +76,13 @@ internal class RNGNewAuraController
     /// 監視しているログディレクトリのパスを取得する
     /// </summary>
     /// <returns>監視しているログディレクトリのパス</returns>
-    public string GetLogDirectory()
-    {
-        return _logDir;
-    }
+    public string GetLogDirectory() => _logDir;
 
     /// <summary>
     /// 監視しているログファイルのパスを取得する
     /// </summary>
     /// <returns>監視しているログファイルのパス</returns>
-    public string GetLastReadFilePath()
-    {
-        return _logWatcher.GetLastReadFilePath();
-    }
+    public string GetLastReadFilePath() => _logWatcher.GetLastReadFilePath();
 
     /// <summary>
     /// VRChatユーザーのログイン完了行を検出したときのハンドラ

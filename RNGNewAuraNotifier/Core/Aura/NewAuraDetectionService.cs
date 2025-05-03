@@ -45,7 +45,7 @@ internal partial class NewAuraDetectionService
             return;
         }
 
-        string auraId = matchAuraLogPattern.Groups["AuraId"].Value;
+        var auraId = matchAuraLogPattern.Groups["AuraId"].Value;
         OnDetected.Invoke(Aura.GetAura(auraId), isFirstReading);
     }
 }

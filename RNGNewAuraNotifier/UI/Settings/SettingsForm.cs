@@ -74,10 +74,7 @@ public partial class SettingsForm : Form
     /// 保存ボタンがクリックされたときの処理
     /// </summary>
     /// <remarks>設定ファイルに値を保存し、VRChatのログ監視を再起動する</remarks>
-    private void OnSaveButtonClicked(object sender, EventArgs e)
-    {
-        Save();
-    }
+    private void OnSaveButtonClicked(object sender, EventArgs e) => Save();
 
     /// <summary>
     /// フォームが閉じられるときの処理
@@ -108,8 +105,5 @@ public partial class SettingsForm : Form
     /// <summary>
     /// フォームが閉じられたときの処理
     /// </summary>
-    private void OnFormClosed(object sender, FormClosedEventArgs e)
-    {
-        _timer.Dispose();
-    }
+    private void OnFormClosed(object sender, FormClosedEventArgs e) => _timer.Dispose();
 }
