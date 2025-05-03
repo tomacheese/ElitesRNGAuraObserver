@@ -1,5 +1,4 @@
 using System.Text.Json;
-using RNGNewAuraNotifier.Core.VRChat;
 
 namespace RNGNewAuraNotifier.Core.Config;
 /// <summary>
@@ -73,7 +72,7 @@ internal class AppConfig
             if (string.IsNullOrEmpty(trimmedValue))
             {
                 // 空白の場合はデフォルトのログディレクトリを使用する
-                _config.LogDir = LogWatcher.GetDefaultVRChatLogDirectory();
+                _config.LogDir = AppConstant.VRChatDefaultLogDirectory;
             }
             if (!Directory.Exists(trimmedValue))
             {

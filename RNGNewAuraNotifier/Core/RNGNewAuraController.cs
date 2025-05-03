@@ -29,7 +29,7 @@ internal class RNGNewAuraController
     {
 
         // ログディレクトリが指定されていない場合は、デフォルトのVRChatログディレクトリを使用する
-        var defaultLogDir = LogWatcher.GetDefaultVRChatLogDirectory();
+        var defaultLogDir = AppConstant.VRChatDefaultLogDirectory;
         _logDir = logDirectory ?? defaultLogDir;
         if (string.IsNullOrEmpty(_logDir))
         {

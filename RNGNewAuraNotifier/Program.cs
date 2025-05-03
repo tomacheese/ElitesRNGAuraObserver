@@ -2,7 +2,6 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using RNGNewAuraNotifier.Core;
 using RNGNewAuraNotifier.Core.Config;
-using RNGNewAuraNotifier.Core.VRChat;
 using RNGNewAuraNotifier.UI.TrayIcon;
 
 namespace RNGNewAuraNotifier;
@@ -41,7 +40,7 @@ internal static partial class Program
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
 
-            AppConfig.LogDir = LogWatcher.GetDefaultVRChatLogDirectory();
+            AppConfig.LogDir = AppConstant.VRChatDefaultLogDirectory;
         }
 
         Controller = new RNGNewAuraController(AppConfig.LogDir);

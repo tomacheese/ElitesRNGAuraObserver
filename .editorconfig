@@ -139,7 +139,7 @@ dotnet_diagnostic.CA1305.severity = warning
 dotnet_diagnostic.CA1707.severity = warning
 # CA1801: 未使用引数の警告
 dotnet_diagnostic.CA1801.severity = warning
-# CA1820: 文字列連結時のStringBuilder等未使用警告
+# CA1820: 文字列の長さを使用して空の文字列をテストする警告
 dotnet_diagnostic.CA1820.severity = warning
 # CA1822: static化可能メンバーの警告
 dotnet_diagnostic.CA1822.severity = warning
