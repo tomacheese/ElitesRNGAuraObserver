@@ -1,13 +1,45 @@
 name: Release
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  release:
-    if: startsWith(github.event.release.tag_name, 'v')
+  bump-version:
+    name: Bump version
+    runs-on: ubuntu-latest
+
+    outputs:
+      version: ${{ steps.semantic.outputs.new_release_version }}
+      tag: ${{ steps.semantic.outputs.new_release_git_tag }}
+      changelog: ${{ steps.semantic.outputs.new_release_notes }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Semantic Release
+        id: semantic
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          extra_plugins: |
+            conventional-changelog-conventionalcommits@^8.0.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+  build-and-release:
+    name: Build and Release
     runs-on: windows-latest
+    needs: bump-version
+
+    env:
+      version: ${{ needs.bump-version.outputs.version }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -19,23 +51,26 @@ jobs:
 
       - name: Set version from tag
         run: |
-          $tag = "${{ github.ref_name }}"
-          $version = $tag -replace '^v', ''
+          $version = $env:APP_VERSION
           $versionWithRevision = ($version.Split('.') + '0')[0..3] -join '.'
           (Get-Content .\RNGNewAuraNotifier\RNGNewAuraNotifier.csproj) -replace '<Version>[^<]*(</Version>)', "<Version>$version</Version>" | Set-Content .\RNGNewAuraNotifier\RNGNewAuraNotifier.csproj
           (Get-Content .\RNGNewAuraNotifier\RNGNewAuraNotifier.csproj) -replace '<AssemblyVersion>[^<]*</AssemblyVersion>', "<AssemblyVersion>$versionWithRevision</AssemblyVersion>" | Set-Content .\RNGNewAuraNotifier\RNGNewAuraNotifier.csproj
           (Get-Content .\RNGNewAuraNotifier\RNGNewAuraNotifier.csproj) -replace '<FileVersion>[^<]*</FileVersion>', "<FileVersion>$versionWithRevision</FileVersion>" | Set-Content .\RNGNewAuraNotifier\RNGNewAuraNotifier.csproj
         shell: pwsh
+        env:
+          APP_VERSION: ${{ needs.bump-version.outputs.version }}
 
-      - name: Restore NuGet packages
-        run: nuget restore RNGNewAuraNotifier.sln
+      - name: Restore dotnet packages
+        run: dotnet restore RNGNewAuraNotifier.sln
 
       - name: Build solution
         run: dotnet publish RNGNewAuraNotifier.sln -p:PublishProfile=Publish
 
-      - name: Upload exe to release
+      - name: 🗃️ Publish Release on main
         uses: softprops/action-gh-release@v2
         with:
-          files: RNGNewAuraNotifier/bin/Publish/RNGNewAuraNotifier.exe
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          body: ${{ needs.bump-version.outputs.changelog }}
+          tag_name: ${{ needs.bump-version.outputs.tag }}
+          target_commitish: ${{ github.sha }}
+          files: |
+            RNGNewAuraNotifier/bin/Publish/RNGNewAuraNotifier.exe
