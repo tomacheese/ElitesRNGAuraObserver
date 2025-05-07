@@ -91,16 +91,16 @@ internal class RNGNewAuraController
     private void OnNewAuraDetected(Aura.Aura aura, bool isFirstReading)
     {
         Console.WriteLine($"New Aura: {aura.Name} (#{aura.Id}) - {isFirstReading}");
-        if (isFirstReading)
+        if (isFirstReading || aura.Tier == 5)
         {
             return;
         }
-        UwpNotificationService.Notify("Successfully legitimized Aura!", $"{aura.Name} (#{aura.Id})");
+        UwpNotificationService.Notify("Unlocked New Aura!", $"{aura.GetNameText()}\n{aura.GetRarityString()}");
         Task.Run(async () =>
         {
             try
             {
-                await DiscordNotificationService.Notify("Successfully legitimized Aura!", $"{aura.Name} (#{aura.Id})", _vrchatUser);
+                await DiscordNotificationService.Notify("Unlocked New Aura!", $"**Aura Name: **`{aura.GetNameText()}`\n**Rarity: ** `{aura.GetRarityString()}`", _vrchatUser);
             }
             catch (Exception ex)
             {
