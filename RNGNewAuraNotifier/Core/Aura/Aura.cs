@@ -9,29 +9,50 @@ internal class Aura
     /// Aura の ID
     /// </summary>
     /// <example>60</example>
-    public required string Id { get; set; }
+    public string Id { get; private set; }
 
     /// <summary>
     /// Aura の名前
     /// </summary>
     /// <example>Celebration</example>
-    public required string? Name { get; set; }
+    public string? Name { get; private set; }
 
     /// <summary>
     /// オーラの当選確率
     /// </summary>
-    public required int Rarity { get; set; } = 0;
+    /// <example>1000000</example>
+    public int Rarity { get; private set; }
 
     /// <summary>
     /// オーラのティア
     /// </summary>
-    public required int Tier { get; set; } = 0;
+    /// <remarks>
+    /// Rarityの高さによる区分け、ゲーム内の演出をもとに割り振っている。
+    /// 
+    /// Rarity: ～ 999 Tier:5
+    /// Rarity: 1000 ～ 9999 Tier:4
+    /// Rarity: 10000 ～ 99999 Tier:3
+    /// Rarity: 100000 ～ 999999 Tier:2
+    /// Rarity: 1000000 ～ 9999999 Tier:1
+    /// SPECIAL枠のAura(特殊な入手条件のAuraのみ)はTier:0
+    /// </remarks>
+    /// <example>4</example>
+    public int Tier { get; private set; }
 
     /// <summary>
     /// オーラのサブテキスト
     /// </summary>
-    public required string SubText { get; set; }
+    /// <example>VALENTINE’S EXCLUSIVE</example>
+    public string SubText { get; private set; }
 
+    public Aura(string id, string? name = null, int rarity = 0, int tier = 0, string subText = "")
+    {
+        Id = id;
+        Name = name;
+        Rarity = rarity;
+        Tier = tier;
+        SubText = subText;
+    }
 
     /// <summary>
     /// Aura を取得する
@@ -48,26 +69,40 @@ internal class Aura
             // JSONをAura[]にデシリアライズ
             Aura[] auras = JsonData.GetAuras();
 
-            // 指定されたIDのAuraを検索
-            Aura? auraInfo = auras.First(aura => aura.Id == auraId);
-
-            return auraInfo;
+            return auras.FirstOrDefault(aura => aura.Id == auraId) ?? new Aura(auraId);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error deserializing Auras: {ex.Message}");
-            return new Aura
-            {
-                Id = auraId,
-                Name = "Unknown",
-                Rarity = 0,
-                Tier = 0,
-                SubText = $"Aura#: {auraId}",
-            };
+            Console.WriteLine($"Error deserializing Auras({ex.GetType().Name}): {ex.Message}");
+            return new Aura(auraId);
         }
     }
 
+    /// <summary>
+    /// オーラの名前を取得する
+    /// </summary>
+    /// <remarks>
+    /// subTextがnullの場合、Nameをそのまま返す。
+    /// subTextが存在する場合、NameとsubTextを括弧で囲んで結合する。
+    /// </remarks>
+    /// <example>
+    /// "Event Horizon"
+    /// "Cupid (VALENTINE’S EXCLUSIVE)"
+    /// </example>
+    /// <returns>通知に表示するオーラ名称</returns>
     public string? GetNameText() => string.IsNullOrEmpty(SubText) ? Name : $"{Name} ({SubText})";
 
+    /// <summary>
+    /// オーラのレアリティを取得する
+    /// </summary>
+    /// <remarks>
+    /// Rarityが0では無い場合、"1 in"の後にレアリティの数値をカンマ区切りで表示。
+    /// Rarityが0の場合、"???"を表示。
+    /// </remarks>
+    /// <example>
+    /// "1 in 1,000,000"
+    /// "???"
+    /// </example>
+    /// <returns>通知に表示するレアリティ</returns>
     public string GetRarityString() => Rarity != 0 ? $"1 in {Rarity:N0}" : "???";
 }

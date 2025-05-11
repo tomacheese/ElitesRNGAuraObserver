@@ -100,7 +100,19 @@ internal class RNGNewAuraController
         {
             try
             {
-                await DiscordNotificationService.Notify("Unlocked New Aura!", $"**Aura Name: **`{aura.GetNameText()}`\n**Rarity: ** `{aura.GetRarityString()}`", _vrchatUser);
+                // Aura名が取得できなかった場合は、"_Unknown_"を表示する
+                var auraName = string.IsNullOrEmpty(aura.GetNameText()) ? $"_Unknown_" : $"`{aura.GetNameText()}`";
+                var auraRarity = $"`{aura.GetRarityString()}`";
+
+                await DiscordNotificationService.Notify(
+                    title: "**Unlocked New Aura!**",
+                    fields:
+                    [
+                        ("Aura Name", auraName, true),
+                        ("Rarity", auraRarity, true),
+                    ],
+                    vrchatUser: _vrchatUser
+                );
             }
             catch (Exception ex)
             {

@@ -5,9 +5,23 @@ using RNGNewAuraNotifier.Properties;
 namespace RNGNewAuraNotifier.Core.Json;
 internal class JsonData
 {
-    public string Version { get; set; } = string.Empty;
-    public Aura.Aura[] Auras { get; set; } = Array.Empty<Aura.Aura>();
 
+    /// <summary>
+    /// JSONのバージョン情報
+    /// </summary>
+    [JsonProperty("Version")]
+    private readonly string _version = string.Empty;
+
+    /// <summary>
+    /// Auraの一覧
+    /// </summary>
+    [JsonProperty("Auras")]
+    private readonly Aura.Aura[] _auras = Array.Empty<Aura.Aura>();
+
+    /// <summary>
+    /// JSONファイルの内容を取得する
+    /// </summary>
+    /// <returns></returns>
     public static JsonData GetJsonData()
     {
         try
@@ -26,13 +40,13 @@ internal class JsonData
     /// <summary>
     /// JSONのバージョン情報を取得する
     /// </summary>
-    /// <returns></returns>
+    /// <returns>JSONのバージョン情報</returns>
     public static string GetVersion()
     {
         try
         {
             JsonData jsonData = GetJsonData();
-            return jsonData.Version;
+            return jsonData._version;
         }
         catch (Exception ex)
         {
@@ -49,7 +63,7 @@ internal class JsonData
     {
         try
         {
-            Aura.Aura[] auras = GetJsonData().Auras ?? Array.Empty<Aura.Aura>();
+            Aura.Aura[] auras = GetJsonData()._auras ?? Array.Empty<Aura.Aura>();
             return auras;
         }
         catch (Exception ex)
