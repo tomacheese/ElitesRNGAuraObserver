@@ -3,25 +3,25 @@ using RNGNewAuraNotifier.Core.Json;
 using RNGNewAuraNotifier.Properties;
 
 namespace RNGNewAuraNotifier.Core.Aura;
-internal class Aura
+internal class Aura(string id, string? name = null, int rarity = 0, int tier = 0, string subText = "")
 {
     /// <summary>
     /// Aura の ID
     /// </summary>
     /// <example>60</example>
-    public string Id { get; private set; }
+    public string Id { get; private set; } = id;
 
     /// <summary>
     /// Aura の名前
     /// </summary>
     /// <example>Celebration</example>
-    public string? Name { get; private set; }
+    public string? Name { get; private set; } = name;
 
     /// <summary>
     /// オーラの当選確率
     /// </summary>
     /// <example>1000000</example>
-    public int Rarity { get; private set; }
+    public int Rarity { get; private set; } = rarity;
 
     /// <summary>
     /// オーラのティア
@@ -37,22 +37,13 @@ internal class Aura
     /// SPECIAL枠のAura(特殊な入手条件のAuraのみ)はTier:0
     /// </remarks>
     /// <example>4</example>
-    public int Tier { get; private set; }
+    public int Tier { get; private set; } = tier;
 
     /// <summary>
     /// オーラのサブテキスト
     /// </summary>
     /// <example>VALENTINE’S EXCLUSIVE</example>
-    public string SubText { get; private set; }
-
-    public Aura(string id, string? name = null, int rarity = 0, int tier = 0, string subText = "")
-    {
-        Id = id;
-        Name = name;
-        Rarity = rarity;
-        Tier = tier;
-        SubText = subText;
-    }
+    public string SubText { get; private set; } = subText;
 
     /// <summary>
     /// Aura を取得する

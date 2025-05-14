@@ -19,8 +19,6 @@ internal class DiscordNotificationService
         var url = AppConfig.DiscordWebhookUrl;
         if (string.IsNullOrEmpty(url)) return;
 
-        Version version = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0);
-
         using var client = new DiscordWebhookClient(url);
         var embed = new EmbedBuilder
         {
@@ -28,7 +26,7 @@ internal class DiscordNotificationService
             Description = message,
             Footer = new EmbedFooterBuilder
             {
-                Text = $"RNGNewAuraNotifier {version.Major}.{version.Minor}.{version.Build}",
+                Text = $"{AppConstant.AppName}{AppConstant.AppVersion.Major}.{AppConstant.AppVersion.Minor}.{AppConstant.AppVersion.Build}",
             },
             Color = new Color(0x00, 0xFF, 0x00),
             Timestamp = DateTimeOffset.UtcNow,
@@ -57,15 +55,13 @@ internal class DiscordNotificationService
         var url = AppConfig.DiscordWebhookUrl;
         if (string.IsNullOrEmpty(url)) return;
 
-        Version version = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0);
-
         using var client = new DiscordWebhookClient(url);
         var embed = new EmbedBuilder
         {
             Title = title,
             Footer = new EmbedFooterBuilder
             {
-                Text = $"RNGNewAuraNotifier {version.Major}.{version.Minor}.{version.Build}",
+                Text = $"{AppConstant.AppName}{AppConstant.AppVersion.Major}.{AppConstant.AppVersion.Minor}.{AppConstant.AppVersion.Build}",
             },
             Color = new Color(0x00, 0xFF, 0x00),
             Timestamp = DateTimeOffset.UtcNow,

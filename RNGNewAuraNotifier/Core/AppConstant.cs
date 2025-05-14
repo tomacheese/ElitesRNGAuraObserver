@@ -1,6 +1,18 @@
+using System.Reflection;
+
 namespace RNGNewAuraNotifier.Core;
 internal class AppConstant
 {
+    /// <summary>
+    /// アプリケーション名
+    /// </summary>
+    public static readonly string AppName = Assembly.GetExecutingAssembly().GetName().Name ?? string.Empty;
+
+    /// <summary>
+    /// アプリケーションバージョン
+    /// </summary>
+    public static readonly Version AppVersion = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0);
+
     /// <summary>
     /// VRChatのデフォルトログディレクトリのパス
     /// </summary>

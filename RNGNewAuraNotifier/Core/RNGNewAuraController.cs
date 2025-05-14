@@ -91,10 +91,13 @@ internal class RNGNewAuraController
     private void OnNewAuraDetected(Aura.Aura aura, bool isFirstReading)
     {
         Console.WriteLine($"New Aura: {aura.Name} (#{aura.Id}) - {isFirstReading}");
+
+        // 初回読み込み、またはTier5のAuraは通知しない
         if (isFirstReading || aura.Tier == 5)
         {
             return;
         }
+
         UwpNotificationService.Notify("Unlocked New Aura!", $"{aura.GetNameText()}\n{aura.GetRarityString()}");
         Task.Run(async () =>
         {
