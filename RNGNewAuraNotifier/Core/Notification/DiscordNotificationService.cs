@@ -1,4 +1,3 @@
-using System.Reflection;
 using Discord;
 using Discord.Webhook;
 using RNGNewAuraNotifier.Core.Config;
