@@ -24,17 +24,10 @@ internal class JsonData
     /// <returns>JSONファイルの内容</returns>
     public static JsonData GetJsonData()
     {
-        try
-        {
-            // JSONデータを文字列に変換
-            var jsonContent = Encoding.UTF8.GetString(Resources.Auras);
-            JsonData jsonData = JsonConvert.DeserializeObject<JsonData>(jsonContent) ?? new JsonData();
-            return jsonData;
-        }
-        catch
-        {
-            throw;
-        }
+        // JSONデータを文字列に変換
+        var jsonContent = Encoding.UTF8.GetString(Resources.Auras);
+        JsonData jsonData = JsonConvert.DeserializeObject<JsonData>(jsonContent) ?? new JsonData();
+        return jsonData;
     }
 
     /// <summary>
