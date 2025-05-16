@@ -21,7 +21,7 @@ internal class JsonData
     /// <summary>
     /// JSONファイルの内容を取得する
     /// </summary>
-    /// <returns></returns>
+    /// <returns>JSONファイルの内容</returns>
     public static JsonData GetJsonData()
     {
         try
@@ -58,7 +58,7 @@ internal class JsonData
     /// <summary>
     /// Auraの情報を取得する
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Auraの情報</returns>
     public static Aura.Aura[] GetAuras()
     {
         try
