@@ -70,9 +70,20 @@ internal class LogWatcher
             }, TaskContinuationOptions.OnlyOnFaulted);
     }
 
-    public void Stop() => _cts.Cancel();
-    public void Dispose() => _cts.Dispose();
+    public async Task Stop()
+    {
+        _cts.Cancel();
+        if (_monitorTask != null)
+        {
+            await _monitorTask;
+        }
+    }
 
+    public void Dispose()
+    {
+        Stop().GetAwaiter().GetResult();
+        _cts.Dispose();
+    }
     public string GetLastReadFilePath() => _lastReadFilePath;
 
     public long GetLastPosition() => _lastPosition;
