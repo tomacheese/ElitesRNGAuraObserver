@@ -70,14 +70,7 @@ internal class LogWatcher
             }, TaskContinuationOptions.OnlyOnFaulted);
     }
 
-    public async Task Stop()
-    {
-        _cts.Cancel();
-        if (_monitorTask != null)
-        {
-            await _monitorTask;
-        }
-    }
+    public void Stop() => _cts.Cancel();
 
     public void Dispose()
     {
