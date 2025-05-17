@@ -72,11 +72,7 @@ internal class LogWatcher
 
     public void Stop() => _cts.Cancel();
 
-    public void Dispose()
-    {
-        Stop().GetAwaiter().GetResult();
-        _cts.Dispose();
-    }
+    public void Dispose() => _cts.Dispose();
     public string GetLastReadFilePath() => _lastReadFilePath;
 
     public long GetLastPosition() => _lastPosition;
