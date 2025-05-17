@@ -2,70 +2,70 @@
   "Version": "2025.05.07",
   "Auras": [
     {
-      "ID": "00",
+      "ID": "0",
       "Name": "Common",
       "Rarity": 2,
       "Tier": 5,
       "SubText": ""
     },
     {
-      "ID": "01",
+      "ID": "1",
       "Name": "Basic",
       "Rarity": 4,
       "Tier": 5,
       "SubText": ""
     },
     {
-      "ID": "02",
+      "ID": "2",
       "Name": "Uncommon",
       "Rarity": 8,
       "Tier": 5,
       "SubText": ""
     },
     {
-      "ID": "03",
+      "ID": "3",
       "Name": "Coal",
       "Rarity": 10,
       "Tier": 5,
       "SubText": ""
     },
     {
-      "ID": "04",
+      "ID": "4",
       "Name": "Rare",
       "Rarity": 16,
       "Tier": 5,
       "SubText": ""
     },
     {
-      "ID": "05",
+      "ID": "5",
       "Name": "Iron",
       "Rarity": 25,
       "Tier": 5,
       "SubText": ""
     },
     {
-      "ID": "06",
+      "ID": "6",
       "Name": "Unique",
       "Rarity": 32,
       "Tier": 5,
       "SubText": ""
     },
     {
-      "ID": "07",
+      "ID": "7",
       "Name": "Copper",
       "Rarity": 50,
       "Tier": 5,
       "SubText": ""
     },
     {
-      "ID": "08",
+      "ID": "8",
       "Name": "Epic",
       "Rarity": 64,
       "Tier": 5,
       "SubText": ""
     },
     {
-      "ID": "09",
+      "ID": "9",
       "Name": "Bronze",
       "Rarity": 100,
       "Tier": 5,

@@ -13,7 +13,7 @@ internal partial class NewAuraDetectionService
     /// Aura取得時のログパターン
     /// </summary>
     /// <example>2025.04.16 18:07:07 Debug      -  [<color=green>Elite's RNG Land</color>] Successfully legitimized Aura #60.</example>
-    [GeneratedRegex(@"(?<datetime>[0-9]{4}\.[0-9]{2}.[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}) (?<Level>.[A-z]+) *- *\[<color=green>Elite's RNG Land</color>\] Successfully legitimized Aura #(?<AuraId>[0-9]{2,3})\.")]
+    [GeneratedRegex(@"(?<datetime>[0-9]{4}\.[0-9]{2}.[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}) (?<Level>.[A-z]+) *- *\[<color=green>Elite's RNG Land</color>\] Successfully legitimized Aura #(?<AuraId>[0-9]+)\.")]
     private static partial Regex AuraLogRegex();
 
     /// <summary>
