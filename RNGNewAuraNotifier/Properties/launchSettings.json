@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "RNGNewAuraNotifier": {
+      "commandName": "Project",
+      "commandLineArgs": "--debug"
+    }
+  }
+}
