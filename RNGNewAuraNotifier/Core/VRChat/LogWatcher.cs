@@ -70,13 +70,33 @@ internal class LogWatcher
             }, TaskContinuationOptions.OnlyOnFaulted);
     }
 
+    /// <summary>
+    /// 監視を停止する
+    /// </summary>
     public void Stop() => _cts.Cancel();
 
+    /// <summary>
+    /// 監視を破棄する
+    /// </summary>
     public void Dispose() => _cts.Dispose();
+
+    /// <summary>
+    /// 最後に読み取ったファイルのパスを取得する
+    /// </summary>
+    /// <returns>最後に読み取ったファイルのパス</returns>
     public string GetLastReadFilePath() => _lastReadFilePath;
 
+    /// <summary>
+    /// 最後に読み取った位置を取得する
+    /// </summary>
+    /// <returns>>最後に読み取った位置</returns>
     public long GetLastPosition() => _lastPosition;
 
+    /// <summary>
+    /// 1秒おきにログファイルを監視する
+    /// </summary>
+    /// <param name="token">キャンセルトークン</param>
+    /// <returns>タスク</returns>
     private async Task MonitorLoop(CancellationToken token)
     {
         while (!token.IsCancellationRequested)
@@ -101,6 +121,10 @@ internal class LogWatcher
         }
     }
 
+    /// <summary>
+    /// 指定されたログファイルを読み込む
+    /// </summary>
+    /// <param name="path">ログファイルのパス</param>
     private void ReadNewLine(string path)
     {
         Console.WriteLine($"ReadNewLine: {path} ({_lastPosition})");
