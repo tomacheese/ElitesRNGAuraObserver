@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
+using Microsoft.Toolkit.Uwp.Notifications;
 using RNGNewAuraNotifier.Core;
 using RNGNewAuraNotifier.Core.Config;
 using RNGNewAuraNotifier.UI.TrayIcon;
@@ -17,6 +18,13 @@ internal static partial class Program
     [STAThread]
     static void Main()
     {
+        if (ToastNotificationManagerCompat.WasCurrentProcessToastActivated())
+        {
+            // トースト通知から起動された場合、なにもしない
+            ToastNotificationManagerCompat.Uninstall();
+            return;
+        }
+
         Application.ThreadException += (s, e) => OnException(e.Exception, "ThreadException");
         Thread.GetDomain().UnhandledException += (s, e) => OnException((Exception)e.ExceptionObject, "UnhandledException");
         TaskScheduler.UnobservedTaskException += (s, e) => OnException(e.Exception, "UnobservedTaskException");
@@ -30,6 +38,7 @@ internal static partial class Program
         }
 
         Console.WriteLine("Program.Main");
+
         ApplicationConfiguration.Initialize();
 
         // ログディレクトリのパス対象が存在しない場合はメッセージを出してリセットする
@@ -47,6 +56,13 @@ internal static partial class Program
 
         Controller = new RNGNewAuraController(AppConfig.LogDir);
         Controller.Start();
+
+        Application.ApplicationExit += (s, e) =>
+        {
+            Console.WriteLine("Program.ApplicationExit");
+            Controller?.Dispose();
+            ToastNotificationManagerCompat.Uninstall();
+        };
 
         Application.Run(new TrayIcon());
     }
