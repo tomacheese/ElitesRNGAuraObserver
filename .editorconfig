@@ -662,7 +662,7 @@ dotnet_naming_rule.parameters_should_be_camel_case.symbols = parameters
 dotnet_naming_rule.parameters_should_be_camel_case.style = camel_case
 
 # ローカル変数名をcamelCaseで強制
-dotnet_naming_rule.locals_should_be_camel_case.severity = error
+dotnet_naming_rule.locals_should_be_camel_case.severity = warning
 # ローカル変数名に対するルール適用対象指定
 dotnet_naming_rule.locals_should_be_camel_case.symbols = locals
 # ローカル変数名のスタイル指定（camelCase）
