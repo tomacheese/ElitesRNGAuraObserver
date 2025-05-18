@@ -103,7 +103,7 @@ internal partial class SettingsForm : Form
     /// <summary>
     /// フォームが閉じられたときの処理
     /// </summary>
-    private void OnFormClosed(object sender, FormClosedEventArgs e) => _timer.Dispose();
+    private void OnFormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
 
     /// <summary>
