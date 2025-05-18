@@ -2,7 +2,7 @@ using System.Text;
 
 namespace RNGNewAuraNotifier.Core.VRChat;
 /// <summary>
-/// コンストラクタ
+/// VRChatのログファイルを監視するクラス
 /// </summary>
 /// <param name="logDirectory">ログディレクトリのパス</param>
 /// <param name="logFileFilter">ログファイルのフィルタ</param>

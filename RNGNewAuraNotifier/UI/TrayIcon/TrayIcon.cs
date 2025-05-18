@@ -68,9 +68,11 @@ internal class TrayIcon : ApplicationContext
     /// </summary>
     protected override void Dispose(bool disposing)
     {
+        if (disposing)
+        {
+            _trayIcon.Dispose();
+            _settingsForm?.Dispose();
+        }
         base.Dispose(disposing);
-        if (!disposing) return;
-        _trayIcon.Dispose();
-        _settingsForm.Dispose();
     }
 }
