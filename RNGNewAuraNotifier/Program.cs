@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using Microsoft.Toolkit.Uwp.Notifications;
 using System.Text;
+using Microsoft.Toolkit.Uwp.Notifications;
 using RNGNewAuraNotifier.Core;
 using RNGNewAuraNotifier.Core.Config;
 using RNGNewAuraNotifier.UI.TrayIcon;
