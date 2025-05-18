@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Microsoft.Toolkit.Uwp.Notifications;
+using System.Text;
 using RNGNewAuraNotifier.Core;
 using RNGNewAuraNotifier.Core.Config;
 using RNGNewAuraNotifier.UI.TrayIcon;
@@ -33,6 +34,7 @@ internal static partial class Program
         {
             AllocConsole();
             Console.SetOut(new StreamWriter(Console.OpenStandardOutput()) { AutoFlush = true });
+            Console.OutputEncoding = Encoding.UTF8;
         }
 
         Console.WriteLine("Program.Main");

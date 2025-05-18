@@ -9,9 +9,19 @@ internal class LogWatcher
     public event Action<string, bool> OnNewLogLine = delegate { };
 
     /// <summary>
-    /// ファイルシステムウォッチャー
+    /// キャンセル用のトークンソース
     /// </summary>
-    private readonly FileSystemWatcher _fsw;
+    private readonly CancellationTokenSource _cts = new();
+
+    /// <summary>
+    /// ログディレクトリ
+    /// </summary>
+    private readonly string _logDirectory;
+
+    /// <summary>
+    /// ログファイルのパターンフィルタ
+    /// </summary>
+    private readonly string _logFileFilter;
 
     /// <summary>
     /// 最後に読み取ったファイルのパス
@@ -30,14 +40,8 @@ internal class LogWatcher
     /// <param name="logFileFilter">ログファイルのフィルタ</param>
     public LogWatcher(string logDirectory, string logFileFilter)
     {
-        _fsw = new FileSystemWatcher(logDirectory, logFileFilter)
-        {
-            NotifyFilter = NotifyFilters.LastWrite,
-            EnableRaisingEvents = false // インスタンス生成時はイベントを無効にする
-        };
-        // ファイルが作成・変更されたときにイベントを発生させる
-        _fsw.Created += (_, e) => ReadNewLine(e.FullPath);
-        _fsw.Changed += (_, e) => ReadNewLine(e.FullPath);
+        _logDirectory = logDirectory;
+        _logFileFilter = logFileFilter;
 
         // コンストラクタ生成時に最新のログファイルを取得する
         _lastReadFilePath = GetNewestLogFile(logDirectory, logFileFilter) ?? string.Empty;
@@ -48,24 +52,79 @@ internal class LogWatcher
     /// </summary>
     public void Start()
     {
-        Console.WriteLine($"LogWatcher.Start: {_fsw.Path} | {_fsw.Filter} | {_lastReadFilePath}");
-
-        _fsw.EnableRaisingEvents = true;
+        Console.WriteLine($"LogWatcher.Start: {_lastReadFilePath}");
 
         // 監視対象の最新ログファイルが存在する場合は、最初に処理する
         if (!string.IsNullOrEmpty(_lastReadFilePath))
         {
             ReadNewLine(_lastReadFilePath);
         }
+
+        Task.Run(() => MonitorLoop(_cts.Token), _cts.Token)
+            .ContinueWith(t =>
+            {
+                if (t.IsFaulted)
+                {
+                    Console.WriteLine($"LogWatcher error: {t.Exception?.GetBaseException().Message}");
+                }
+            }, TaskContinuationOptions.OnlyOnFaulted);
     }
 
-    public void Stop() => _fsw.EnableRaisingEvents = false;
-    public void Dispose() => _fsw.Dispose();
+    /// <summary>
+    /// 監視を停止する
+    /// </summary>
+    public void Stop() => _cts.Cancel();
 
+    /// <summary>
+    /// 監視を破棄する
+    /// </summary>
+    public void Dispose() => _cts.Dispose();
+
+    /// <summary>
+    /// 最後に読み取ったファイルのパスを取得する
+    /// </summary>
+    /// <returns>最後に読み取ったファイルのパス</returns>
     public string GetLastReadFilePath() => _lastReadFilePath;
 
+    /// <summary>
+    /// 最後に読み取った位置を取得する
+    /// </summary>
+    /// <returns>>最後に読み取った位置</returns>
     public long GetLastPosition() => _lastPosition;
 
+    /// <summary>
+    /// 1秒おきにログファイルを監視する
+    /// </summary>
+    /// <param name="token">キャンセルトークン</param>
+    /// <returns>タスク</returns>
+    private async Task MonitorLoop(CancellationToken token)
+    {
+        while (!token.IsCancellationRequested)
+        {
+            // 監視対象の最新ログファイルを取得する
+            var newestLogFile = GetNewestLogFile(_logDirectory, _logFileFilter);
+            if (newestLogFile == null)
+            {
+                Console.WriteLine($"No log file found in {_logDirectory}");
+                await Task.Delay(1000, token);
+                continue;
+            }
+            // 最新のログファイルが変更された場合は、読み込み位置をリセットする
+            if (_lastReadFilePath != newestLogFile || _lastPosition == 0)
+            {
+                _lastPosition = 0;
+            }
+
+            // 最新のログファイルを読み込む
+            ReadNewLine(newestLogFile);
+            await Task.Delay(1000, token);
+        }
+    }
+
+    /// <summary>
+    /// 指定されたログファイルを読み込む
+    /// </summary>
+    /// <param name="path">ログファイルのパス</param>
     private void ReadNewLine(string path)
     {
         Console.WriteLine($"ReadNewLine: {path} ({_lastPosition})");
