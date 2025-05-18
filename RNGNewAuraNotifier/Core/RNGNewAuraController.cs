@@ -3,7 +3,8 @@ using RNGNewAuraNotifier.Core.Notification;
 using RNGNewAuraNotifier.Core.VRChat;
 
 namespace RNGNewAuraNotifier.Core;
-internal class RNGNewAuraController
+
+internal class RNGNewAuraController : IDisposable
 {
     /// <summary>
     /// 監視対象のログディレクトリパス
@@ -115,7 +116,7 @@ internal class RNGNewAuraController
                         ("Rarity", auraRarity, true),
                     ],
                     vrchatUser: _vrchatUser
-                );
+                ).ConfigureAwait(false);
             }
             catch (Exception ex)
             {

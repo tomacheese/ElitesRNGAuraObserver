@@ -7,16 +7,18 @@ using RNGNewAuraNotifier.Core.Config;
 using RNGNewAuraNotifier.UI.TrayIcon;
 
 namespace RNGNewAuraNotifier;
+
 internal static partial class Program
 {
     public static RNGNewAuraController? Controller;
 
     [LibraryImport("kernel32.dll", SetLastError = true)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     [return: MarshalAs(UnmanagedType.Bool)]
     private static partial bool AllocConsole();
 
     [STAThread]
-    static void Main()
+    public static void Main()
     {
         if (ToastNotificationManagerCompat.WasCurrentProcessToastActivated())
         {

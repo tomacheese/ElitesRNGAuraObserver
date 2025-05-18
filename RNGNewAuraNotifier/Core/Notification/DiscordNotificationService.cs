@@ -39,7 +39,7 @@ internal class DiscordNotificationService
             };
         }
 
-        await client.SendMessageAsync(text: "", embeds: [embed.Build()]);
+        await client.SendMessageAsync(text: "", embeds: [embed.Build()]).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -77,12 +77,12 @@ internal class DiscordNotificationService
 
         if (fields != null)
         {
-            foreach ((string Name, string Value, bool Inline) field in fields)
+            foreach ((var Name, var Value, var Inline) in fields)
             {
-                embed.AddField(field.Name, field.Value, field.Inline);
+                embed.AddField(Name, Value, Inline);
             }
         }
 
-        await client.SendMessageAsync(text: "", embeds: [embed.Build()]);
+        await client.SendMessageAsync(text: "", embeds: [embed.Build()]).ConfigureAwait(false);
     }
 }

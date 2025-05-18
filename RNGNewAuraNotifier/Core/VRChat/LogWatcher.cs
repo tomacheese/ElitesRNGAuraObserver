@@ -1,7 +1,12 @@
 using System.Text;
 
 namespace RNGNewAuraNotifier.Core.VRChat;
-internal class LogWatcher
+/// <summary>
+/// コンストラクタ
+/// </summary>
+/// <param name="logDirectory">ログディレクトリのパス</param>
+/// <param name="logFileFilter">ログファイルのフィルタ</param>
+internal class LogWatcher(string logDirectory, string logFileFilter) : IDisposable
 {
     /// <summary>
     /// 新規ログ行を検出したときに発生するイベント
@@ -16,36 +21,22 @@ internal class LogWatcher
     /// <summary>
     /// ログディレクトリ
     /// </summary>
-    private readonly string _logDirectory;
+    private readonly string _logDirectory = logDirectory;
 
     /// <summary>
     /// ログファイルのパターンフィルタ
     /// </summary>
-    private readonly string _logFileFilter;
+    private readonly string _logFileFilter = logFileFilter;
 
     /// <summary>
     /// 最後に読み取ったファイルのパス
     /// </summary>
-    private string _lastReadFilePath = string.Empty;
+    private string _lastReadFilePath = GetNewestLogFile(logDirectory, logFileFilter) ?? string.Empty;
 
     /// <summary>
     /// 最後に読み取った位置
     /// </summary>
     private long _lastPosition = 0;
-
-    /// <summary>
-    /// コンストラクタ
-    /// </summary>
-    /// <param name="logDirectory">ログディレクトリのパス</param>
-    /// <param name="logFileFilter">ログファイルのフィルタ</param>
-    public LogWatcher(string logDirectory, string logFileFilter)
-    {
-        _logDirectory = logDirectory;
-        _logFileFilter = logFileFilter;
-
-        // コンストラクタ生成時に最新のログファイルを取得する
-        _lastReadFilePath = GetNewestLogFile(logDirectory, logFileFilter) ?? string.Empty;
-    }
 
     /// <summary>
     /// ログファイルの監視を開始する
@@ -106,7 +97,7 @@ internal class LogWatcher
             if (newestLogFile == null)
             {
                 Console.WriteLine($"No log file found in {_logDirectory}");
-                await Task.Delay(1000, token);
+                await Task.Delay(1000, token).ConfigureAwait(false);
                 continue;
             }
             // 最新のログファイルが変更された場合は、読み込み位置をリセットする
@@ -117,7 +108,7 @@ internal class LogWatcher
 
             // 最新のログファイルを読み込む
             ReadNewLine(newestLogFile);
-            await Task.Delay(1000, token);
+            await Task.Delay(1000, token).ConfigureAwait(false);
         }
     }
 
@@ -185,10 +176,6 @@ internal class LogWatcher
     private static string? GetNewestLogFile(string logDirectory, string logFileFilter)
     {
         var files = Directory.GetFiles(logDirectory, logFileFilter);
-        if (files.Length == 0)
-        {
-            return null;
-        }
-        return files.OrderByDescending(static f => File.GetLastWriteTime(f)).FirstOrDefault();
+        return files.Length == 0 ? null : files.OrderByDescending(static f => File.GetLastWriteTime(f)).FirstOrDefault();
     }
 }

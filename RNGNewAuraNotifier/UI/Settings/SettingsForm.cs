@@ -4,7 +4,8 @@ using RNGNewAuraNotifier.Core.Notification;
 using Timer = System.Windows.Forms.Timer;
 
 namespace RNGNewAuraNotifier.UI.Settings;
-public partial class SettingsForm : Form
+
+internal partial class SettingsForm : Form
 {
     private readonly Timer _timer = new()
     {
@@ -103,4 +104,15 @@ public partial class SettingsForm : Form
     /// フォームが閉じられたときの処理
     /// </summary>
     private void OnFormClosed(object sender, FormClosedEventArgs e) => _timer.Dispose();
+
+
+    /// <summary>
+    /// アプリケーションの終了処理
+    /// </summary>
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        if (!disposing) return;
+        _timer?.Dispose();
+    }
 }
