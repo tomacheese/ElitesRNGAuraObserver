@@ -66,6 +66,8 @@ csharp_style_var_elsewhere = false:warning
 csharp_style_var_for_built_in_types = true:warning
 # 型明示時のvar使用の強制
 csharp_style_var_when_type_is_apparent = true:warning
+# 条件付きデリゲート呼び出しを使用する
+csharp_style_conditional_delegate_call = true:warning
 
 # =========================
 # C# コードスタイル: usingディレクティブ
@@ -660,7 +662,7 @@ dotnet_naming_rule.parameters_should_be_camel_case.symbols = parameters
 dotnet_naming_rule.parameters_should_be_camel_case.style = camel_case
 
 # ローカル変数名をcamelCaseで強制
-dotnet_naming_rule.locals_should_be_camel_case.severity = warning
+dotnet_naming_rule.locals_should_be_camel_case.severity = error
 # ローカル変数名に対するルール適用対象指定
 dotnet_naming_rule.locals_should_be_camel_case.symbols = locals
 # ローカル変数名のスタイル指定（camelCase）
@@ -729,6 +731,8 @@ dotnet_naming_symbols.parameters.applicable_accessibilities = *
 dotnet_naming_symbols.parameters.required_modifiers =
 # ローカル変数に対する適用範囲指定
 dotnet_naming_symbols.locals.applicable_kinds = local
+dotnet_naming_symbols.locals.applicable_accessibilities = *
+dotnet_naming_symbols.locals.required_modifiers =
 
 # =========================
 # 命名規則: スタイル仕様

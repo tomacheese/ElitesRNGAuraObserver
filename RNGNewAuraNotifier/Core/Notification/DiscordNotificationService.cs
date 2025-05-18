@@ -5,6 +5,7 @@ using RNGNewAuraNotifier.Core.VRChat;
 using Color = Discord.Color;
 
 namespace RNGNewAuraNotifier.Core.Notification;
+
 internal class DiscordNotificationService
 {
     /// <summary>
@@ -77,9 +78,9 @@ internal class DiscordNotificationService
 
         if (fields != null)
         {
-            foreach ((var Name, var Value, var Inline) in fields)
+            foreach ((var name, var value, var inline) in fields)
             {
-                embed.AddField(Name, Value, Inline);
+                embed.AddField(name, value, inline);
             }
         }
 
