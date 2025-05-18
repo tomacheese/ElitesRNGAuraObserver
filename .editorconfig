@@ -16,8 +16,8 @@ indent_size = 4
 tab_width = 4
 # 改行コードをCRLF（\r\n）のみに限定する強制
 end_of_line = crlf
-# ファイル末尾の自動改行追加の禁止
-insert_final_newline = false
+# ファイル末尾の自動改行の強制
+insert_final_newline = true
 # 行末の空白自動削除の強制
 trim_trailing_whitespace = true
 # ファイルの文字エンコーディングをUTF-8のみに限定する強制
