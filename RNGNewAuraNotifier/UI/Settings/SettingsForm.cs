@@ -4,7 +4,8 @@ using RNGNewAuraNotifier.Core.Notification;
 using Timer = System.Windows.Forms.Timer;
 
 namespace RNGNewAuraNotifier.UI.Settings;
-public partial class SettingsForm : Form
+
+internal partial class SettingsForm : Form
 {
     private readonly Timer _timer = new()
     {

@@ -2,6 +2,7 @@ using RNGNewAuraNotifier.UI.Settings;
 using Application = System.Windows.Forms.Application;
 
 namespace RNGNewAuraNotifier.UI.TrayIcon;
+
 internal class TrayIcon : ApplicationContext
 {
     /// <summary>
@@ -56,7 +57,22 @@ internal class TrayIcon : ApplicationContext
     private void Exit(object? sender, EventArgs e)
     {
         _trayIcon.Visible = false;
+        _settingsForm?.Close();
+        _settingsForm?.Dispose();
         _trayIcon.Dispose();
         Application.Exit();
+    }
+
+    /// <summary>
+    /// アプリケーションの終了処理
+    /// </summary>
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            _trayIcon.Dispose();
+            _settingsForm?.Dispose();
+        }
+        base.Dispose(disposing);
     }
 }

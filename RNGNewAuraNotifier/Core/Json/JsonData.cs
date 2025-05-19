@@ -16,7 +16,7 @@ internal class JsonData
     /// Auraの一覧
     /// </summary>
     [JsonProperty("Auras")]
-    private readonly Aura.Aura[] _auras = Array.Empty<Aura.Aura>();
+    private readonly Aura.Aura[] _auras = [];
 
     /// <summary>
     /// JSONファイルの内容を取得する
@@ -56,13 +56,13 @@ internal class JsonData
     {
         try
         {
-            Aura.Aura[] auras = GetJsonData()._auras ?? Array.Empty<Aura.Aura>();
+            Aura.Aura[] auras = GetJsonData()._auras ?? [];
             return auras;
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error deserializing Aura data: {ex.Message}");
-            return Array.Empty<Aura.Aura>();
+            return [];
         }
     }
 }
