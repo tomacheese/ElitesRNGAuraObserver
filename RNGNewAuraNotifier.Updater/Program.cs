@@ -9,7 +9,7 @@ Console.WriteLine();
 // 引数のパース
 // --app-name="<アプリ名>"
 // --target="<インストールフォルダ>"
-// --asset="<ダウンロードアセット名>"
+// --asset-name="<ダウンロードアセット名>"
 var appName = GetArgValue(args, "--app-name") ?? string.Empty;
 var target = GetArgValue(args, "--target") ?? string.Empty;
 var assetName = GetArgValue(args, "--asset-name") ?? string.Empty;
