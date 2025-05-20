@@ -72,7 +72,7 @@ internal class AppConfig
             if (string.IsNullOrEmpty(trimmedValue))
             {
                 // 空白の場合はデフォルトのログディレクトリを使用する
-                _config.LogDir = AppConstant.VRChatDefaultLogDirectory;
+                _config.LogDir = AppConstants.VRChatDefaultLogDirectory;
             }
             if (!Directory.Exists(trimmedValue))
             {
