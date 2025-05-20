@@ -31,7 +31,7 @@ internal class GitHubReleaseService : IDisposable
     /// </summary>
     /// <param name="assetName">アセット名</param>
     /// <returns>リリース情報</returns>
-    /// <exception cref="Exception">アセットが見つからない場合</exception>
+    /// <exception cref="InvalidOperationException">アセットが見つからない場合</exception>
     public async Task<ReleaseInfo> GetLatestReleaseAsync(string assetName)
     {
         var url = new Uri($"https://api.github.com/repos/{_owner}/{_repo}/releases/latest");
@@ -41,11 +41,9 @@ internal class GitHubReleaseService : IDisposable
         var tagName = obj["tag_name"]!.ToString();
         var assetUrl = obj["assets"]!
             .FirstOrDefault(x => x["name"]!.ToString() == assetName)?["browser_download_url"]?.ToString();
-        if (string.IsNullOrEmpty(assetUrl))
-        {
-            throw new Exception($"Failed to find asset: {assetName}");
-        }
-        return new ReleaseInfo(tagName, assetUrl);
+        return string.IsNullOrEmpty(assetUrl)
+            ? throw new InvalidOperationException($"Failed to find asset: {assetName}")
+            : new ReleaseInfo(tagName, assetUrl);
     }
 
     /// <summary>
