@@ -100,6 +100,8 @@ dotnet_style_qualification_for_property = false
 # =========================
 # 名前空間のスコープはファイル単位とする
 csharp_style_namespace_declarations = file_scoped:warning
+# 最上位レベルのステートメントを使用しない
+csharp_style_prefer_top_level_statements = false:warning
 
 # =========================
 # C# コードスタイル: 不要な括弧の扱い
