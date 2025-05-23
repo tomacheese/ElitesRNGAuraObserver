@@ -26,7 +26,7 @@ internal class DiscordNotificationService
             Description = message,
             Footer = new EmbedFooterBuilder
             {
-                Text = $"{AppConstants.AppName}{AppConstants.AppVersionString}",
+                Text = $"{AppConstants.AppName} {AppConstants.AppVersionString}",
             },
             Color = new Color(0x00, 0xFF, 0x00),
             Timestamp = DateTimeOffset.UtcNow,
