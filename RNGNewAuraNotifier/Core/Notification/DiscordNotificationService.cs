@@ -6,7 +6,7 @@ using Color = Discord.Color;
 
 namespace RNGNewAuraNotifier.Core.Notification;
 
-internal class DiscordNotificationService
+internal static class DiscordNotificationService
 {
     /// <summary>
     /// DiscordのWebhookを使用してメッセージを送信する
