@@ -15,6 +15,7 @@ internal static partial class Program
     public static RNGNewAuraController? Controller;
 
     [LibraryImport("kernel32.dll", SetLastError = true)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     [return: MarshalAs(UnmanagedType.Bool)]
     private static partial bool AllocConsole();
 
@@ -84,6 +85,11 @@ internal static partial class Program
         Application.Run(new TrayIcon());
     }
 
+    /// <summary>
+    /// 例外が発生したときに呼び出されるメソッド
+    /// </summary>
+    /// <param name="e">Exception</param>
+    /// <param name="exceptionType">例外の発生元種類</param>
     public static void OnException(Exception e, string exceptionType)
     {
         Console.WriteLine($"Exception: {exceptionType}");
@@ -120,6 +126,12 @@ internal static partial class Program
         Application.Exit();
     }
 
+    /// <summary>
+    /// 例外の詳細情報を取得するメソッド
+    /// </summary>
+    /// <param name="e">Exception</param>
+    /// <param name="isMarkdown">Markdown形式で出力するかどうか</param>
+    /// <returns>例外の詳細情報</returns>
     private static string GetErrorDetails(Exception e, bool isMarkdown)
     {
         var sb = new StringBuilder();
