@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.Toolkit.Uwp.Notifications;
 using RNGNewAuraNotifier.Core;
 using RNGNewAuraNotifier.Core.Config;
+using RNGNewAuraNotifier.Core.Updater;
 using RNGNewAuraNotifier.UI.TrayIcon;
 
 namespace RNGNewAuraNotifier;
@@ -18,7 +19,7 @@ internal static partial class Program
     private static partial bool AllocConsole();
 
     [STAThread]
-    public static void Main()
+    public static async Task Main()
     {
         if (ToastNotificationManagerCompat.WasCurrentProcessToastActivated())
         {
@@ -41,6 +42,20 @@ internal static partial class Program
 
         Console.WriteLine("Program.Main");
 
+        if (cmds.Any(cmd => cmd.Equals("--skip-update")))
+        {
+            Console.WriteLine("Skip update check");
+        }
+        else
+        {
+            var existsUpdate = await UpdateChecker.Check().ConfigureAwait(false);
+            if (existsUpdate)
+            {
+                Console.WriteLine("Found update. Exiting...");
+                return;
+            }
+        }
+
         ApplicationConfiguration.Initialize();
 
         // ログディレクトリのパス対象が存在しない場合はメッセージを出してリセットする
@@ -53,7 +68,7 @@ internal static partial class Program
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
 
-            AppConfig.LogDir = AppConstant.VRChatDefaultLogDirectory;
+            AppConfig.LogDir = AppConstants.VRChatDefaultLogDirectory;
         }
 
         Controller = new RNGNewAuraController(AppConfig.LogDir);

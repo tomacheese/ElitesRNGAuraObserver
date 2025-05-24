@@ -47,7 +47,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0.x'
+          dotnet-version: "9.0.x"
 
       - name: Set version from tag
         run: |
@@ -56,6 +56,10 @@ jobs:
           (Get-Content .\RNGNewAuraNotifier\RNGNewAuraNotifier.csproj) -replace '<Version>[^<]*(</Version>)', "<Version>$version</Version>" | Set-Content .\RNGNewAuraNotifier\RNGNewAuraNotifier.csproj
           (Get-Content .\RNGNewAuraNotifier\RNGNewAuraNotifier.csproj) -replace '<AssemblyVersion>[^<]*</AssemblyVersion>', "<AssemblyVersion>$versionWithRevision</AssemblyVersion>" | Set-Content .\RNGNewAuraNotifier\RNGNewAuraNotifier.csproj
           (Get-Content .\RNGNewAuraNotifier\RNGNewAuraNotifier.csproj) -replace '<FileVersion>[^<]*</FileVersion>', "<FileVersion>$versionWithRevision</FileVersion>" | Set-Content .\RNGNewAuraNotifier\RNGNewAuraNotifier.csproj
+
+          (Get-Content .\RNGNewAuraNotifier.Updater\RNGNewAuraNotifier.Updater.csproj) -replace '<Version>[^<]*(</Version>)', "<Version>$version</Version>" | Set-Content .\RNGNewAuraNotifier.Updater\RNGNewAuraNotifier.Updater.csproj
+          (Get-Content .\RNGNewAuraNotifier.Updater\RNGNewAuraNotifier.Updater.csproj) -replace '<AssemblyVersion>[^<]*</AssemblyVersion>', "<AssemblyVersion>$versionWithRevision</AssemblyVersion>" | Set-Content .\RNGNewAuraNotifier.Updater\RNGNewAuraNotifier.Updater.csproj
+          (Get-Content .\RNGNewAuraNotifier.Updater\RNGNewAuraNotifier.Updater.csproj) -replace '<FileVersion>[^<]*</FileVersion>', "<FileVersion>$versionWithRevision</FileVersion>" | Set-Content .\RNGNewAuraNotifier.Updater\RNGNewAuraNotifier.Updater.csproj
         shell: pwsh
         env:
           APP_VERSION: ${{ needs.bump-version.outputs.version }}
@@ -66,11 +70,17 @@ jobs:
       - name: Build solution
         run: dotnet publish RNGNewAuraNotifier.sln -p:PublishProfile=Publish
 
+      - name: Create zip
+        run: |
+          $zipFilePath = "RNGNewAuraNotifier.zip"
+          $sourceDir = "bin/Publish/*"
+          Compress-Archive -Path $sourceDir -DestinationPath $zipFilePath -Force
+        shell: pwsh
+
       - name: Publish Release
         uses: softprops/action-gh-release@v2
         with:
           body: ${{ needs.bump-version.outputs.changelog }}
           tag_name: ${{ needs.bump-version.outputs.tag }}
           target_commitish: ${{ github.sha }}
-          files: |
-            RNGNewAuraNotifier/bin/Publish/RNGNewAuraNotifier.exe
+          files: RNGNewAuraNotifier.zip
