@@ -2,6 +2,11 @@ using System.Text.RegularExpressions;
 using RNGNewAuraNotifier.Core.VRChat;
 
 namespace RNGNewAuraNotifier.Core.Aura;
+
+/// <summary>
+/// 新しいAuraログを検出するサービス
+/// </summary>
+
 internal partial class NewAuraDetectionService
 {
     /// <summary>
