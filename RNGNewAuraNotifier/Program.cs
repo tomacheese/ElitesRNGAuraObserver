@@ -48,7 +48,7 @@ internal static partial class Program
         }
         else
         {
-            var existsUpdate = await UpdateChecker.Check().ConfigureAwait(false);
+            var existsUpdate = await UpdateChecker.CheckAsync().ConfigureAwait(false);
             if (existsUpdate)
             {
                 Console.WriteLine("Found update. Exiting...");

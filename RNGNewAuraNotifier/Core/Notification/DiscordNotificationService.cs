@@ -14,7 +14,7 @@ internal class DiscordNotificationService
     /// <param name="title">メッセージのタイトル</param>
     /// <param name="message">メッセージの内容</param>
     /// <param name="vrchatUser">VRChatユーザーの情報</param>
-    public static async Task Notify(string title, string message, VRChatUser? vrchatUser)
+    public static async Task NotifyAsync(string title, string message, VRChatUser? vrchatUser)
     {
         var url = AppConfig.DiscordWebhookUrl;
         if (string.IsNullOrEmpty(url)) return;
@@ -50,7 +50,7 @@ internal class DiscordNotificationService
     /// <param name="fields">メッセージの内容(Field)</param>
     /// <param name="vrchatUser">VRChatのユーザー情報</param>
     /// <returns></returns>
-    public static async Task Notify(string title, List<(string Name, string Value, bool Inline)>? fields, VRChatUser? vrchatUser)
+    public static async Task NotifyAsync(string title, List<(string Name, string Value, bool Inline)>? fields, VRChatUser? vrchatUser)
     {
         var url = AppConfig.DiscordWebhookUrl;
         if (string.IsNullOrEmpty(url)) return;
