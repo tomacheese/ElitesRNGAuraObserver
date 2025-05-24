@@ -97,7 +97,7 @@ internal static partial class Program
             {
                 "An error has occurred and the operation has stopped.",
                 "It would be helpful if you could report this bug using GitHub issues!",
-                $"https://github.com/tomacheese/{AppConstants.AppName}/issues",
+                $"https://github.com/{AppConstants.GitHubRepoOwner}/{AppConstants.GitHubRepoName}/issues",
                 "",
                 GetErrorDetails(e, false),
                 "",
@@ -112,7 +112,7 @@ internal static partial class Program
         {
             Process.Start(new ProcessStartInfo()
             {
-                FileName = $"https://github.com/tomacheese/{AppConstants.AppName}/issues/new?body={Uri.EscapeDataString(GetErrorDetails(e, true))}",
+                FileName = $"https://github.com/{AppConstants.GitHubRepoOwner}/{AppConstants.GitHubRepoName}/issues/new?body={Uri.EscapeDataString(GetErrorDetails(e, true))}",
 
                 UseShellExecute = true,
             });
