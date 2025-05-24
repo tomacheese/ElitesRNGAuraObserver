@@ -1,6 +1,4 @@
-using System.Text;
 using RNGNewAuraNotifier.Core.Json;
-using RNGNewAuraNotifier.Properties;
 
 namespace RNGNewAuraNotifier.Core.Aura;
 internal class Aura(string id, string? name = null, int rarity = 0, int tier = 0, string subText = "")
@@ -54,9 +52,6 @@ internal class Aura(string id, string? name = null, int rarity = 0, int tier = 0
     {
         try
         {
-            // JSONデータを文字列に変換
-            var jsonContent = Encoding.UTF8.GetString(Resources.Auras);
-
             // JSONをAura[]にデシリアライズ
             Aura[] auras = JsonData.GetAuras();
 
