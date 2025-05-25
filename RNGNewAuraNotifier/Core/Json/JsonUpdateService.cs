@@ -23,11 +23,11 @@ internal class JsonUpdateService(string owner, string repo)
         Directory.CreateDirectory(Path.GetDirectoryName(saveDir));
 
         using var client = new HttpClient();
-        var jsonContent = await client.GetStringAsync(url).ConfigureAwait(true);
+        var jsonContent = await client.GetStringAsync(url).ConfigureAwait(false);
 
         if (CheckUpdateJsonData(jsonContent))
         {
-            await File.WriteAllTextAsync(saveDir, jsonContent).ConfigureAwait(true);
+            await File.WriteAllTextAsync(saveDir, jsonContent).ConfigureAwait(false);
             Console.WriteLine($"Json file saved. Path: {saveDir}");
         }
     }
