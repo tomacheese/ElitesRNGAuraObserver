@@ -23,7 +23,7 @@ internal class JsonData
     [JsonProperty("Auras")]
     private readonly Aura.Aura[] _auras = [];
 
-    public static async Task GetRatestJsonDataAsync()
+    public static async Task GetLatestJsonDataAsync()
     {
         var jsonUpdate = new JsonUpdateService(AppConstants.GitHubRepoOwner, AppConstants.GitHubRepoName);
 
@@ -52,8 +52,6 @@ internal class JsonData
         {
             jsonContent = File.ReadAllText(jsonDir);
         }
-
-
         JsonData jsonData = JsonConvert.DeserializeObject<JsonData>(jsonContent) ?? new JsonData();
         return jsonData;
     }

@@ -32,7 +32,7 @@ internal class JsonUpdateService(string owner, string repo) : IDisposable
         if (CheckUpdateJsonData(jsonContent))
         {
             await File.WriteAllTextAsync(Path.Combine(saveDir, "Aura.json"), jsonContent).ConfigureAwait(true);
-            Console.WriteLine($"Json file saved.  Path: {saveDir}");
+            Console.WriteLine($"Json file saved. Path: {saveDir}");
         }
     }
 

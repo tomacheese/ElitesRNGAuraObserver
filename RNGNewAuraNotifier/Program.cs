@@ -110,7 +110,7 @@ internal static partial class Program
     /// <summary>
     /// ログディレクトリの存在を確認し、存在しない場合はデフォルト値にリセットするメソッド
     /// </summary>
-    private static void CheckExistLogDirectory()
+    private static void CheckExistsLogDirectory()
     {
         // ログディレクトリのパス対象が存在しない場合はメッセージを出してリセットする
         if (!Directory.Exists(AppConfig.LogDir))
