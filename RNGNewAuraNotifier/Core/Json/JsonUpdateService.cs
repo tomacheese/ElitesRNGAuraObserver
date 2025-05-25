@@ -18,20 +18,17 @@ internal class JsonUpdateService(string owner, string repo) : IDisposable
     public async Task FetchMasterJsonAsync()
     {
         var url = new Uri($"https://raw.githubusercontent.com/{_owner}/{_repo}/master/{_repo}/Resources/Auras.json");
-        var saveDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RNGNewAuraNotifier");
+        var saveDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RNGNewAuraNotifier", "Aura.json");
 
         // ディレクトリが存在しない場合は作成
-        if (!Directory.Exists(saveDir))
-        {
-            Directory.CreateDirectory(saveDir);
-        }
+        Directory.CreateDirectory(Path.GetDirectoryName(saveDir));
 
         using var client = new HttpClient();
         var jsonContent = await client.GetStringAsync(url).ConfigureAwait(true);
 
         if (CheckUpdateJsonData(jsonContent))
         {
-            await File.WriteAllTextAsync(Path.Combine(saveDir, "Aura.json"), jsonContent).ConfigureAwait(true);
+            await File.WriteAllTextAsync(saveDir, jsonContent).ConfigureAwait(true);
             Console.WriteLine($"Json file saved. Path: {saveDir}");
         }
     }
