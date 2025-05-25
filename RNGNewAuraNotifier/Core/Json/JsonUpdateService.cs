@@ -1,5 +1,4 @@
 using System.Text;
-using Newtonsoft.Json;
 using RNGNewAuraNotifier.Properties;
 
 namespace RNGNewAuraNotifier.Core.Json;
@@ -37,6 +36,11 @@ internal class JsonUpdateService(string owner, string repo) : IDisposable
         }
     }
 
+    /// <summary>
+    /// JSONデータの更新が必要かどうかを確認する
+    /// </summary>
+    /// <param name="fetchJsonContent">ダウンロードしたJSON文字列</param>
+    /// <returns>true:アップデートする/false:アップデートしない</returns>
     private static bool CheckUpdateJsonData(string fetchJsonContent)
     {
         // Jsonファイルの保存先
@@ -51,5 +55,8 @@ internal class JsonUpdateService(string owner, string repo) : IDisposable
         return !string.Equals(fetchJsonContent, currentJsonContent, StringComparison.OrdinalIgnoreCase);
     }
 
+    /// <summary>
+    /// リソースを解放する
+    /// </summary>
     public void Dispose() => _http.Dispose();
 }
