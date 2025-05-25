@@ -43,7 +43,7 @@ internal static partial class Program
 
         ApplicationConfiguration.Initialize();
         // ログディレクトリの存在を確認し、存在しない場合はデフォルト値にリセット
-        CheckExistLogDirectory();
+        CheckExistsLogDirectory();
 
         Controller = new RNGNewAuraController(AppConfig.LogDir);
         Controller.Start();
@@ -96,7 +96,7 @@ internal static partial class Program
         {
             Task.Run(async () =>
             {
-                await JsonData.GetRatestJsonDataAsync().ConfigureAwait(false);
+                await JsonData.GetLatestJsonDataAsync().ConfigureAwait(false);
                 var existsUpdate = await UpdateChecker.CheckAsync().ConfigureAwait(false);
                 if (existsUpdate)
                 {
