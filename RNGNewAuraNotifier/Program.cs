@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Toolkit.Uwp.Notifications;
@@ -48,7 +49,7 @@ internal static partial class Program
         }
         else
         {
-            var existsUpdate = await UpdateChecker.Check().ConfigureAwait(false);
+            var existsUpdate = await UpdateChecker.CheckAsync().ConfigureAwait(false);
             if (existsUpdate)
             {
                 Console.WriteLine("Found update. Exiting...");
@@ -84,29 +85,31 @@ internal static partial class Program
         Application.Run(new TrayIcon());
     }
 
+    /// <summary>
+    /// 例外が発生したときに呼び出されるメソッド
+    /// </summary>
+    /// <param name="e">Exception</param>
+    /// <param name="exceptionType">例外の発生元種類</param>
     public static void OnException(Exception e, string exceptionType)
     {
         Console.WriteLine($"Exception: {exceptionType}");
         Console.WriteLine($"Message: {e.Message}");
         Console.WriteLine($"InnerException: {e.InnerException?.Message}");
         Console.WriteLine($"StackTrace: {e.StackTrace}");
-
-        var errorDetailAndStacktrace = "----- Error Details -----\n" +
-            e.Message + "\n" +
-            e.InnerException?.Message + "\n" +
-            "\n" +
-            "----- StackTrace -----\n" +
-            e.StackTrace + "\n";
+        Console.WriteLine($"InnerException StackTrace: {e.InnerException?.StackTrace}");
 
         DialogResult result = MessageBox.Show(
-            "An error has occurred and the operation has stopped.\n" +
-            "It would be helpful if you could report this bug using GitHub issues!\n" +
-            "https://github.com/tomacheese/RNGNewAuraNotifier/issues\n" +
-            "\n" +
-            errorDetailAndStacktrace +
-            "\n" +
-            "Click OK to open the Create GitHub issue page.\n" +
-            "Click Cancel to close this application.",
+            string.Join("\n", new List<string>()
+            {
+                "An error has occurred and the operation has stopped.",
+                "It would be helpful if you could report this bug using GitHub issues!",
+                $"https://github.com/{AppConstants.GitHubRepoOwner}/{AppConstants.GitHubRepoName}/issues",
+                "",
+                GetErrorDetails(e, false),
+                "",
+                "Click OK to open the Create GitHub issue page.",
+                "Click Cancel to close this application.",
+            }),
             $"Error ({exceptionType})",
             MessageBoxButtons.OKCancel,
             MessageBoxIcon.Error);
@@ -115,10 +118,56 @@ internal static partial class Program
         {
             Process.Start(new ProcessStartInfo()
             {
-                FileName = "https://github.com/tomacheese/RNGNewAuraNotifier/issues/new?body=" + Uri.EscapeDataString(errorDetailAndStacktrace),
+                FileName = $"https://github.com/{AppConstants.GitHubRepoOwner}/{AppConstants.GitHubRepoName}/issues/new?body={Uri.EscapeDataString(GetErrorDetails(e, true))}",
+
                 UseShellExecute = true,
             });
         }
         Application.Exit();
+    }
+
+    /// <summary>
+    /// 例外の詳細情報を取得するメソッド
+    /// </summary>
+    /// <param name="e">Exception</param>
+    /// <param name="isMarkdown">Markdown形式で出力するかどうか</param>
+    /// <returns>例外の詳細情報</returns>
+    private static string GetErrorDetails(Exception e, bool isMarkdown)
+    {
+        var sb = new StringBuilder();
+        var fence = isMarkdown ? "```" : string.Empty;
+
+        void AppendSection(string title, string content)
+        {
+            if (isMarkdown)
+            {
+                sb.AppendLine(CultureInfo.InvariantCulture, $"## {title}\n\n{fence}\n{content}\n{fence}\n");
+            }
+            else
+            {
+                sb.AppendLine(CultureInfo.InvariantCulture, $"----- {title} -----\n{content}\n");
+            }
+        }
+
+        Exception? current = e;
+        var level = 0;
+        while (current != null)
+        {
+            var title = level == 0
+                ? "Error"
+                : $"Inner Exception (Level {level})";
+            AppendSection(title, $"{current.Message ?? "<no message>"}\n{current.StackTrace ?? "<no trace>"}");
+
+            current = current.InnerException;
+            level++;
+        }
+
+        // Environment info
+        AppendSection("Environment",
+            $"OS: {Environment.OSVersion}\n" +
+            $"CLR: {Environment.Version}\n" +
+            $"App: {AppConstants.AppName} {AppConstants.AppVersionString}");
+
+        return sb.ToString().Trim();
     }
 }

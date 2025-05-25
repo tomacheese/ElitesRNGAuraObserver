@@ -1,6 +1,4 @@
-using System.Text;
 using RNGNewAuraNotifier.Core.Json;
-using RNGNewAuraNotifier.Properties;
 
 namespace RNGNewAuraNotifier.Core.Aura;
 
@@ -75,9 +73,6 @@ internal record Aura
     {
         try
         {
-            // JSONデータを文字列に変換
-            var jsonContent = Encoding.UTF8.GetString(Resources.Auras);
-
             // JSONをAura[]にデシリアライズ
             Aura[] auras = JsonData.GetAuras();
 

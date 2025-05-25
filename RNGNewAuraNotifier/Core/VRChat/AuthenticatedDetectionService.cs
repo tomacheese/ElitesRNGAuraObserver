@@ -1,6 +1,7 @@
 using System.Text.RegularExpressions;
 
 namespace RNGNewAuraNotifier.Core.VRChat;
+
 internal partial class AuthenticatedDetectionService
 {
     public event Action<VRChatUser, bool> OnDetected = delegate { };

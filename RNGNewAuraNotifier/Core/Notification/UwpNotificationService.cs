@@ -1,6 +1,11 @@
 using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace RNGNewAuraNotifier.Core.Notification;
+
+/// <summary>
+/// Windowsのトースト通知を表示するサービス
+/// </summary>
+
 internal class UwpNotificationService
 {
     /// <summary>
