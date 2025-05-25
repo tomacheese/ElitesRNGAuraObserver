@@ -7,10 +7,8 @@ namespace RNGNewAuraNotifier.Core.Json;
 /// <summary>
 /// JSONデータを格納するクラス
 /// </summary>
-
 internal class JsonData
 {
-
     /// <summary>
     /// JSONのバージョン情報
     /// </summary>

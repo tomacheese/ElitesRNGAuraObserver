@@ -4,6 +4,9 @@ using RNGNewAuraNotifier.Core.VRChat;
 
 namespace RNGNewAuraNotifier.Core;
 
+/// <summary>
+/// VRChatのログを監視し新しいAuraの取得を検出して通知するコントローラークラス
+/// </summary>
 internal class RNGNewAuraController : IDisposable
 {
     /// <summary>
@@ -28,7 +31,6 @@ internal class RNGNewAuraController : IDisposable
     /// <remarks>ログディレクトリにnullまたは空白を指定した場合は、デフォルトのVRChatログディレクトリを使用する</remarks>
     public RNGNewAuraController(string? logDirectory)
     {
-
         // ログディレクトリが指定されていない場合は、デフォルトのVRChatログディレクトリを使用する
         var defaultLogDir = AppConstants.VRChatDefaultLogDirectory;
         _logDir = logDirectory ?? defaultLogDir;
@@ -107,14 +109,15 @@ internal class RNGNewAuraController : IDisposable
                 // Aura名が取得できなかった場合は、"_Unknown_"を表示する
                 var auraName = string.IsNullOrEmpty(aura.GetNameText()) ? $"_Unknown_" : $"`{aura.GetNameText()}`";
                 var auraRarity = $"`{aura.GetRarityString()}`";
+                var fields = new List<(string Name, string Value, bool Inline)>
+                {
+                    ("Aura Name", auraName, true),
+                    ("Rarity", auraRarity, true),
+                };
 
                 await DiscordNotificationService.NotifyAsync(
                     title: "**Unlocked New Aura!**",
-                    fields:
-                    [
-                        ("Aura Name", auraName, true),
-                        ("Rarity", auraRarity, true),
-                    ],
+                    fields: fields,
                     vrchatUser: _vrchatUser
                 ).ConfigureAwait(false);
             }

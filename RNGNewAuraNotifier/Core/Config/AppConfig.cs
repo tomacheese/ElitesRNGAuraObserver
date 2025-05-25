@@ -1,6 +1,7 @@
 using System.Text.Json;
 
 namespace RNGNewAuraNotifier.Core.Config;
+
 /// <summary>
 /// アプリケーションの設定を管理するクラス
 /// </summary>
@@ -23,7 +24,7 @@ internal class AppConfig
     /// </summary>
     private static readonly JsonSerializerOptions _jsonSerializerOptions = new()
     {
-        WriteIndented = true
+        WriteIndented = true,
     };
 
     /// <summary>
@@ -77,6 +78,7 @@ internal class AppConfig
             Load();
             return _config.LogDir;
         }
+
         set
         {
             var trimmedValue = value.Trim();
@@ -85,11 +87,13 @@ internal class AppConfig
                 // 空白の場合はデフォルトのログディレクトリを使用する
                 _config.LogDir = AppConstants.VRChatDefaultLogDirectory;
             }
+
             if (!Directory.Exists(trimmedValue))
             {
                 // Directory.Existsは、ディレクトリが存在しない場合や、アクセス権がない場合にfalseを返す
                 throw new DirectoryNotFoundException($"The specified directory does not exist or not readable: {trimmedValue}");
             }
+
             _config.LogDir = trimmedValue;
             Save();
         }
@@ -106,6 +110,7 @@ internal class AppConfig
             Load();
             return _config.DiscordWebhookUrl;
         }
+
         set
         {
             var trimmedValue = value.Trim();
@@ -113,6 +118,7 @@ internal class AppConfig
             {
                 throw new ArgumentException("DiscordWebhookUrl must start with http or https.");
             }
+
             _config.DiscordWebhookUrl = trimmedValue;
             Save();
         }

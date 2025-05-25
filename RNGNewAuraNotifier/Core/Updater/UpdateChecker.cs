@@ -74,6 +74,7 @@ internal class UpdateChecker(GitHubReleaseService gh)
             {
                 throw new InvalidOperationException("Failed to get target directory.");
             }
+
             Console.WriteLine("Starting updater...");
             Process.Start(new ProcessStartInfo
             {
@@ -83,9 +84,9 @@ internal class UpdateChecker(GitHubReleaseService gh)
                     $"--target={target}",
                     $"--asset-name={assetName}",
                     $"--repo-owner={repoOwner}",
-                    $"--repo-name={repoName}"
+                    $"--repo-name={repoName}",
                 },
-                UseShellExecute = false
+                UseShellExecute = false,
             });
             Application.Exit();
             return true;

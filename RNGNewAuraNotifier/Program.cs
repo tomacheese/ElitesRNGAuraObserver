@@ -10,15 +10,25 @@ using RNGNewAuraNotifier.UI.TrayIcon;
 
 namespace RNGNewAuraNotifier;
 
+/// <summary>
+/// RNGNewAuraNotifierのエントリポイント
+/// </summary>
 internal static partial class Program
 {
-    public static RNGNewAuraController? Controller;
+    /// <summary>
+    /// RNGNewAuraControllerのインスタンス
+    /// </summary>
+    private static RNGNewAuraController? _controller;
 
     [LibraryImport("kernel32.dll", SetLastError = true)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     [return: MarshalAs(UnmanagedType.Bool)]
     private static partial bool AllocConsole();
 
+    /// <summary>
+    /// アプリケーションのエントリポイント
+    /// </summary>
+    /// <returns>Task</returns>
     [STAThread]
     public static async Task Main()
     {
@@ -72,13 +82,13 @@ internal static partial class Program
             AppConfig.LogDir = AppConstants.VRChatDefaultLogDirectory;
         }
 
-        Controller = new RNGNewAuraController(AppConfig.LogDir);
-        Controller.Start();
+        _controller = new RNGNewAuraController(AppConfig.LogDir);
+        _controller.Start();
 
         Application.ApplicationExit += (s, e) =>
         {
             Console.WriteLine("Program.ApplicationExit");
-            Controller?.Dispose();
+            _controller?.Dispose();
             ToastNotificationManagerCompat.Uninstall();
         };
 
@@ -104,9 +114,9 @@ internal static partial class Program
                 "An error has occurred and the operation has stopped.",
                 "It would be helpful if you could report this bug using GitHub issues!",
                 $"https://github.com/{AppConstants.GitHubRepoOwner}/{AppConstants.GitHubRepoName}/issues",
-                "",
+                string.Empty,
                 GetErrorDetails(e, false),
-                "",
+                string.Empty,
                 "Click OK to open the Create GitHub issue page.",
                 "Click Cancel to close this application.",
             }),
@@ -123,6 +133,7 @@ internal static partial class Program
                 UseShellExecute = true,
             });
         }
+
         Application.Exit();
     }
 
@@ -163,11 +174,30 @@ internal static partial class Program
         }
 
         // Environment info
-        AppendSection("Environment",
-            $"OS: {Environment.OSVersion}\n" +
-            $"CLR: {Environment.Version}\n" +
-            $"App: {AppConstants.AppName} {AppConstants.AppVersionString}");
+        var content = $"""
+            OS: {Environment.OSVersion}
+            CLR: {Environment.Version}
+            App: {AppConstants.AppName} {AppConstants.AppVersionString}
+            """;
+        AppendSection("Environment", content);
 
         return sb.ToString().Trim();
+    }
+
+    /// <summary>
+    /// RNGNewAuraControllerのインスタンスを取得する
+    /// </summary>
+    /// <returns>RNGNewAuraControllerのインスタンス</returns>
+    public static RNGNewAuraController? GetController() => _controller;
+
+    /// <summary>
+    /// RNGNewAuraControllerを再起動する
+    /// </summary>
+    /// <param name="logDirectory">ログディレクトリのパス</param>
+    public static void RestartController(string? logDirectory)
+    {
+        _controller?.Dispose();
+        _controller = new RNGNewAuraController(logDirectory);
+        _controller.Start();
     }
 }

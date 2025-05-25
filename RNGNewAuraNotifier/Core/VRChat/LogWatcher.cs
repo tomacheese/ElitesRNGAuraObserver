@@ -1,6 +1,7 @@
 using System.Text;
 
 namespace RNGNewAuraNotifier.Core.VRChat;
+
 /// <summary>
 /// VRChatのログファイルを監視するクラス
 /// </summary>
@@ -11,7 +12,7 @@ internal class LogWatcher(string logDirectory, string logFileFilter) : IDisposab
     /// <summary>
     /// 新規ログ行を検出したときに発生するイベント
     /// </summary>
-    public event Action<string, bool> OnNewLogLine = delegate { };
+    public event Action<string, bool> OnNewLogLine = (arg1, arg2) => { };
 
     /// <summary>
     /// キャンセル用のトークンソース
@@ -52,13 +53,16 @@ internal class LogWatcher(string logDirectory, string logFileFilter) : IDisposab
         }
 
         Task.Run(() => MonitorLoopAsync(_cts.Token), _cts.Token)
-            .ContinueWith(t =>
-            {
-                if (t.IsFaulted)
+            .ContinueWith(
+                t =>
                 {
-                    Console.WriteLine($"LogWatcher error: {t.Exception?.GetBaseException().Message}");
-                }
-            }, TaskContinuationOptions.OnlyOnFaulted);
+                    if (t.IsFaulted)
+                    {
+                        Console.WriteLine($"LogWatcher error: {t.Exception?.GetBaseException().Message}");
+                    }
+                },
+                TaskContinuationOptions.OnlyOnFaulted
+            );
     }
 
     /// <summary>
@@ -100,6 +104,7 @@ internal class LogWatcher(string logDirectory, string logFileFilter) : IDisposab
                 await Task.Delay(1000, token).ConfigureAwait(false);
                 continue;
             }
+
             // 最新のログファイルが変更された場合は、読み込み位置をリセットする
             if (_lastReadFilePath != newestLogFile || _lastPosition == 0)
             {
@@ -127,6 +132,7 @@ internal class LogWatcher(string logDirectory, string logFileFilter) : IDisposab
                 Console.WriteLine($"File is empty: {path}");
                 return;
             }
+
             if (_lastReadFilePath != path || stream.Length < _lastPosition)
             {
                 Console.WriteLine($"File changed: {_lastReadFilePath} -> {path} | {_lastPosition} -> {stream.Length}");

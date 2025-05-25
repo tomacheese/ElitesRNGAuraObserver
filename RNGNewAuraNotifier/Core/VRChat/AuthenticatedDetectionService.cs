@@ -2,9 +2,16 @@ using System.Text.RegularExpressions;
 
 namespace RNGNewAuraNotifier.Core.VRChat;
 
+/// <summary>
+/// 認証されたユーザーのログインを検出するサービス
+/// </summary>
 internal partial class AuthenticatedDetectionService
 {
-    public event Action<VRChatUser, bool> OnDetected = delegate { };
+    /// <summary>
+    /// 新しいユーザーログインを検出したときに発生するイベント
+    /// </summary>
+    public event Action<VRChatUser, bool> OnDetected = (arg1, arg2) => { };
+
     /// <summary>
     /// VRChatログイン時のログパターン
     /// </summary>
@@ -20,7 +27,7 @@ internal partial class AuthenticatedDetectionService
     /// <summary>
     /// 新しいユーザーログインを検出するサービス
     /// </summary>
-    /// <param name="watcher"></param>
+    /// <param name="watcher">ログウォッチャー</param>
     public AuthenticatedDetectionService(LogWatcher watcher)
     {
         _watcher = watcher;
@@ -43,12 +50,11 @@ internal partial class AuthenticatedDetectionService
 
         var userName = matchUserLogPattern.Groups["UserName"].Value;
         var userId = matchUserLogPattern.Groups["UserId"].Value;
-        OnDetected.Invoke(new VRChatUser
-        {
-            UserName = userName,
-            UserId = userId
-        }, isFirstReading);
+        OnDetected.Invoke(
+            new VRChatUser
+            {
+                UserName = userName,
+                UserId = userId,
+            }, isFirstReading);
     }
-
-
 }

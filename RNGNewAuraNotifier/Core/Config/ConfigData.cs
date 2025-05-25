@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 
 namespace RNGNewAuraNotifier.Core.Config;
+
 /// <summary>
 /// 設定データを格納するクラス
 /// </summary>

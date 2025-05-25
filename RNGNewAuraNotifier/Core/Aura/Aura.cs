@@ -45,7 +45,7 @@ internal record Aura
     /// オーラのサブテキスト
     /// </summary>
     /// <example>VALENTINE’S EXCLUSIVE</example>
-    public string SubText { get; init; } = "";
+    public string SubText { get; init; } = string.Empty;
 
     /// <summary>
     /// コンストラクタ

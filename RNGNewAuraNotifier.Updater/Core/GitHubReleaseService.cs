@@ -74,9 +74,11 @@ internal class GitHubReleaseService : IDisposable
                 Console.Write($"\r{downloaded:#,0}/{total:#,0} bytes");
             }
         }
+
         Console.WriteLine();
         return tmp;
     }
 
+    /// <inheritdoc/>
     public void Dispose() => _http.Dispose();
 }

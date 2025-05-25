@@ -3,6 +3,9 @@ using Application = System.Windows.Forms.Application;
 
 namespace RNGNewAuraNotifier.UI.TrayIcon;
 
+/// <summary>
+/// トレイアイコンのクラス
+/// </summary>
 internal class TrayIcon : ApplicationContext
 {
     /// <summary>
@@ -64,8 +67,12 @@ internal class TrayIcon : ApplicationContext
     }
 
     /// <summary>
-    /// アプリケーションの終了処理
+    /// アンマネージリソースを解放するかどうかを示します。
     /// </summary>
+    /// <param name="disposing">
+    /// true の場合、マネージリソースとアンマネージリソースの両方を解放します。
+    /// false の場合、アンマネージリソースのみを解放します。
+    /// </param>
     protected override void Dispose(bool disposing)
     {
         if (disposing)
@@ -73,6 +80,7 @@ internal class TrayIcon : ApplicationContext
             _trayIcon.Dispose();
             _settingsForm?.Dispose();
         }
+
         base.Dispose(disposing);
     }
 }
