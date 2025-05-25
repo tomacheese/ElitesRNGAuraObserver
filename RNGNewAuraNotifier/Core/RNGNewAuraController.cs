@@ -108,7 +108,7 @@ internal class RNGNewAuraController : IDisposable
                 var auraName = string.IsNullOrEmpty(aura.GetNameText()) ? $"_Unknown_" : $"`{aura.GetNameText()}`";
                 var auraRarity = $"`{aura.GetRarityString()}`";
 
-                await DiscordNotificationService.Notify(
+                await DiscordNotificationService.NotifyAsync(
                     title: "**Unlocked New Aura!**",
                     fields:
                     [

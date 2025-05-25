@@ -51,7 +51,7 @@ internal class LogWatcher(string logDirectory, string logFileFilter) : IDisposab
             ReadNewLine(_lastReadFilePath);
         }
 
-        Task.Run(() => MonitorLoop(_cts.Token), _cts.Token)
+        Task.Run(() => MonitorLoopAsync(_cts.Token), _cts.Token)
             .ContinueWith(t =>
             {
                 if (t.IsFaulted)
@@ -88,7 +88,7 @@ internal class LogWatcher(string logDirectory, string logFileFilter) : IDisposab
     /// </summary>
     /// <param name="token">キャンセルトークン</param>
     /// <returns>タスク</returns>
-    private async Task MonitorLoop(CancellationToken token)
+    private async Task MonitorLoopAsync(CancellationToken token)
     {
         while (!token.IsCancellationRequested)
         {
