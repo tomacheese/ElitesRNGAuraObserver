@@ -6,7 +6,7 @@ namespace RNGNewAuraNotifier.Updater.Core;
 /// アプリケーションの定数を格納するクラス
 /// </summary>
 
-internal class AppConstants
+internal static class AppConstants
 {
     /// <summary>
     /// アプリケーション名
