@@ -23,6 +23,20 @@ internal class JsonData
     [JsonProperty("Auras")]
     private readonly Aura.Aura[] _auras = [];
 
+    public static async Task GetRatestJsonDataAsync()
+    {
+        var jsonUpdate = new JsonUpdateService(AppConstants.GitHubRepoOwner, AppConstants.GitHubRepoName);
+
+        try
+        {
+            await jsonUpdate.FetchMasterJsonAsync().ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching latest JSON data: {ex.Message}");
+        }
+    }
+
     /// <summary>
     /// JSONファイルの内容を取得する
     /// </summary>
@@ -31,6 +45,15 @@ internal class JsonData
     {
         // JSONデータを文字列に変換
         var jsonContent = Encoding.UTF8.GetString(Resources.Auras);
+
+        // Jsonファイルの保存先
+        var jsonDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RNGNewAuraNotifier", "Aura.json");
+        if (File.Exists(jsonDir))
+        {
+            jsonContent = File.ReadAllText(jsonDir);
+        }
+
+
         JsonData jsonData = JsonConvert.DeserializeObject<JsonData>(jsonContent) ?? new JsonData();
         return jsonData;
     }

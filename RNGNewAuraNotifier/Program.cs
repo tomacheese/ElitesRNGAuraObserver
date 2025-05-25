@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Toolkit.Uwp.Notifications;
 using RNGNewAuraNotifier.Core;
 using RNGNewAuraNotifier.Core.Config;
+using RNGNewAuraNotifier.Core.Json;
 using RNGNewAuraNotifier.Core.Updater;
 using RNGNewAuraNotifier.UI.TrayIcon;
 
@@ -49,6 +50,7 @@ internal static partial class Program
         }
         else
         {
+            Task.Run(JsonData.GetRatestJsonDataAsync).Wait();
             var existsUpdate = await UpdateChecker.CheckAsync().ConfigureAwait(false);
             if (existsUpdate)
             {
