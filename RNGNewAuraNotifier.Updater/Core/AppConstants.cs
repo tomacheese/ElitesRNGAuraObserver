@@ -1,6 +1,11 @@
 using System.Reflection;
 
 namespace RNGNewAuraNotifier.Updater.Core;
+
+/// <summary>
+/// アプリケーションの定数を格納するクラス
+/// </summary>
+  
 internal static class AppConstants
 {
     /// <summary>

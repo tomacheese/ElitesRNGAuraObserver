@@ -8,10 +8,10 @@ namespace RNGNewAuraNotifier.Updater.Core;
 /// </summary>  
 internal static class UpdaterHelper
 {
-    /// <summary>  
-    /// 指定したプロセス名のプロセスを全て終了させる。まずは CloseMainWindow() を呼び、5秒待ってから Kill() を呼ぶ。  
-    /// </summary>  
-    /// <param name="processName">プロセス名</param>  
+    /// <summary>
+    /// 指定したプロセス名のプロセスを全て終了させる。まずは CloseMainWindow() を呼び、5秒待ってから Kill() を呼ぶ。
+    /// </summary>
+    /// <param name="processName">プロセス名</param>
     public static void KillProcesses(string processName)
     {
         Process[] processes = Process.GetProcessesByName(processName);
@@ -48,24 +48,24 @@ internal static class UpdaterHelper
         }
     }
 
-    /// <summary>  
-    /// 指定したパスの ZIP ファイルを展開する  
-    /// </summary>  
-    /// <param name="zipPath">ZIP ファイルのパス</param>  
-    /// <param name="targetFolder">展開先フォルダ</param>  
+    /// <summary>
+    /// 指定したパスの ZIP ファイルを展開する
+    /// </summary>
+    /// <param name="zipPath">ZIP ファイルのパス</param>
+    /// <param name="targetFolder">展開先フォルダ</param>
     public static void ExtractZipToTarget(string zipPath, string targetFolder)
     {
         using ZipArchive archive = ZipFile.OpenRead(zipPath);
         foreach (ZipArchiveEntry entry in archive.Entries)
         {
-            // ディレクトリは飛ばす  
+            // ディレクトリは飛ばす
             if (string.IsNullOrEmpty(entry.Name)) continue;
 
-            // サニタイズされたパスを作成  
+            // サニタイズされたパスを作成
             var dest = Path.Combine(targetFolder, entry.FullName);
             var fullPath = Path.GetFullPath(dest);
 
-            // 展開先フォルダの外に出ないようにチェック  
+            // 展開先フォルダの外に出ないようにチェック
             if (!fullPath.StartsWith(Path.GetFullPath(targetFolder), StringComparison.Ordinal))
             {
                 throw new InvalidOperationException("The ZIP file contains an incorrect path.");
