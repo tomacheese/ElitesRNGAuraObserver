@@ -3,33 +3,27 @@ using RNGNewAuraNotifier.Core.Json;
 namespace RNGNewAuraNotifier.Core.Aura;
 
 /// <summary>
-/// オーラの情報を格納するクラス
+/// Auraの情報を表すレコード
 /// </summary>
-/// <param name="id">ID</param>
-/// <param name="name">名前</param>
-/// <param name="rarity">レアリティ</param>
-/// <param name="tier">ティア</param>
-/// <param name="subText">サブテキスト</param>
-
-internal class Aura(string id, string? name = null, int rarity = 0, int tier = 0, string subText = "")
+internal record Aura
 {
     /// <summary>
     /// Aura の ID
     /// </summary>
     /// <example>60</example>
-    public string Id { get; private set; } = id;
+    public string Id { get; init; }
 
     /// <summary>
     /// Aura の名前
     /// </summary>
     /// <example>Celebration</example>
-    public string? Name { get; private set; } = name;
+    public string? Name { get; init; }
 
     /// <summary>
     /// オーラの当選確率
     /// </summary>
     /// <example>1000000</example>
-    public int Rarity { get; private set; } = rarity;
+    public int Rarity { get; init; }
 
     /// <summary>
     /// オーラのティア
@@ -45,13 +39,30 @@ internal class Aura(string id, string? name = null, int rarity = 0, int tier = 0
     /// SPECIAL枠のAura(特殊な入手条件のAuraのみ)はTier:0
     /// </remarks>
     /// <example>4</example>
-    public int Tier { get; private set; } = tier;
+    public int Tier { get; init; }
 
     /// <summary>
     /// オーラのサブテキスト
     /// </summary>
     /// <example>VALENTINE’S EXCLUSIVE</example>
-    public string SubText { get; private set; } = subText;
+    public string SubText { get; init; } = "";
+
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="id">Aura の ID</param>
+    /// <param name="name">Aura の名前</param>
+    /// <param name="rarity">オーラの当選確率</param>
+    /// <param name="tier">オーラのティア</param>
+    /// <param name="subText">オーラのサブテキスト</param>
+    public Aura(string id, string? name = null, int rarity = 0, int tier = 0, string subText = "")
+    {
+        Id = id;
+        Name = name;
+        Rarity = rarity;
+        Tier = tier;
+        SubText = subText;
+    }
 
     /// <summary>
     /// Aura を取得する
@@ -101,4 +112,17 @@ internal class Aura(string id, string? name = null, int rarity = 0, int tier = 0
     /// </example>
     /// <returns>通知に表示するレアリティ</returns>
     public string GetRarityString() => Rarity != 0 ? $"1 in {Rarity:N0}" : "???";
+
+    /// <summary>
+    /// オーラの等価性を比較する
+    /// </summary>
+    /// <param name="other">比較対象のAura</param>
+    /// <returns>等価であればtrue、そうでなければfalse</returns>
+    public virtual bool Equals(Aura? other) => other != null && Id == other.Id;
+
+    /// <summary>
+    /// オーラのハッシュコードを取得する
+    /// </summary>
+    /// <returns>ハッシュコード</returns>
+    public override int GetHashCode() => Id.GetHashCode();
 }
