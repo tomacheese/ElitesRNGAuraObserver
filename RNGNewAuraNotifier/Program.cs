@@ -30,20 +30,64 @@ internal static partial class Program
             return;
         }
 
+        // 例外処理ハンドラを登録
+        RegisterExceptionHandlers();
+
+        var cmds = Environment.GetCommandLineArgs();
+        // デバッグコンソールの設定
+        HandleDebugConsole(cmds);
+        // アップデートチェック
+        UpdateCheck(cmds);
+
+        Console.WriteLine("Program.Main");
+
+        ApplicationConfiguration.Initialize();
+        // ログディレクトリの存在を確認し、存在しない場合はデフォルト値にリセット
+        CheckExistLogDirectory();
+
+        Controller = new RNGNewAuraController(AppConfig.LogDir);
+        Controller.Start();
+
+        Application.ApplicationExit += (s, e) =>
+        {
+            Console.WriteLine("Program.ApplicationExit");
+            Controller?.Dispose();
+            ToastNotificationManagerCompat.Uninstall();
+        };
+
+        Application.Run(new TrayIcon());
+    }
+
+    /// <summary>
+    /// 例外ハンドラを登録するメソッド
+    /// </summary>
+    private static void RegisterExceptionHandlers()
+    {
         Application.ThreadException += (s, e) => OnException(e.Exception, "ThreadException");
         Thread.GetDomain().UnhandledException += (s, e) => OnException((Exception)e.ExceptionObject, "UnhandledException");
         TaskScheduler.UnobservedTaskException += (s, e) => OnException(e.Exception, "UnobservedTaskException");
+    }
 
-        var cmds = Environment.GetCommandLineArgs();
+    /// <summary>
+    /// デバッグコンソールを有効にするメソッド
+    /// </summary>
+    /// <param name="cmds">アプリケーションの起動引数</param>
+    private static void HandleDebugConsole(string[] cmds)
+    {
         if (cmds.Any(cmd => cmd.Equals("--debug")))
         {
             AllocConsole();
             Console.SetOut(new StreamWriter(Console.OpenStandardOutput()) { AutoFlush = true });
             Console.OutputEncoding = Encoding.UTF8;
         }
+    }
 
-        Console.WriteLine("Program.Main");
-
+    /// <summary>
+    /// アップデートチェックを行うメソッド
+    /// </summary>
+    /// <param name="cmds">アプリケーションの起動引数</param>
+    private static void UpdateCheck(string[] cmds)
+    {
         if (cmds.Any(cmd => cmd.Equals("--skip-update")))
         {
             Console.WriteLine("Skip update check");
@@ -61,36 +105,28 @@ internal static partial class Program
                 }
             }).Wait();
         }
+    }
 
-        ApplicationConfiguration.Initialize();
-
+    /// <summary>
+    /// ログディレクトリの存在を確認し、存在しない場合はデフォルト値にリセットするメソッド
+    /// </summary>
+    private static void CheckExistLogDirectory()
+    {
         // ログディレクトリのパス対象が存在しない場合はメッセージを出してリセットする
         if (!Directory.Exists(AppConfig.LogDir))
         {
             MessageBox.Show(
-            string.Join("\n", new List<string>()
-            {
-                "The log directory does not exist.\n",
-                "Log directory settings return to default value.",
-            }),
+                string.Join("\n", new List<string>()
+                {
+                    "The log directory does not exist.",
+                    "Log directory settings return to default value.",
+                }),
                 "Error",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
 
             AppConfig.LogDir = AppConstants.VRChatDefaultLogDirectory;
         }
-
-        Controller = new RNGNewAuraController(AppConfig.LogDir);
-        Controller.Start();
-
-        Application.ApplicationExit += (s, e) =>
-        {
-            Console.WriteLine("Program.ApplicationExit");
-            Controller?.Dispose();
-            ToastNotificationManagerCompat.Uninstall();
-        };
-
-        Application.Run(new TrayIcon());
     }
 
     /// <summary>
