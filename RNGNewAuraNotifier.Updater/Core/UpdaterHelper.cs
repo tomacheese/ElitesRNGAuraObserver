@@ -3,9 +3,9 @@ using System.IO.Compression;
 
 namespace RNGNewAuraNotifier.Updater.Core;
 
-/// <summary>  
-/// UpdaterHelper  
-/// </summary>  
+/// <summary>
+/// UpdaterHelper
+/// </summary>
 internal static class UpdaterHelper
 {
     /// <summary>
