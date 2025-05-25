@@ -3,6 +3,11 @@ using Newtonsoft.Json;
 using RNGNewAuraNotifier.Properties;
 
 namespace RNGNewAuraNotifier.Core.Json;
+
+/// <summary>
+/// JSONデータを格納するクラス
+/// </summary>
+
 internal class JsonData
 {
 

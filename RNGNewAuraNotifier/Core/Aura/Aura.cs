@@ -3,6 +3,16 @@ using RNGNewAuraNotifier.Core.Json;
 using RNGNewAuraNotifier.Properties;
 
 namespace RNGNewAuraNotifier.Core.Aura;
+
+/// <summary>
+/// オーラの情報を格納するクラス
+/// </summary>
+/// <param name="id">ID</param>
+/// <param name="name">名前</param>
+/// <param name="rarity">レアリティ</param>
+/// <param name="tier">ティア</param>
+/// <param name="subText">サブテキスト</param>
+
 internal class Aura(string id, string? name = null, int rarity = 0, int tier = 0, string subText = "")
 {
     /// <summary>
@@ -28,7 +38,7 @@ internal class Aura(string id, string? name = null, int rarity = 0, int tier = 0
     /// </summary>
     /// <remarks>
     /// Rarityの高さによる区分け、ゲーム内の演出をもとに割り振っている。
-    /// 
+    ///
     /// Rarity: ～ 999 Tier:5
     /// Rarity: 1000 ～ 9999 Tier:4
     /// Rarity: 10000 ～ 99999 Tier:3

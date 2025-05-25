@@ -55,7 +55,7 @@ internal class GitHubReleaseService : IDisposable
     {
         var tmp = Path.GetTempFileName();
         var uri = new Uri(url);
-        using HttpResponseMessage res = await _http.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false); // 修正: Uri を使用
+        using HttpResponseMessage res = await _http.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
         res.EnsureSuccessStatusCode();
 
         var total = res.Content.Headers.ContentLength ?? -1L;
