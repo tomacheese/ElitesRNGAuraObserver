@@ -9,7 +9,7 @@ namespace RNGNewAuraNotifier.Core.Notification;
 /// <summary>
 /// DiscordのWebhookを使用してメッセージを送信するサービス
 /// </summary>
-internal class DiscordNotificationService
+internal static class DiscordNotificationService
 {
     /// <summary>
     /// DiscordのWebhookを使用してメッセージを送信する(Field形式)
