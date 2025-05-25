@@ -68,8 +68,11 @@ internal static partial class Program
         if (!Directory.Exists(AppConfig.LogDir))
         {
             MessageBox.Show(
-                "The log directory does not exist.\n" +
+            string.Join("\n", new List<string>()
+            {
+                "The log directory does not exist.\n",
                 "Log directory settings return to default value.",
+            }),
                 "Error",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
