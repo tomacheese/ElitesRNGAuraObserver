@@ -21,7 +21,7 @@ internal static partial class Program
     private static partial bool AllocConsole();
 
     [STAThread]
-    public static async Task Main()
+    public static void Main()
     {
         if (ToastNotificationManagerCompat.WasCurrentProcessToastActivated())
         {
@@ -50,13 +50,16 @@ internal static partial class Program
         }
         else
         {
-            Task.Run(JsonData.GetRatestJsonDataAsync).Wait();
-            var existsUpdate = await UpdateChecker.CheckAsync().ConfigureAwait(false);
-            if (existsUpdate)
+            Task.Run(async () =>
             {
-                Console.WriteLine("Found update. Exiting...");
-                return;
-            }
+                await JsonData.GetRatestJsonDataAsync().ConfigureAwait(false);
+                var existsUpdate = await UpdateChecker.CheckAsync().ConfigureAwait(false);
+                if (existsUpdate)
+                {
+                    Console.WriteLine("Found update. Exiting...");
+                    return;
+                }
+            }).Wait();
         }
 
         ApplicationConfiguration.Initialize();
