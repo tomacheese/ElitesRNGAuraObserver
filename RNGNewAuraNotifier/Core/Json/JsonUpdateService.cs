@@ -6,9 +6,8 @@ namespace RNGNewAuraNotifier.Core.Json;
 /// <summary>
 /// Aura.jsonの更新を管理するクラス
 /// </summary>
-internal class JsonUpdateService(string owner, string repo) : IDisposable
+internal class JsonUpdateService(string owner, string repo)
 {
-    private readonly HttpClient _http = new();
     private readonly string _owner = owner;
     private readonly string _repo = repo;
 
@@ -51,9 +50,4 @@ internal class JsonUpdateService(string owner, string repo) : IDisposable
 
         return !string.Equals(fetchJsonContent, currentJsonContent, StringComparison.OrdinalIgnoreCase);
     }
-
-    /// <summary>
-    /// リソースを解放する
-    /// </summary>
-    public void Dispose() => _http.Dispose();
 }
