@@ -23,6 +23,9 @@ internal class JsonData
     [JsonProperty("Auras")]
     private readonly Aura.Aura[] _auras = [];
 
+    /// <summary>
+    /// 最新のJSONデータを取得する非同期メソッド
+    /// </summary>
     public static async Task GetLatestJsonDataAsync()
     {
         var jsonUpdate = new JsonUpdateService(AppConstants.GitHubRepoOwner, AppConstants.GitHubRepoName);
