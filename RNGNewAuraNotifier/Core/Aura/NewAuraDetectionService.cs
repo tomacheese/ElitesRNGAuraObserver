@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text.RegularExpressions;
 using RNGNewAuraNotifier.Core.VRChat;
 
@@ -50,7 +51,7 @@ internal partial class NewAuraDetectionService
             return;
         }
 
-        var auraId = matchAuraLogPattern.Groups["AuraId"].Value;
+        var auraId = int.Parse(matchAuraLogPattern.Groups["AuraId"].Value, CultureInfo.InvariantCulture);
         OnDetected.Invoke(Aura.GetAura(auraId), isFirstReading);
     }
 }
