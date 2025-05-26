@@ -27,7 +27,7 @@ partial class SettingsForm
     /// </summary>
     private void InitializeComponent()
     {
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
+        var resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
         label1 = new Label();
         textBoxWatchingFilePath = new TextBox();
         label2 = new Label();
@@ -40,64 +40,67 @@ partial class SettingsForm
         // label1
         // 
         label1.AutoSize = true;
-        label1.Location = new Point(30, 139);
+        label1.Location = new Point(21, 83);
+        label1.Margin = new Padding(2, 0, 2, 0);
         label1.Name = "label1";
-        label1.Size = new Size(151, 25);
+        label1.Size = new Size(102, 15);
         label1.TabIndex = 0;
         label1.Text = "Watching LogFile:";
         // 
         // textBoxWatchingFilePath
         // 
-        textBoxWatchingFilePath.Location = new Point(33, 167);
-        textBoxWatchingFilePath.Margin = new Padding(3, 4, 3, 4);
+        textBoxWatchingFilePath.Location = new Point(23, 100);
+        textBoxWatchingFilePath.Margin = new Padding(2, 2, 2, 2);
         textBoxWatchingFilePath.Multiline = true;
         textBoxWatchingFilePath.Name = "textBoxWatchingFilePath";
         textBoxWatchingFilePath.ReadOnly = true;
-        textBoxWatchingFilePath.Size = new Size(726, 68);
+        textBoxWatchingFilePath.Size = new Size(509, 42);
         textBoxWatchingFilePath.TabIndex = 1;
         // 
         // label2
         // 
         label2.AutoSize = true;
-        label2.Location = new Point(30, 14);
+        label2.Location = new Point(21, 8);
+        label2.Margin = new Padding(2, 0, 2, 0);
         label2.Name = "label2";
-        label2.Size = new Size(118, 25);
+        label2.Size = new Size(78, 15);
         label2.TabIndex = 2;
         label2.Text = "LogDirectory:";
         // 
         // textBoxLogDir
         // 
-        textBoxLogDir.Location = new Point(33, 42);
-        textBoxLogDir.Margin = new Padding(3, 4, 3, 4);
+        textBoxLogDir.Location = new Point(23, 25);
+        textBoxLogDir.Margin = new Padding(2, 2, 2, 2);
         textBoxLogDir.Multiline = true;
         textBoxLogDir.Name = "textBoxLogDir";
-        textBoxLogDir.Size = new Size(726, 68);
+        textBoxLogDir.Size = new Size(509, 42);
         textBoxLogDir.TabIndex = 3;
         // 
         // label3
         // 
         label3.AutoSize = true;
-        label3.Location = new Point(30, 264);
+        label3.Location = new Point(21, 158);
+        label3.Margin = new Padding(2, 0, 2, 0);
         label3.Name = "label3";
-        label3.Size = new Size(195, 25);
+        label3.Size = new Size(128, 15);
         label3.TabIndex = 4;
         label3.Text = "Discord Webhook URL:";
         // 
         // textBoxDiscordWebhookUrl
         // 
-        textBoxDiscordWebhookUrl.Location = new Point(33, 292);
-        textBoxDiscordWebhookUrl.Margin = new Padding(3, 4, 3, 4);
+        textBoxDiscordWebhookUrl.Location = new Point(23, 175);
+        textBoxDiscordWebhookUrl.Margin = new Padding(2, 2, 2, 2);
         textBoxDiscordWebhookUrl.Multiline = true;
         textBoxDiscordWebhookUrl.Name = "textBoxDiscordWebhookUrl";
-        textBoxDiscordWebhookUrl.Size = new Size(726, 68);
+        textBoxDiscordWebhookUrl.Size = new Size(509, 42);
         textBoxDiscordWebhookUrl.TabIndex = 5;
         // 
         // buttonSave
         // 
-        buttonSave.Location = new Point(653, 397);
-        buttonSave.Margin = new Padding(3, 4, 3, 4);
+        buttonSave.Location = new Point(457, 238);
+        buttonSave.Margin = new Padding(2, 2, 2, 2);
         buttonSave.Name = "buttonSave";
-        buttonSave.Size = new Size(103, 53);
+        buttonSave.Size = new Size(72, 32);
         buttonSave.TabIndex = 6;
         buttonSave.Text = "Save";
         buttonSave.UseVisualStyleBackColor = true;
@@ -105,9 +108,9 @@ partial class SettingsForm
         // 
         // SettingsForm
         // 
-        AutoScaleDimensions = new SizeF(10F, 25F);
+        AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(800, 486);
+        ClientSize = new Size(560, 292);
         Controls.Add(buttonSave);
         Controls.Add(textBoxDiscordWebhookUrl);
         Controls.Add(label3);
@@ -117,7 +120,7 @@ partial class SettingsForm
         Controls.Add(label1);
         FormBorderStyle = FormBorderStyle.Fixed3D;
         Icon = (Icon)resources.GetObject("$this.Icon");
-        Margin = new Padding(3, 4, 3, 4);
+        Margin = new Padding(2, 2, 2, 2);
         MaximizeBox = false;
         Name = "SettingsForm";
         Text = "RNGNewAuraNotifier Settings";
