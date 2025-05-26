@@ -33,19 +33,14 @@ internal class Program
         try
         {
             if (string.IsNullOrEmpty(appName) || string.IsNullOrEmpty(target) || string.IsNullOrEmpty(assetName) || string.IsNullOrEmpty(repoOwner) || string.IsNullOrEmpty(repoName))
-            {
                 throw new ArgumentException("Invalid arguments. Required: --app-name=<AppName> --target=<TargetFolder> --asset-name=<AssetName> --repo-owner=<RepoOwner> --repo-name=<RepoName>");
-            }
 
             // 実行中Updaterがテンポラリフォルダにコピーされているか確認
             // コピーされていない場合は、コピーして再起動
             var tempRoot = Path.Combine(Path.GetTempPath(), appName, "Updater");
             var currentExe = Environment.ProcessPath;
             if (string.IsNullOrEmpty(currentExe))
-            {
                 throw new InvalidOperationException("Failed to get current executable path.");
-            }
-
             Console.WriteLine($"Current executable: {currentExe}");
 
             var version = Assembly.GetExecutingAssembly()
@@ -59,10 +54,7 @@ internal class Program
             if (!currentExe.Equals(selfCopyExe, StringComparison.OrdinalIgnoreCase))
             {
                 if (Directory.Exists(tempRoot))
-                {
                     Directory.Delete(tempRoot, recursive: true);
-                }
-
                 Directory.CreateDirectory(versionFolder);
                 Console.WriteLine($"{currentExe} -> {selfCopyExe}");
                 File.Copy(currentExe, selfCopyExe, overwrite: true);
@@ -140,10 +132,7 @@ internal class Program
                 {
                     var value = arg[key.Length..];
                     if (value.StartsWith('=') || value.StartsWith(':') || value.StartsWith(' '))
-                    {
                         value = value[1..];
-                    }
-
                     return value.Trim('"', '\'');
                 })
                 .FirstOrDefault();

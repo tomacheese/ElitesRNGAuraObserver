@@ -15,16 +15,13 @@ internal static class DiscordNotificationService
     /// DiscordのWebhookを使用してメッセージを送信する
     /// </summary>
     /// <param name="title">メッセージのタイトル</param>
-    /// <param name="fields">メッセージの内容(Field)</param>
+    /// <param name="fields">メッセージのフィールド群</param>
     /// <param name="vrchatUser">VRChatのユーザー情報</param>
     /// <returns>Task</returns>
     public static async Task NotifyAsync(string title, List<(string Name, string Value, bool Inline)>? fields, VRChatUser? vrchatUser)
     {
         var url = AppConfig.DiscordWebhookUrl;
-        if (string.IsNullOrEmpty(url))
-        {
-            return;
-        }
+        if (string.IsNullOrEmpty(url)) return;
 
         using var client = new DiscordWebhookClient(url);
         var embed = new EmbedBuilder

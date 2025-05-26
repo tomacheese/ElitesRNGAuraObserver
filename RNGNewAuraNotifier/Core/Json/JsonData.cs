@@ -24,6 +24,7 @@ internal class JsonData
     /// <summary>
     /// 最新のJSONデータを取得する非同期メソッド
     /// </summary>
+    /// <returns>Task</returns>
     public static async Task GetLatestJsonDataAsync()
     {
         var jsonUpdate = new JsonUpdateService(AppConstants.GitHubRepoOwner, AppConstants.GitHubRepoName);

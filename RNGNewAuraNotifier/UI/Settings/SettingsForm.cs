@@ -17,7 +17,14 @@ internal partial class SettingsForm : Form
         Interval = 1000, // 1 sec
     };
 
+    /// <summary>
+    /// 最後に保存したログディレクトリ
+    /// </summary>
     private string _lastSavedLogDir = string.Empty;
+
+    /// <summary>
+    /// 最後に保存したDiscordのWebhook URL
+    /// </summary>
     private string _lastSavedDiscordWebhookUrl = string.Empty;
 
     /// <summary>

@@ -50,11 +50,10 @@ internal partial class AuthenticatedDetectionService
 
         var userName = matchUserLogPattern.Groups["UserName"].Value;
         var userId = matchUserLogPattern.Groups["UserId"].Value;
-        OnDetected.Invoke(
-            new VRChatUser
-            {
-                UserName = userName,
-                UserId = userId,
-            }, isFirstReading);
+        OnDetected.Invoke(new VRChatUser
+        {
+            UserName = userName,
+            UserId = userId,
+        }, isFirstReading);
     }
 }

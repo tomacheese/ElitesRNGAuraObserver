@@ -53,16 +53,13 @@ internal class LogWatcher(string logDirectory, string logFileFilter) : IDisposab
         }
 
         Task.Run(() => MonitorLoopAsync(_cts.Token), _cts.Token)
-            .ContinueWith(
-                t =>
+            .ContinueWith(t =>
+            {
+                if (t.IsFaulted)
                 {
-                    if (t.IsFaulted)
-                    {
-                        Console.WriteLine($"LogWatcher error: {t.Exception?.GetBaseException().Message}");
-                    }
-                },
-                TaskContinuationOptions.OnlyOnFaulted
-            );
+                    Console.WriteLine($"LogWatcher error: {t.Exception?.GetBaseException().Message}");
+                }
+            }, TaskContinuationOptions.OnlyOnFaulted);
     }
 
     /// <summary>

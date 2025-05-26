@@ -59,10 +59,7 @@ internal static class UpdaterHelper
         foreach (ZipArchiveEntry entry in archive.Entries)
         {
             // ディレクトリは飛ばす
-            if (string.IsNullOrEmpty(entry.Name))
-            {
-                continue;
-            }
+            if (string.IsNullOrEmpty(entry.Name)) continue;
 
             // サニタイズされたパスを作成
             var dest = Path.Combine(targetFolder, entry.FullName);

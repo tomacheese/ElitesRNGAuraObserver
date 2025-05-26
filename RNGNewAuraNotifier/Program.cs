@@ -29,7 +29,6 @@ internal static partial class Program
     /// <summary>
     /// アプリケーションのエントリポイント
     /// </summary>
-    /// <returns>Task</returns>
     [STAThread]
     public static void Main()
     {

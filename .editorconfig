@@ -4,7 +4,7 @@
 # このファイルをルートとして扱う
 root = true
 
-[*.cs]
+[*]
 # =========================
 # インデント・改行・文字コード
 # =========================
@@ -23,6 +23,12 @@ trim_trailing_whitespace = true
 # ファイルの文字エンコーディングをUTF-8のみに限定する強制
 charset = utf-8
 
+# いくつかのファイルはインデント幅を2スペースに設定
+[*.{xml,pubxml,json,yaml,yml,resx}]
+indent_size = 2
+tab_width = 2
+
+[*.cs]
 # =========================
 # C# コードスタイル: ブレース・式本体
 # =========================
@@ -715,7 +721,7 @@ dotnet_naming_symbols.async_suffix_methods.applicable_kinds = method
 # Asyncで終わる名前を持つメソッドのアクセス修飾子指定なし
 dotnet_naming_symbols.async_suffix_methods.applicable_accessibilities = *
 # Asyncで終わる名前を持つメソッドの修飾子指定なし
-dotnet_naming_symbols.async_suffix_methods.required_modifiers = 
+dotnet_naming_symbols.async_suffix_methods.required_modifiers =
 # Asyncで終わる名前を持つメソッドの名前パターン
 dotnet_naming_symbols.async_suffix_methods.required_suffix = Async
 # privateフィールドに対する適用範囲指定
@@ -902,8 +908,8 @@ dotnet_diagnostic.SA1500.severity = none
 dotnet_diagnostic.SA1501.severity = warning
 # SA1502: 開始ブレースと終了ブレースを持つ要素は一行にすべて記述しない
 dotnet_diagnostic.SA1502.severity = warning
-# SA1503: 制御ブロックの中括弧を省略しない
-dotnet_diagnostic.SA1503.severity = warning
+# SA1503: 制御ブロックの中括弧を省略してもよい
+dotnet_diagnostic.SA1503.severity = none
 # SA1504: すべてのアクセサは単一行または複数行のいずれかで記述
 dotnet_diagnostic.SA1504.severity = warning
 # SA1505: 開始ブレースの後に空白行を入れない
@@ -962,8 +968,8 @@ dotnet_diagnostic.SA1113.severity = warning
 dotnet_diagnostic.SA1114.severity = warning
 # SA1115: パラメータはコンマの直後に記述する
 dotnet_diagnostic.SA1115.severity = warning
-# SA1116: 分割されたパラメータリストは宣言の次の行から開始する
-dotnet_diagnostic.SA1116.severity = warning
+# SA1116: 分割されたパラメータリストは宣言の次の行から開始しない
+dotnet_diagnostic.SA1116.severity = none
 # SA1117: パラメータは同じ行に記述するか、それぞれ別の行に記述する
 dotnet_diagnostic.SA1117.severity = warning
 # SA1118: パラメータは複数行にまたがるべきではない
@@ -1170,3 +1176,7 @@ dotnet_diagnostic.SA1643.severity = none
 dotnet_diagnostic.SA1649.severity = none
 # SA1650: 要素のドキュメントは正しくスペルする必要はない
 dotnet_diagnostic.SA1650.severity = none
+
+# Designer ファイル、resx ファイルは除外
+[*.{Designer.cs,resx}]
+generated_code = true
