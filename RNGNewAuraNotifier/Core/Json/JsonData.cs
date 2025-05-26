@@ -46,17 +46,29 @@ internal class JsonData
     /// <returns>JSONファイルの内容</returns>
     public static JsonData GetJsonData()
     {
-        // JSONデータを文字列に変換
-        var jsonContent = Encoding.UTF8.GetString(Resources.Auras);
-
         // Jsonファイルの保存先
         var jsonDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RNGNewAuraNotifier", "Aura.json");
+        string? jsonContent;
+
+        // 1. 保存先JSONファイルが存在する場合はそれを読む
         if (File.Exists(jsonDir))
         {
-            jsonContent = File.ReadAllText(jsonDir);
+            try
+            {
+                jsonContent = File.ReadAllText(jsonDir);
+                JsonData? jsonData = JsonConvert.DeserializeObject<JsonData>(jsonContent) ?? new JsonData();
+                return jsonData;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Could not deserialize local JSON data: {ex.Message}");
+            }
         }
-        JsonData jsonData = JsonConvert.DeserializeObject<JsonData>(jsonContent) ?? new JsonData();
-        return jsonData;
+
+        // 保存先JSONファイルが存在しない場合、またはデシリアライズに失敗した場合はResourcesから読み込む
+        jsonContent = Encoding.UTF8.GetString(Resources.Auras);
+        JsonData? resourceJsonData = JsonConvert.DeserializeObject<JsonData>(jsonContent) ?? new JsonData();
+        return resourceJsonData;
     }
 
     /// <summary>

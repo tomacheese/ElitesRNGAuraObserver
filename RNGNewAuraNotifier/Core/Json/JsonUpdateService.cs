@@ -1,5 +1,4 @@
-using System.Text;
-using RNGNewAuraNotifier.Properties;
+using Newtonsoft.Json.Linq;
 
 namespace RNGNewAuraNotifier.Core.Json;
 
@@ -29,7 +28,20 @@ internal class JsonUpdateService(string owner, string repo)
         using var client = new HttpClient();
         var jsonContent = await client.GetStringAsync(url).ConfigureAwait(false);
 
-        if (CheckUpdateJsonData(jsonContent))
+        // Versionフィールドを取得
+        string? version = null;
+        try
+        {
+            var jObject = JObject.Parse(jsonContent);
+            version = jObject["Version"]?.ToString();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to get Version: {ex.Message}");
+        }
+
+        // JSONファイルの更新チェック
+        if (version is null || CheckUpdateJsonData(version))
         {
             await File.WriteAllTextAsync(saveDir, jsonContent).ConfigureAwait(false);
             Console.WriteLine($"Json file saved. Path: {saveDir}");
@@ -39,19 +51,13 @@ internal class JsonUpdateService(string owner, string repo)
     /// <summary>
     /// JSONデータの更新が必要かどうかを確認する
     /// </summary>
-    /// <param name="fetchJsonContent">ダウンロードしたJSON文字列</param>
+    /// <param name="fetchJsonVersion">ダウンロードしたJSON文字列</param>
     /// <returns>true:アップデートする/false:アップデートしない</returns>
-    private static bool CheckUpdateJsonData(string fetchJsonContent)
+    private static bool CheckUpdateJsonData(string fetchJsonVersion)
     {
-        // Jsonファイルの保存先
-        var jsonDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RNGNewAuraNotifier", "Aura.json");
-        var currentJsonContent = Encoding.UTF8.GetString(Resources.Auras);
+        var currentJsonVersion = JsonData.GetVersion();
 
-        if (File.Exists(jsonDir))
-        {
-            currentJsonContent = File.ReadAllText(jsonDir);
-        }
-
-        return !string.Equals(fetchJsonContent, currentJsonContent, StringComparison.OrdinalIgnoreCase);
+        return DateTime.TryParse(fetchJsonVersion, out DateTime fetchDate) &&
+            DateTime.TryParse(currentJsonVersion, out DateTime currentDate) && fetchDate > currentDate;
     }
 }
