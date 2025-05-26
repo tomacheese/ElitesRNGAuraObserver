@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Toolkit.Uwp.Notifications;
 using RNGNewAuraNotifier.Core;
 using RNGNewAuraNotifier.Core.Config;
+using RNGNewAuraNotifier.Core.Json;
 using RNGNewAuraNotifier.Core.Updater;
 using RNGNewAuraNotifier.UI.TrayIcon;
 
@@ -30,7 +31,7 @@ internal static partial class Program
     /// </summary>
     /// <returns>Task</returns>
     [STAThread]
-    public static async Task Main()
+    public static void Main()
     {
         if (ToastNotificationManagerCompat.WasCurrentProcessToastActivated())
         {
@@ -39,48 +40,20 @@ internal static partial class Program
             return;
         }
 
-        Application.ThreadException += (s, e) => OnException(e.Exception, "ThreadException");
-        Thread.GetDomain().UnhandledException += (s, e) => OnException((Exception)e.ExceptionObject, "UnhandledException");
-        TaskScheduler.UnobservedTaskException += (s, e) => OnException(e.Exception, "UnobservedTaskException");
+        // 例外処理ハンドラを登録
+        RegisterExceptionHandlers();
 
         var cmds = Environment.GetCommandLineArgs();
-        if (cmds.Any(cmd => cmd.Equals("--debug")))
-        {
-            AllocConsole();
-            Console.SetOut(new StreamWriter(Console.OpenStandardOutput()) { AutoFlush = true });
-            Console.OutputEncoding = Encoding.UTF8;
-        }
+        // デバッグコンソールの設定
+        HandleDebugConsole(cmds);
+        // アップデートチェック
+        UpdateCheck(cmds);
 
         Console.WriteLine("Program.Main");
 
-        if (cmds.Any(cmd => cmd.Equals("--skip-update")))
-        {
-            Console.WriteLine("Skip update check");
-        }
-        else
-        {
-            var existsUpdate = await UpdateChecker.CheckAsync().ConfigureAwait(false);
-            if (existsUpdate)
-            {
-                Console.WriteLine("Found update. Exiting...");
-                return;
-            }
-        }
-
         ApplicationConfiguration.Initialize();
-
-        // ログディレクトリのパス対象が存在しない場合はメッセージを出してリセットする
-        if (!Directory.Exists(AppConfig.LogDir))
-        {
-            MessageBox.Show(
-                "The log directory does not exist.\n" +
-                "Log directory settings return to default value.",
-                "Error",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-
-            AppConfig.LogDir = AppConstants.VRChatDefaultLogDirectory;
-        }
+        // ログディレクトリの存在を確認し、存在しない場合はデフォルト値にリセット
+        CheckExistsLogDirectory();
 
         _controller = new RNGNewAuraController(AppConfig.LogDir);
         _controller.Start();
@@ -93,6 +66,77 @@ internal static partial class Program
         };
 
         Application.Run(new TrayIcon());
+    }
+
+    /// <summary>
+    /// 例外ハンドラを登録するメソッド
+    /// </summary>
+    private static void RegisterExceptionHandlers()
+    {
+        Application.ThreadException += (s, e) => OnException(e.Exception, "ThreadException");
+        Thread.GetDomain().UnhandledException += (s, e) => OnException((Exception)e.ExceptionObject, "UnhandledException");
+        TaskScheduler.UnobservedTaskException += (s, e) => OnException(e.Exception, "UnobservedTaskException");
+    }
+
+    /// <summary>
+    /// デバッグコンソールを有効にするメソッド
+    /// </summary>
+    /// <param name="cmds">アプリケーションの起動引数</param>
+    private static void HandleDebugConsole(string[] cmds)
+    {
+        if (cmds.Any(cmd => cmd.Equals("--debug")))
+        {
+            AllocConsole();
+            Console.SetOut(new StreamWriter(Console.OpenStandardOutput()) { AutoFlush = true });
+            Console.OutputEncoding = Encoding.UTF8;
+        }
+    }
+
+    /// <summary>
+    /// アップデートチェックを行うメソッド
+    /// </summary>
+    /// <param name="cmds">アプリケーションの起動引数</param>
+    private static void UpdateCheck(string[] cmds)
+    {
+        if (cmds.Any(cmd => cmd.Equals("--skip-update")))
+        {
+            Console.WriteLine("Skip update check");
+        }
+        else
+        {
+            Task.Run(async () =>
+            {
+                await JsonData.GetLatestJsonDataAsync().ConfigureAwait(false);
+                var existsUpdate = await UpdateChecker.CheckAsync().ConfigureAwait(false);
+                if (existsUpdate)
+                {
+                    Console.WriteLine("Found update. Exiting...");
+                    return;
+                }
+            }).Wait();
+        }
+    }
+
+    /// <summary>
+    /// ログディレクトリの存在を確認し、存在しない場合はデフォルト値にリセットするメソッド
+    /// </summary>
+    private static void CheckExistsLogDirectory()
+    {
+        // ログディレクトリのパス対象が存在しない場合はメッセージを出してリセットする
+        if (!Directory.Exists(AppConfig.LogDir))
+        {
+            MessageBox.Show(
+                string.Join("\n", new List<string>()
+                {
+                    "The log directory does not exist.",
+                    "Log directory settings return to default value.",
+                }),
+                "Error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+
+            AppConfig.LogDir = AppConstants.VRChatDefaultLogDirectory;
+        }
     }
 
     /// <summary>
