@@ -20,7 +20,11 @@ internal class JsonUpdateService(string owner, string repo)
         var saveDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RNGNewAuraNotifier", "Aura.json");
 
         // ディレクトリが存在しない場合は作成
-        Directory.CreateDirectory(Path.GetDirectoryName(saveDir));
+        var dir = Path.GetDirectoryName(saveDir);
+        if (dir is not null)
+        {
+            Directory.CreateDirectory(dir);
+        }
 
         using var client = new HttpClient();
         var jsonContent = await client.GetStringAsync(url).ConfigureAwait(false);
