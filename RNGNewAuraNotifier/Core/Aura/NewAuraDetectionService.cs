@@ -14,7 +14,6 @@ internal partial class NewAuraDetectionService
     /// </summary>
     /// <param name="aura">取得したAura</param>
     /// <param name="isFirstReading">初回読み込みかどうか</param>
-
     public event Action<Aura, bool> OnDetected = (aura, isFirstReading) => { };
 
     /// <summary>
