@@ -39,39 +39,6 @@ internal static partial class Program
             return;
         }
 
-        // 例外処理ハンドラを登録
-        RegisterExceptionHandlers();
-
-        var cmds = Environment.GetCommandLineArgs();
-        // デバッグコンソールの設定
-        HandleDebugConsole(cmds);
-        // アップデートチェック
-        UpdateCheck(cmds);
-
-        Console.WriteLine("Program.Main");
-
-        ApplicationConfiguration.Initialize();
-        // ログディレクトリの存在を確認し、存在しない場合はデフォルト値にリセット
-        CheckExistsLogDirectory();
-
-        _controller = new RNGNewAuraController(AppConfig.LogDir);
-        _controller.Start();
-
-        Application.ApplicationExit += (s, e) =>
-        {
-            Console.WriteLine("Program.ApplicationExit");
-            _controller?.Dispose();
-            ToastNotificationManagerCompat.Uninstall();
-        };
-
-        Application.Run(new TrayIcon());
-    }
-
-    /// <summary>
-    /// 例外ハンドラを登録するメソッド
-    /// </summary>
-    private static void RegisterExceptionHandlers()
-    {
         Application.ThreadException += (s, e) => OnException(e.Exception, "ThreadException");
         Thread.GetDomain().UnhandledException += (s, e) => OnException((Exception)e.ExceptionObject, "UnhandledException");
         TaskScheduler.UnobservedTaskException += (s, e) => OnException(e.Exception, "UnobservedTaskException");
