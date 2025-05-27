@@ -7,12 +7,13 @@ namespace RNGNewAuraNotifier.Core.Aura;
 /// <summary>
 /// 新しいAuraログを検出するサービス
 /// </summary>
+
 internal partial class NewAuraDetectionService
 {
     /// <summary>
     /// Aura取得時のイベント
     /// </summary>
-    public event Action<Aura, bool> OnDetected = (arg1, arg2) => { };
+    public event Action<Aura, bool> OnDetected = delegate { };
 
     /// <summary>
     /// Aura取得時のログパターン
