@@ -11,7 +11,7 @@ internal record Aura
     /// Aura の ID
     /// </summary>
     /// <example>60</example>
-    public string Id { get; init; }
+    public int Id { get; init; }
 
     /// <summary>
     /// Aura の名前
@@ -55,7 +55,7 @@ internal record Aura
     /// <param name="rarity">オーラの当選確率</param>
     /// <param name="tier">オーラのティア</param>
     /// <param name="subText">オーラのサブテキスト</param>
-    public Aura(string id, string? name = null, int rarity = 0, int tier = 0, string subText = "")
+    public Aura(int id, string? name = null, int rarity = 0, int tier = 0, string subText = "")
     {
         Id = id;
         Name = name;
@@ -69,7 +69,7 @@ internal record Aura
     /// </summary>
     /// <param name="auraId">Aura の ID</param>
     /// <returns>Aura のインスタンス</returns>
-    public static Aura GetAura(string auraId)
+    public static Aura GetAura(int auraId)
     {
         try
         {

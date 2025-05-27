@@ -24,15 +24,51 @@ internal class JsonData
     private readonly Aura.Aura[] _auras = [];
 
     /// <summary>
+    /// 最新のJSONデータを取得する非同期メソッド
+    /// </summary>
+    public static async Task GetLatestJsonDataAsync()
+    {
+        var jsonUpdate = new JsonUpdateService(AppConstants.GitHubRepoOwner, AppConstants.GitHubRepoName);
+
+        try
+        {
+            await jsonUpdate.FetchMasterJsonAsync().ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching latest JSON data: {ex.Message}");
+        }
+    }
+
+    /// <summary>
     /// JSONファイルの内容を取得する
     /// </summary>
     /// <returns>JSONファイルの内容</returns>
     public static JsonData GetJsonData()
     {
-        // JSONデータを文字列に変換
-        var jsonContent = Encoding.UTF8.GetString(Resources.Auras);
-        JsonData jsonData = JsonConvert.DeserializeObject<JsonData>(jsonContent) ?? new JsonData();
-        return jsonData;
+        // Jsonファイルの保存先
+        var jsonDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RNGNewAuraNotifier", "Aura.json");
+        string? jsonContent;
+
+        // 1. 保存先JSONファイルが存在する場合はそれを読む
+        if (File.Exists(jsonDir))
+        {
+            try
+            {
+                jsonContent = File.ReadAllText(jsonDir);
+                JsonData? jsonData = JsonConvert.DeserializeObject<JsonData>(jsonContent) ?? new JsonData();
+                return jsonData;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Could not deserialize local JSON data: {ex.Message}");
+            }
+        }
+
+        // 保存先JSONファイルが存在しない場合、またはデシリアライズに失敗した場合はResourcesから読み込む
+        jsonContent = Encoding.UTF8.GetString(Resources.Auras);
+        JsonData? resourceJsonData = JsonConvert.DeserializeObject<JsonData>(jsonContent) ?? new JsonData();
+        return resourceJsonData;
     }
 
     /// <summary>
