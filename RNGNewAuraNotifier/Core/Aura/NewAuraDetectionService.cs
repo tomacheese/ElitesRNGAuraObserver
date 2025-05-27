@@ -10,7 +10,7 @@ namespace RNGNewAuraNotifier.Core.Aura;
 internal partial class NewAuraDetectionService
 {
     /// <summary>
-    /// 新しい取得された Aura が検出されるとトリガーされる。
+    /// 取得された Aura を検出したときに発生するイベント
     /// </summary>
     /// <param name="aura">取得したAura</param>
     /// <param name="isFirstReading">初回読み込みかどうか</param>

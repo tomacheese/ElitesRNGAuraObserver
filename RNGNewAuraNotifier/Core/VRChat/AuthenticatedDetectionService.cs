@@ -10,7 +10,9 @@ internal partial class AuthenticatedDetectionService
     /// <summary>
     /// 新しいユーザーログインを検出したときに発生するイベント
     /// </summary>
-    public event Action<VRChatUser, bool> OnDetected = (arg1, arg2) => { };
+    /// <param name="vrchatUser">ログインしているVRChatユーザーの情報</param>
+    /// <param name="isFirstReading">初回読み込みかどうか</param>
+    public event Action<VRChatUser, bool> OnDetected = (vrchatUser, isFirstReading) => { };
 
     /// <summary>
     /// VRChatログイン時のログパターン
