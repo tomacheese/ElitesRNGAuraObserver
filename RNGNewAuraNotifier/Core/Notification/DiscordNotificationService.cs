@@ -12,12 +12,12 @@ namespace RNGNewAuraNotifier.Core.Notification;
 internal static class DiscordNotificationService
 {
     /// <summary>
-    /// DiscordのWebhookを使用してメッセージを送信する(Field形式)
+    /// DiscordのWebhookを使用してメッセージを送信する
     /// </summary>
     /// <param name="title">メッセージのタイトル</param>
-    /// <param name="fields">メッセージの内容(Field)</param>
+    /// <param name="fields">メッセージのフィールド群</param>
     /// <param name="vrchatUser">VRChatのユーザー情報</param>
-    /// <returns></returns>
+    /// <returns>DiscordのWebhookを使用してメッセージを送信する非同期操作を表すタスク</returns>
     public static async Task NotifyAsync(string title, List<(string Name, string Value, bool Inline)>? fields, VRChatUser? vrchatUser)
     {
         var url = AppConfig.DiscordWebhookUrl;
@@ -52,6 +52,6 @@ internal static class DiscordNotificationService
             }
         }
 
-        await client.SendMessageAsync(text: "", embeds: [embed.Build()]).ConfigureAwait(false);
+        await client.SendMessageAsync(text: string.Empty, embeds: [embed.Build()]).ConfigureAwait(false);
     }
 }

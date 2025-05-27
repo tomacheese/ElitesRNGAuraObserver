@@ -40,7 +40,7 @@ internal class Program
             var tempRoot = Path.Combine(Path.GetTempPath(), appName, "Updater");
             var currentExe = Environment.ProcessPath;
             if (string.IsNullOrEmpty(currentExe))
-                throw new Exception("Failed to get current executable path.");
+                throw new InvalidOperationException("Failed to get current executable path.");
             Console.WriteLine($"Current executable: {currentExe}");
 
             var version = Assembly.GetExecutingAssembly()
@@ -69,7 +69,7 @@ internal class Program
                         $"--target={target}",
                         $"--asset-name={assetName}",
                         $"--repo-owner={repoOwner}",
-                        $"--repo-name={repoName}"
+                        $"--repo-name={repoName}",
                     },
                 });
                 return;

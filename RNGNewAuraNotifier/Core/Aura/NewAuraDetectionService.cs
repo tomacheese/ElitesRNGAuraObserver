@@ -7,13 +7,14 @@ namespace RNGNewAuraNotifier.Core.Aura;
 /// <summary>
 /// 新しいAuraログを検出するサービス
 /// </summary>
-
 internal partial class NewAuraDetectionService
 {
     /// <summary>
-    /// Aura取得時のイベント
+    /// 取得された Aura を検出したときに発生するイベント
     /// </summary>
-    public event Action<Aura, bool> OnDetected = delegate { };
+    /// <param name="aura">取得したAura</param>
+    /// <param name="isFirstReading">初回読み込みかどうか</param>
+    public event Action<Aura, bool> OnDetected = (aura, isFirstReading) => { };
 
     /// <summary>
     /// Aura取得時のログパターン
@@ -28,7 +29,7 @@ internal partial class NewAuraDetectionService
     private readonly LogWatcher _watcher;
 
     /// <summary>
-    /// 新しいAuraログを検出するサービス
+    /// 指定された LogWatcher を使用して新しいインスタンスを初期化する
     /// </summary>
     /// <param name="watcher">ログウォッチャー</param>
     public NewAuraDetectionService(LogWatcher watcher)

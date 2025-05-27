@@ -7,10 +7,8 @@ namespace RNGNewAuraNotifier.Core.Json;
 /// <summary>
 /// JSONデータを格納するクラス
 /// </summary>
-
 internal class JsonData
 {
-
     /// <summary>
     /// JSONのバージョン情報
     /// </summary>
@@ -26,6 +24,7 @@ internal class JsonData
     /// <summary>
     /// 最新のJSONデータを取得する非同期メソッド
     /// </summary>
+    /// <returns>最新のJSONデータを取得するための非同期操作を表すタスク</returns>
     public static async Task GetLatestJsonDataAsync()
     {
         var jsonUpdate = new JsonUpdateService(AppConstants.GitHubRepoOwner, AppConstants.GitHubRepoName);

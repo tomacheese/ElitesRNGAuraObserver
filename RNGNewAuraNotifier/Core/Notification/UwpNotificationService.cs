@@ -5,7 +5,6 @@ namespace RNGNewAuraNotifier.Core.Notification;
 /// <summary>
 /// Windowsのトースト通知を表示するサービス
 /// </summary>
-
 internal static class UwpNotificationService
 {
     /// <summary>

@@ -1,19 +1,35 @@
-using RNGNewAuraNotifier.Core;
 using RNGNewAuraNotifier.Core.Config;
 using RNGNewAuraNotifier.Core.Notification;
 using Timer = System.Windows.Forms.Timer;
 
 namespace RNGNewAuraNotifier.UI.Settings;
 
+/// <summary>
+/// 設定画面のフォームクラス
+/// </summary>
 internal partial class SettingsForm : Form
 {
+    /// <summary>
+    /// 監視対象パス更新タイマー
+    /// </summary>
     private readonly Timer _timer = new()
     {
-        Interval = 1000 // 1 sec
+        Interval = 1000, // 1 sec
     };
+
+    /// <summary>
+    /// 最後に保存したログディレクトリ
+    /// </summary>
     private string _lastSavedLogDir = string.Empty;
+
+    /// <summary>
+    /// 最後に保存したDiscordのWebhook URL
+    /// </summary>
     private string _lastSavedDiscordWebhookUrl = string.Empty;
 
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
     public SettingsForm() => InitializeComponent();
 
     /// <summary>
@@ -25,14 +41,15 @@ internal partial class SettingsForm : Form
         textBoxLogDir.Text = AppConfig.LogDir;
         if (string.IsNullOrWhiteSpace(textBoxLogDir.Text))
         {
-            textBoxLogDir.Text = Program.Controller?.GetLogDirectory() ?? string.Empty;
+            textBoxLogDir.Text = Program.GetController()?.GetLogDirectory() ?? string.Empty;
         }
+
         textBoxDiscordWebhookUrl.Text = AppConfig.DiscordWebhookUrl;
 
         // 1秒ごとに監視対象パスの更新を行う
         _timer.Tick += (s, args) =>
         {
-            textBoxWatchingFilePath.Text = Program.Controller?.GetLastReadFilePath() ?? string.Empty;
+            textBoxWatchingFilePath.Text = Program.GetController()?.GetLastReadFilePath() ?? string.Empty;
         };
         _timer.Start();
 
@@ -51,9 +68,7 @@ internal partial class SettingsForm : Form
             AppConfig.LogDir = textBoxLogDir.Text;
             AppConfig.DiscordWebhookUrl = textBoxDiscordWebhookUrl.Text;
 
-            Program.Controller?.Dispose();
-            Program.Controller = new RNGNewAuraController(textBoxLogDir.Text);
-            Program.Controller.Start();
+            Program.RestartController(textBoxLogDir.Text);
 
             _lastSavedLogDir = textBoxLogDir.Text;
             _lastSavedDiscordWebhookUrl = textBoxDiscordWebhookUrl.Text;

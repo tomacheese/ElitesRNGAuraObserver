@@ -45,5 +45,6 @@ internal class GitHubReleaseService : IDisposable
             : new ReleaseInfo(tagName, assetUrl);
     }
 
+    /// <inheritdoc/>
     public void Dispose() => _http.Dispose();
 }

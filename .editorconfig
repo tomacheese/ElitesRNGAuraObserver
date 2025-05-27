@@ -4,7 +4,7 @@
 # このファイルをルートとして扱う
 root = true
 
-[*.cs]
+[*]
 # =========================
 # インデント・改行・文字コード
 # =========================
@@ -23,6 +23,12 @@ trim_trailing_whitespace = true
 # ファイルの文字エンコーディングをUTF-8のみに限定する強制
 charset = utf-8
 
+# いくつかのファイルはインデント幅を2スペースに設定
+[*.{xml,pubxml,json,yaml,yml,resx}]
+indent_size = 2
+tab_width = 2
+
+[*.cs]
 # =========================
 # C# コードスタイル: ブレース・式本体
 # =========================
@@ -148,6 +154,11 @@ csharp_space_around_binary_operators = before_and_after
 csharp_space_after_comma = true
 # コンマの前にスペースを挿入しない
 csharp_space_before_comma = false
+
+# =========================
+# C# コードスタイル: 修飾子の順序
+# =========================
+csharp_preferred_modifier_order = public,private,protected,internal,file,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,required,volatile,async
 
 # =========================
 # 診断・警告レベルの設定
@@ -710,7 +721,7 @@ dotnet_naming_symbols.async_suffix_methods.applicable_kinds = method
 # Asyncで終わる名前を持つメソッドのアクセス修飾子指定なし
 dotnet_naming_symbols.async_suffix_methods.applicable_accessibilities = *
 # Asyncで終わる名前を持つメソッドの修飾子指定なし
-dotnet_naming_symbols.async_suffix_methods.required_modifiers = 
+dotnet_naming_symbols.async_suffix_methods.required_modifiers =
 # Asyncで終わる名前を持つメソッドの名前パターン
 dotnet_naming_symbols.async_suffix_methods.required_suffix = Async
 # privateフィールドに対する適用範囲指定
@@ -785,3 +796,387 @@ dotnet_naming_style.end_in_async.capitalization = pascal_case
 dotnet_naming_style.must_be_async.required_modifiers = async
 # asyncキーワードを持つべきの大文字小文字指定
 dotnet_naming_style.must_be_async.capitalization = pascal_case
+
+# =========================
+# StyleCop.Analyzers スペーシングルール
+# =========================
+# SA1000: キーワードのスペーシングを強制しない
+dotnet_diagnostic.SA1000.severity = none
+# SA1001: コンマの後にはスペースを入れ、前にはスペースを入れない
+dotnet_diagnostic.SA1001.severity = warning
+# SA1002: セミコロンの後にはスペースを入れ、前にはスペースを入れない
+dotnet_diagnostic.SA1002.severity = warning
+# SA1003: シンボルの周りには適切にスペースを入れる
+dotnet_diagnostic.SA1003.severity = warning
+# SA1004: ドキュメント行は単一のスペースから始める
+dotnet_diagnostic.SA1004.severity = warning
+# SA1005: 単一行コメントは単一のスペースから始める
+dotnet_diagnostic.SA1005.severity = warning
+# SA1006: プリプロセッサキーワードの前にスペースを入れない
+dotnet_diagnostic.SA1006.severity = warning
+# SA1007: operator キーワードの後にはスペースを入れる
+dotnet_diagnostic.SA1007.severity = warning
+# SA1008: 開始括弧の前にはスペースを入れ、後にはスペースを入れない
+dotnet_diagnostic.SA1008.severity = warning
+# SA1009: 終了括弧のスペーシングを強制しない
+dotnet_diagnostic.SA1009.severity = none
+# SA1010: 開始角括弧のスペーシングを強制しない
+dotnet_diagnostic.SA1010.severity = none
+# SA1011: 終了角括弧のスペーシングを強制しない
+dotnet_diagnostic.SA1011.severity = none
+# SA1012: 開始中括弧の前後にはスペースを入れる
+dotnet_diagnostic.SA1012.severity = warning
+# SA1013: 終了中括弧の前後には適切にスペースを入れる
+dotnet_diagnostic.SA1013.severity = warning
+# SA1014: 開始ジェネリック角括弧の前にはスペースを入れず、後にもスペースを入れない
+dotnet_diagnostic.SA1014.severity = warning
+# SA1015: 終了ジェネリック角括弧の前後のスペースは正しく入れる
+dotnet_diagnostic.SA1015.severity = warning
+# SA1016: 開始属性括弧の前後のスペースは正しく入れる
+dotnet_diagnostic.SA1016.severity = warning
+# SA1017: 終了属性括弧の前後のスペースは正しく入れる
+dotnet_diagnostic.SA1017.severity = warning
+# SA1018: Null許容型シンボルの前にはスペースを入れない
+dotnet_diagnostic.SA1018.severity = warning
+# SA1019: メンバーアクセスシンボルの前後にはスペースを入れない
+dotnet_diagnostic.SA1019.severity = warning
+# SA1020: インクリメント/デクリメントシンボルの前後のスペースは正しく入れる
+dotnet_diagnostic.SA1020.severity = warning
+# SA1021: 負の符号の前後のスペースは正しく入れる
+dotnet_diagnostic.SA1021.severity = warning
+# SA1022: 正の符号の前後のスペースは正しく入れる
+dotnet_diagnostic.SA1022.severity = warning
+# SA1023: デリファレンスとアクセス演算子の前後のスペースは正しく入れる
+dotnet_diagnostic.SA1023.severity = warning
+# SA1024: コロンの前後のスペースは正しく入れる
+dotnet_diagnostic.SA1024.severity = warning
+# SA1025: コードには連続する複数のホワイトスペースを含めない
+dotnet_diagnostic.SA1025.severity = warning
+# SA1026: 暗黙的に型指定された配列割り当てでの new キーワードの後にスペースを含めない
+dotnet_diagnostic.SA1026.severity = warning
+# SA1027: タブを正しく使用する
+dotnet_diagnostic.SA1027.severity = warning
+# SA1028: コードは末尾のホワイトスペースを含めない
+dotnet_diagnostic.SA1028.severity = warning
+
+# =========================
+# StyleCop.Analyzers 順序ルール
+# =========================
+# SA1200: usingディレクティブの配置場所を強制しない
+dotnet_diagnostic.SA1200.severity = none
+# SA1201: コード要素の順序を強制しない
+dotnet_diagnostic.SA1201.severity = none
+# SA1202: コード要素はアクセスレベル順に記述
+dotnet_diagnostic.SA1202.severity = none
+# SA1203: 定数とフィールドの順序を強制しない
+dotnet_diagnostic.SA1203.severity = none
+# SA1204: 静的要素とインスタンス要素の順序を強制しない
+dotnet_diagnostic.SA1204.severity = none
+# SA1205: partial要素はアクセス修飾子を宣言
+dotnet_diagnostic.SA1205.severity = warning
+# SA1206: 宣言キーワードの順序を強制しない（カスタム設定で対応）
+dotnet_diagnostic.SA1206.severity = none
+# SA1207: protected は internal の前に記述
+dotnet_diagnostic.SA1207.severity = warning
+# SA1208: System名前空間のusingディレクティブは他のusingディレクティブの前に配置
+dotnet_diagnostic.SA1208.severity = warning
+# SA1209: usingエイリアスディレクティブは他のusingディレクティブの後に配置
+dotnet_diagnostic.SA1209.severity = warning
+# SA1210: usingディレクティブは名前空間によってアルファベット順に並べる
+dotnet_diagnostic.SA1210.severity = warning
+# SA1211: usingエイリアスディレクティブはエイリアス名によってアルファベット順に並べる
+dotnet_diagnostic.SA1211.severity = warning
+# SA1212: プロパティアクセサは正しい順序で記述（getの後にset）
+dotnet_diagnostic.SA1212.severity = warning
+# SA1213: イベントアクセサは正しい順序で記述（addの後にremove）
+dotnet_diagnostic.SA1213.severity = warning
+# SA1214: 読み取り専用要素は非読み取り専用要素の前に記述
+dotnet_diagnostic.SA1214.severity = none
+# SA1215: インスタンスの読み取り専用要素はインスタンスの非読み取り専用要素の前に記述
+dotnet_diagnostic.SA1215.severity = none
+# SA1216: using static ディレクティブは正しい位置に配置
+dotnet_diagnostic.SA1216.severity = warning
+# SA1217: using static ディレクティブはアルファベット順に並べる
+dotnet_diagnostic.SA1217.severity = warning
+
+# =========================
+# StyleCop.Analyzers レイアウトルール
+# =========================
+# SA1500: 複数行ステートメントのブレース配置を強制しない
+dotnet_diagnostic.SA1500.severity = none
+# SA1501: 開始ブレースと終了ブレースを持つステートメントは一行にすべて記述しない
+dotnet_diagnostic.SA1501.severity = warning
+# SA1502: 開始ブレースと終了ブレースを持つ要素は一行にすべて記述しない
+dotnet_diagnostic.SA1502.severity = warning
+# SA1503: 制御ブロックの中括弧を省略してもよい
+dotnet_diagnostic.SA1503.severity = none
+# SA1504: すべてのアクセサは単一行または複数行のいずれかで記述
+dotnet_diagnostic.SA1504.severity = warning
+# SA1505: 開始ブレースの後に空白行を入れない
+dotnet_diagnostic.SA1505.severity = warning
+# SA1506: 要素のドキュメンテーションヘッダーの後に空白行を入れない
+dotnet_diagnostic.SA1506.severity = warning
+# SA1507: コードに連続する複数の空白行を含めない
+dotnet_diagnostic.SA1507.severity = warning
+# SA1508: 終了ブレースの前に空白行を入れない
+dotnet_diagnostic.SA1508.severity = warning
+# SA1509: 開始ブレースの前に空白行を入れない
+dotnet_diagnostic.SA1509.severity = warning
+# SA1510: 連鎖したステートメントブロックの前に空白行を入れない
+dotnet_diagnostic.SA1510.severity = warning
+# SA1511: while-do文のフッターの前に空白行を入れない
+dotnet_diagnostic.SA1511.severity = warning
+# SA1512: 単一行コメントの後に空白行を入れない
+dotnet_diagnostic.SA1512.severity = warning
+# SA1513: 終了ブレースの後には空白行を入れる
+dotnet_diagnostic.SA1513.severity = warning
+# SA1514: 要素のドキュメンテーションヘッダーの前には空白行を入れる
+dotnet_diagnostic.SA1514.severity = warning
+# SA1515: 単一行コメントの前の空白行を強制しない
+dotnet_diagnostic.SA1515.severity = none
+# SA1516: 要素間は空白行で区切る
+dotnet_diagnostic.SA1516.severity = warning
+# SA1517: ファイルの先頭に空白行を含めない
+dotnet_diagnostic.SA1517.severity = warning
+# SA1518: ファイルの末尾では行末文字を正しく使用する
+dotnet_diagnostic.SA1518.severity = warning
+# SA1519: 複数行の子ステートメントからブレースを省略しない
+dotnet_diagnostic.SA1519.severity = warning
+# SA1520: ブレースは一貫して使用する
+dotnet_diagnostic.SA1520.severity = warning
+
+# =========================
+# StyleCop.Analyzers 可読性ルール
+# =========================
+# SA1100: オーバーライドやローカル実装が存在しない限り、継承したメンバーの呼び出しに`base.`プレフィックスを使用しない
+dotnet_diagnostic.SA1100.severity = warning
+# SA1101: インスタンスメンバーへの`this.`プレフィックスを強制しない
+dotnet_diagnostic.SA1101.severity = none
+# SX1101: ローカルメンバーに`this.`プレフィックスを使用しない（SA1101の代替ルール）
+dotnet_diagnostic.SX1101.severity = warning
+# SA1106: コードに空のステートメントを含めない
+dotnet_diagnostic.SA1106.severity = warning
+# SA1107: 1行に複数のステートメントを記述しない
+dotnet_diagnostic.SA1107.severity = warning
+# SA1111: 終了括弧の位置を強制しない
+dotnet_diagnostic.SA1111.severity = none
+# SA1112: 終了括弧は開始括弧と同じ行にあるべき
+dotnet_diagnostic.SA1112.severity = warning
+# SA1113: コンマは前のパラメータと同じ行にあるべき
+dotnet_diagnostic.SA1113.severity = warning
+# SA1114: パラメータリストは宣言の直後に記述する
+dotnet_diagnostic.SA1114.severity = warning
+# SA1115: パラメータはコンマの直後に記述する
+dotnet_diagnostic.SA1115.severity = warning
+# SA1116: 分割されたパラメータリストは宣言の次の行から開始しない
+dotnet_diagnostic.SA1116.severity = none
+# SA1117: パラメータは同じ行に記述するか、それぞれ別の行に記述する
+dotnet_diagnostic.SA1117.severity = warning
+# SA1118: パラメータは複数行にまたがるべきではない
+dotnet_diagnostic.SA1118.severity = warning
+# SA1119: ステートメントは不必要な括弧を使用しない
+dotnet_diagnostic.SA1119.severity = warning
+# SA1120: コメントはテキストを含む必要がある
+dotnet_diagnostic.SA1120.severity = warning
+# SA1121: ビルトイン型のエイリアスを使用する
+dotnet_diagnostic.SA1121.severity = warning
+# SA1122: 空の文字列には`String.Empty`を使用する
+dotnet_diagnostic.SA1122.severity = warning
+# SA1123: 要素内でのリージョン使用を許可する
+dotnet_diagnostic.SA1123.severity = none
+# SA1124: リージョンの使用を許可する
+dotnet_diagnostic.SA1124.severity = none
+# SA1125: Nullable型には省略形を使用する
+dotnet_diagnostic.SA1125.severity = warning
+# SA1127: ジェネリック型の制約は独自の行に記述する
+dotnet_diagnostic.SA1127.severity = warning
+# SA1128: コンストラクタ初期化子は独自の行に記述する
+dotnet_diagnostic.SA1128.severity = warning
+# SA1129: 値型のデフォルトコンストラクタ使用を強制しない
+dotnet_diagnostic.SA1129.severity = none
+# SA1130: 匿名メソッドにはラムダ構文を使用する
+dotnet_diagnostic.SA1130.severity = warning
+# SA1131: 読みやすい条件を使用する（定数を左側に置かない）
+dotnet_diagnostic.SA1131.severity = warning
+# SA1132: フィールド宣言を結合しない
+dotnet_diagnostic.SA1132.severity = warning
+# SA1133: 属性を結合しない
+dotnet_diagnostic.SA1133.severity = warning
+# SA1134: 属性は行を共有しない
+dotnet_diagnostic.SA1134.severity = warning
+# SA1135: using ディレクティブは完全修飾名を使用する
+dotnet_diagnostic.SA1135.severity = warning
+# SA1136: 列挙型の値は別々の行に記述する
+dotnet_diagnostic.SA1136.severity = warning
+# SA1137: 同じレベルの要素は同じインデントを持つべき
+dotnet_diagnostic.SA1137.severity = warning
+# SA1139: キャストの代わりにリテラルのサフィックス表記を使用する
+dotnet_diagnostic.SA1139.severity = warning
+# SA1141: タプル構文を使用する
+dotnet_diagnostic.SA1141.severity = warning
+# SA1142: タプル要素は名前で参照する
+dotnet_diagnostic.SA1142.severity = warning
+
+# =========================
+# StyleCop.Analyzers 保守性ルール
+# =========================
+# SA1400: アクセス修飾子を明示的に宣言する
+dotnet_diagnostic.SA1400.severity = warning
+# SA1401: フィールドはプライベートでなければならない
+dotnet_diagnostic.SA1401.severity = warning
+# SA1402: ファイルには単一の型のみを含めることができる
+dotnet_diagnostic.SA1402.severity = suggestion
+# SA1403: ファイルには単一の名前空間のみを含めることができる
+dotnet_diagnostic.SA1403.severity = warning
+# SA1404: コード分析の抑制には正当な理由が必要
+dotnet_diagnostic.SA1404.severity = warning
+# SA1405: Debug.Assert にはメッセージテキストを提供する必要がある
+dotnet_diagnostic.SA1405.severity = warning
+# SA1406: Debug.Fail にはメッセージテキストを提供する必要がある
+dotnet_diagnostic.SA1406.severity = warning
+# SA1407: 算術式は優先順位を明示的に宣言する必要がある
+dotnet_diagnostic.SA1407.severity = warning
+# SA1408: 条件式は優先順位を明示的に宣言する必要がある
+dotnet_diagnostic.SA1408.severity = warning
+# SA1410: 可能な場合はデリゲートの括弧を削除する
+dotnet_diagnostic.SA1410.severity = warning
+# SA1411: 属性コンストラクタは不必要な括弧を使用しない
+dotnet_diagnostic.SA1411.severity = warning
+# SA1412: UTF-8エンコーディングのBOM要件を強制しない
+dotnet_diagnostic.SA1412.severity = none
+# SA1413: 複数行の初期化子では末尾のカンマを使用する
+dotnet_diagnostic.SA1413.severity = warning
+# SA1414: シグネチャ内のタプル型には要素名が必要
+dotnet_diagnostic.SA1414.severity = warning
+
+# =========================
+# StyleCop.Analyzers 命名ルール
+# =========================
+# SA1300: C#の要素は大文字で始まる必要がある
+dotnet_diagnostic.SA1300.severity = warning
+# SA1302: インターフェース名は「I」で始まる必要がある
+dotnet_diagnostic.SA1302.severity = warning
+# SA1303: 定数フィールド名は大文字で始まる必要がある
+dotnet_diagnostic.SA1303.severity = warning
+# SA1304: 非プライベートの読み取り専用フィールドは大文字で始まる必要がある
+dotnet_diagnostic.SA1304.severity = warning
+# SA1305: フィールド名にハンガリアン表記法を使用しない
+dotnet_diagnostic.SA1305.severity = none
+# SA1306: フィールド名は小文字で始まる必要がある
+dotnet_diagnostic.SA1306.severity = warning
+# SA1307: アクセス可能なフィールド名は大文字で始まる必要がある
+dotnet_diagnostic.SA1307.severity = warning
+# SA1308: 変数名にはプレフィックスを付けるべきではない
+dotnet_diagnostic.SA1308.severity = warning
+# SA1309: フィールド名はアンダースコアで始めるべきではない
+dotnet_diagnostic.SA1309.severity = none
+# SX1309: フィールド名はアンダースコアで始まる必要がある（SA1309の代替ルール）
+dotnet_diagnostic.SX1309.severity = warning
+# SA1310: フィールド名にアンダースコアを含めるべきではない
+dotnet_diagnostic.SA1310.severity = none
+# SA1311: 静的な読み取り専用フィールドは大文字で始まる必要がある
+dotnet_diagnostic.SA1311.severity = warning
+# SA1312: 変数名は小文字で始まる必要がある
+dotnet_diagnostic.SA1312.severity = warning
+# SA1313: パラメーター名は小文字で始まる必要がある
+dotnet_diagnostic.SA1313.severity = warning
+# SA1314: タイプパラメーター名は「T」で始まる必要がある
+dotnet_diagnostic.SA1314.severity = warning
+# SX1309S: 静的フィールド名はアンダースコアで始まる必要がある
+dotnet_diagnostic.SX1309S.severity = warning
+
+# =========================
+# StyleCop.Analyzers ドキュメンテーションルール
+# =========================
+# SA1600: すべての要素（クラス、メソッドなど）にドキュメントコメントを付ける
+dotnet_diagnostic.SA1600.severity = warning
+# SA1601: Partialとマークされているすべての要素にドキュメントコメントを付ける
+dotnet_diagnostic.SA1601.severity = warning
+# SA1602: すべての列挙型の項目にドキュメントコメントを付ける
+dotnet_diagnostic.SA1602.severity = warning
+# SA1603: ドキュメントコメントは有効なXMLを含む
+dotnet_diagnostic.SA1603.severity = warning
+# SA1604: 要素のドキュメントコメントにsummaryタグを含める
+dotnet_diagnostic.SA1604.severity = warning
+# SA1605: partial要素のドキュメントコメントにsummaryタグを含める
+dotnet_diagnostic.SA1605.severity = warning
+# SA1606: 要素のドキュメントコメントのsummaryタグにテキストを含める
+dotnet_diagnostic.SA1606.severity = warning
+# SA1607: partial要素のドキュメントコメントのsummaryタグにテキストを含める
+dotnet_diagnostic.SA1607.severity = warning
+# SA1608: 要素のドキュメントコメントは自動生成されたデフォルトのテキストを使用しない
+dotnet_diagnostic.SA1608.severity = warning
+# SA1609: プロパティのドキュメントコメントにvalueタグを含めない
+dotnet_diagnostic.SA1609.severity = none
+# SA1610: プロパティのドキュメントコメントのvalueタグにテキストを含める
+dotnet_diagnostic.SA1610.severity = warning
+# SA1611: 要素のすべてのパラメータにparamタグを含むドキュメントを付ける
+dotnet_diagnostic.SA1611.severity = warning
+# SA1612: 要素のドキュメントコメントのパラメータ名が実際のパラメータ名と一致する
+dotnet_diagnostic.SA1612.severity = warning
+# SA1613: 要素のパラメータ用のドキュメントコメントにはパラメータ名を含める
+dotnet_diagnostic.SA1613.severity = warning
+# SA1614: 要素のパラメータ用のドキュメントコメントにはパラメータの説明テキストを含める
+dotnet_diagnostic.SA1614.severity = warning
+# SA1615: 値を返す要素には、returnsタグを含むドキュメントコメントを付ける
+dotnet_diagnostic.SA1615.severity = warning
+# SA1616: 要素のreturnsタグには戻り値の説明テキストを含める
+dotnet_diagnostic.SA1616.severity = warning
+# SA1617: void型を返す要素には、returnsタグを含めない
+dotnet_diagnostic.SA1617.severity = warning
+# SA1618: ジェネリック型パラメータには、typeparamタグを使用してドキュメントを付ける
+dotnet_diagnostic.SA1618.severity = warning
+# SA1619: partial クラスのジェネリック型パラメータには、typeparamタグを使用してドキュメントを付ける
+dotnet_diagnostic.SA1619.severity = warning
+# SA1620: ジェネリック型パラメータのドキュメント名が実際の型パラメータ名と一致する
+dotnet_diagnostic.SA1620.severity = warning
+# SA1621: 型パラメータのドキュメントコメントにはパラメータ名を含める
+dotnet_diagnostic.SA1621.severity = warning
+# SA1622: 型パラメータのドキュメントコメントにはパラメータの説明テキストを含める
+dotnet_diagnostic.SA1622.severity = warning
+# SA1623: プロパティのsummaryテキストは、プロパティが「取得」されるのか「設定」されるのかを正しく記述する
+dotnet_diagnostic.SA1623.severity = none
+# SA1624: 制限付きsetアクセサーを持つプロパティのsummaryテキストは、setを言及しない
+dotnet_diagnostic.SA1624.severity = none
+# SA1625: 要素のドキュメントコメントは他の要素からコピー＆ペーストしない
+dotnet_diagnostic.SA1625.severity = warning
+# SA1626: 単一行コメントはドキュメンテーションスタイルのスラッシュ（///）を使用しない
+dotnet_diagnostic.SA1626.severity = warning
+# SA1627: ドキュメントコメントのテキストは空でない
+dotnet_diagnostic.SA1627.severity = warning
+# SA1628: ドキュメントテキストは大文字で始める必要はない
+dotnet_diagnostic.SA1628.severity = none
+# SA1629: ドキュメントテキストはピリオドで終わる必要はない
+dotnet_diagnostic.SA1629.severity = none
+# SA1630: ドキュメントテキストには空白を含める必要がある
+dotnet_diagnostic.SA1630.severity = warning
+# SA1633: ファイルにはヘッダーが必要ではない
+dotnet_diagnostic.SA1633.severity = none
+# SA1634: ファイルヘッダーには著作権表示が必要ではない
+dotnet_diagnostic.SA1634.severity = none
+# SA1635: ファイルヘッダーに著作権テキストを含める必要はない
+dotnet_diagnostic.SA1635.severity = none
+# SA1636: ファイルヘッダーの著作権テキストが一致する必要はない
+dotnet_diagnostic.SA1636.severity = none
+# SA1637: ファイルヘッダーにはファイル名を含める必要はない
+dotnet_diagnostic.SA1637.severity = none
+# SA1638: ファイルヘッダーのファイル名ドキュメントが実際のファイル名と一致する必要はない
+dotnet_diagnostic.SA1638.severity = none
+# SA1639: ファイルヘッダーにはサマリーを含める必要はない
+dotnet_diagnostic.SA1639.severity = none
+# SA1640: ファイルヘッダーには有効な会社テキストを含める必要はない
+dotnet_diagnostic.SA1640.severity = none
+# SA1641: ファイルヘッダーの会社名テキストが一致する必要はない
+dotnet_diagnostic.SA1641.severity = none
+# SA1642: コンストラクタのサマリードキュメントは標準テキストで始まる必要はない
+dotnet_diagnostic.SA1642.severity = none
+# SA1643: デストラクタのサマリードキュメントは標準テキストで始まる必要はない
+dotnet_diagnostic.SA1643.severity = none
+# SA1649: ファイルヘッダーのファイル名ドキュメントが型名と一致する必要はない
+dotnet_diagnostic.SA1649.severity = none
+# SA1650: 要素のドキュメントは正しくスペルする必要はない
+dotnet_diagnostic.SA1650.severity = none
+
+# Designer ファイル、resx ファイルは除外
+[*.{Designer.cs,resx}]
+generated_code = true
