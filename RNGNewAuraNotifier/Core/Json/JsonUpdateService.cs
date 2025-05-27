@@ -13,7 +13,7 @@ internal class JsonUpdateService(string owner, string repo)
     /// <summary>
     /// masterブランチのAuras.jsonを取得し、最新のバージョンだったらローカルに保存する
     /// </summary>
-    /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
+    /// <returns>Task</returns>
     public async Task FetchMasterJsonAsync()
     {
         var url = new Uri($"https://raw.githubusercontent.com/{_owner}/{_repo}/master/{_repo}/Resources/Auras.json");
