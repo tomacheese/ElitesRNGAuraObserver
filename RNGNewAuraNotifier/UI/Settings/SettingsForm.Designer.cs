@@ -35,51 +35,70 @@ partial class SettingsForm
         label3 = new Label();
         textBoxDiscordWebhookUrl = new TextBox();
         buttonSave = new Button();
+        buttonLogDirBrowse = new Button();
+        checkBoxToastNotification = new CheckBox();
+        checkBoxStartup = new CheckBox();
+        label4 = new Label();
+        textBoxConfigDir = new TextBox();
+        buttonConfigDirBrowse = new Button();
+        label5 = new Label();
+        labelJsonVersion = new Label();
+        folderBrowserDialog = new FolderBrowserDialog();
+        label6 = new Label();
+        labelAppVersion = new Label();
+        label7 = new Label();
+        label8 = new Label();
+        label9 = new Label();
+        fixed3dLineControl1 = new RNGNewAuraNotifier.UI.Controls.Fixed3DLineControl();
+        fixed3dLineControl2 = new RNGNewAuraNotifier.UI.Controls.Fixed3DLineControl();
+        fixed3dLineControl3 = new RNGNewAuraNotifier.UI.Controls.Fixed3DLineControl();
+        label10 = new Label();
+        fixed3dLineControl4 = new RNGNewAuraNotifier.UI.Controls.Fixed3DLineControl();
         SuspendLayout();
         // 
         // label1
         // 
         label1.AutoSize = true;
-        label1.Location = new Point(21, 83);
+        label1.Location = new Point(12, 76);
         label1.Margin = new Padding(2, 0, 2, 0);
         label1.Name = "label1";
-        label1.Size = new Size(102, 15);
+        label1.Size = new Size(114, 15);
         label1.TabIndex = 0;
-        label1.Text = "Watching LogFile:";
+        label1.Text = "Monitoring Log File:";
         // 
         // textBoxWatchingFilePath
         // 
-        textBoxWatchingFilePath.Location = new Point(23, 100);
-        textBoxWatchingFilePath.Margin = new Padding(2, 2, 2, 2);
+        textBoxWatchingFilePath.Location = new Point(162, 73);
+        textBoxWatchingFilePath.Margin = new Padding(2, 10, 2, 2);
         textBoxWatchingFilePath.Multiline = true;
         textBoxWatchingFilePath.Name = "textBoxWatchingFilePath";
         textBoxWatchingFilePath.ReadOnly = true;
-        textBoxWatchingFilePath.Size = new Size(509, 42);
+        textBoxWatchingFilePath.Size = new Size(474, 23);
         textBoxWatchingFilePath.TabIndex = 1;
         // 
         // label2
         // 
         label2.AutoSize = true;
-        label2.Location = new Point(21, 8);
+        label2.Location = new Point(12, 41);
         label2.Margin = new Padding(2, 0, 2, 0);
         label2.Name = "label2";
-        label2.Size = new Size(78, 15);
+        label2.Size = new Size(122, 15);
         label2.TabIndex = 2;
-        label2.Text = "LogDirectory:";
+        label2.Text = "VRChat Log Directory:";
         // 
         // textBoxLogDir
         // 
-        textBoxLogDir.Location = new Point(23, 25);
-        textBoxLogDir.Margin = new Padding(2, 2, 2, 2);
+        textBoxLogDir.Location = new Point(162, 38);
+        textBoxLogDir.Margin = new Padding(2);
         textBoxLogDir.Multiline = true;
         textBoxLogDir.Name = "textBoxLogDir";
-        textBoxLogDir.Size = new Size(509, 42);
+        textBoxLogDir.Size = new Size(474, 23);
         textBoxLogDir.TabIndex = 3;
         // 
         // label3
         // 
         label3.AutoSize = true;
-        label3.Location = new Point(21, 158);
+        label3.Location = new Point(12, 169);
         label3.Margin = new Padding(2, 0, 2, 0);
         label3.Name = "label3";
         label3.Size = new Size(128, 15);
@@ -88,29 +107,222 @@ partial class SettingsForm
         // 
         // textBoxDiscordWebhookUrl
         // 
-        textBoxDiscordWebhookUrl.Location = new Point(23, 175);
-        textBoxDiscordWebhookUrl.Margin = new Padding(2, 2, 2, 2);
+        textBoxDiscordWebhookUrl.Location = new Point(162, 166);
+        textBoxDiscordWebhookUrl.Margin = new Padding(2);
         textBoxDiscordWebhookUrl.Multiline = true;
         textBoxDiscordWebhookUrl.Name = "textBoxDiscordWebhookUrl";
-        textBoxDiscordWebhookUrl.Size = new Size(509, 42);
+        textBoxDiscordWebhookUrl.Size = new Size(474, 69);
         textBoxDiscordWebhookUrl.TabIndex = 5;
         // 
         // buttonSave
         // 
-        buttonSave.Location = new Point(457, 238);
-        buttonSave.Margin = new Padding(2, 2, 2, 2);
+        buttonSave.Location = new Point(592, 501);
+        buttonSave.Margin = new Padding(2);
         buttonSave.Name = "buttonSave";
-        buttonSave.Size = new Size(72, 32);
+        buttonSave.Size = new Size(128, 23);
         buttonSave.TabIndex = 6;
         buttonSave.Text = "Save";
         buttonSave.UseVisualStyleBackColor = true;
         buttonSave.Click += OnSaveButtonClicked;
         // 
+        // buttonLogDirBrowse
+        // 
+        buttonLogDirBrowse.Location = new Point(641, 38);
+        buttonLogDirBrowse.Name = "buttonLogDirBrowse";
+        buttonLogDirBrowse.Size = new Size(79, 23);
+        buttonLogDirBrowse.TabIndex = 8;
+        buttonLogDirBrowse.Text = "Browse...";
+        buttonLogDirBrowse.UseVisualStyleBackColor = true;
+        buttonLogDirBrowse.Click += ButtonLogDirBrowse_Click;
+        // 
+        // checkBoxToastNotification
+        // 
+        checkBoxToastNotification.AutoSize = true;
+        checkBoxToastNotification.Location = new Point(13, 297);
+        checkBoxToastNotification.Name = "checkBoxToastNotification";
+        checkBoxToastNotification.Size = new Size(154, 19);
+        checkBoxToastNotification.TabIndex = 11;
+        checkBoxToastNotification.Text = "Enable Toast notification";
+        checkBoxToastNotification.UseVisualStyleBackColor = true;
+        // 
+        // checkBoxStartup
+        // 
+        checkBoxStartup.AutoSize = true;
+        checkBoxStartup.Location = new Point(13, 325);
+        checkBoxStartup.Margin = new Padding(3, 6, 3, 3);
+        checkBoxStartup.Name = "checkBoxStartup";
+        checkBoxStartup.Size = new Size(161, 19);
+        checkBoxStartup.TabIndex = 12;
+        checkBoxStartup.Text = "Startup at Windows setup";
+        checkBoxStartup.UseVisualStyleBackColor = true;
+        // 
+        // label4
+        // 
+        label4.AutoSize = true;
+        label4.Location = new Point(13, 366);
+        label4.Margin = new Padding(2, 6, 2, 0);
+        label4.Name = "label4";
+        label4.Size = new Size(116, 15);
+        label4.TabIndex = 13;
+        label4.Text = "Config File Directory:";
+        // 
+        // textBoxConfigDir
+        // 
+        textBoxConfigDir.Location = new Point(162, 363);
+        textBoxConfigDir.Margin = new Padding(3, 6, 3, 3);
+        textBoxConfigDir.Name = "textBoxConfigDir";
+        textBoxConfigDir.Size = new Size(474, 23);
+        textBoxConfigDir.TabIndex = 14;
+        // 
+        // buttonConfigDirBrowse
+        // 
+        buttonConfigDirBrowse.Location = new Point(641, 363);
+        buttonConfigDirBrowse.Name = "buttonConfigDirBrowse";
+        buttonConfigDirBrowse.Size = new Size(80, 23);
+        buttonConfigDirBrowse.TabIndex = 15;
+        buttonConfigDirBrowse.Text = "Browse...";
+        buttonConfigDirBrowse.UseVisualStyleBackColor = true;
+        buttonConfigDirBrowse.Click += ButtonConfigDirBrowse_Click;
+        // 
+        // label5
+        // 
+        label5.AutoSize = true;
+        label5.Location = new Point(13, 473);
+        label5.Margin = new Padding(3, 6, 3, 0);
+        label5.Name = "label5";
+        label5.Size = new Size(102, 15);
+        label5.TabIndex = 18;
+        label5.Text = "Aura data version:";
+        // 
+        // labelJsonVersion
+        // 
+        labelJsonVersion.AutoSize = true;
+        labelJsonVersion.Location = new Point(130, 473);
+        labelJsonVersion.Margin = new Padding(3, 6, 3, 0);
+        labelJsonVersion.Name = "labelJsonVersion";
+        labelJsonVersion.Size = new Size(61, 15);
+        labelJsonVersion.TabIndex = 19;
+        labelJsonVersion.Text = "0000.00.00";
+        // 
+        // label6
+        // 
+        label6.AutoSize = true;
+        label6.Location = new Point(12, 452);
+        label6.Margin = new Padding(3, 6, 3, 0);
+        label6.Name = "label6";
+        label6.Size = new Size(112, 15);
+        label6.TabIndex = 20;
+        label6.Text = "Application version:";
+        // 
+        // labelAppVersion
+        // 
+        labelAppVersion.AutoSize = true;
+        labelAppVersion.Location = new Point(130, 452);
+        labelAppVersion.Margin = new Padding(3, 6, 3, 0);
+        labelAppVersion.Name = "labelAppVersion";
+        labelAppVersion.Size = new Size(31, 15);
+        labelAppVersion.TabIndex = 21;
+        labelAppVersion.Text = "0.0.0";
+        // 
+        // label7
+        // 
+        label7.AutoSize = true;
+        label7.Font = new Font("Yu Gothic UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 128);
+        label7.Location = new Point(12, 15);
+        label7.Margin = new Padding(3, 6, 3, 6);
+        label7.Name = "label7";
+        label7.Size = new Size(115, 15);
+        label7.TabIndex = 22;
+        label7.Text = "Monitorning Setting";
+        // 
+        // label8
+        // 
+        label8.AutoSize = true;
+        label8.Font = new Font("Yu Gothic UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 128);
+        label8.Location = new Point(12, 143);
+        label8.Margin = new Padding(3, 6, 3, 6);
+        label8.Name = "label8";
+        label8.Size = new Size(94, 15);
+        label8.TabIndex = 23;
+        label8.Text = "Discord Settings";
+        // 
+        // label9
+        // 
+        label9.AutoSize = true;
+        label9.Font = new Font("Yu Gothic UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 128);
+        label9.Location = new Point(12, 273);
+        label9.Margin = new Padding(3, 6, 3, 6);
+        label9.Name = "label9";
+        label9.Size = new Size(114, 15);
+        label9.TabIndex = 24;
+        label9.Text = "Application Settings";
+        // 
+        // fixed3dLineControl1
+        // 
+        fixed3dLineControl1.Location = new Point(133, 15);
+        fixed3dLineControl1.Name = "fixed3dLineControl1";
+        fixed3dLineControl1.Size = new Size(588, 15);
+        fixed3dLineControl1.TabIndex = 25;
+        fixed3dLineControl1.Text = "fixed3dLineControl1";
+        // 
+        // fixed3dLineControl2
+        // 
+        fixed3dLineControl2.Location = new Point(112, 143);
+        fixed3dLineControl2.Name = "fixed3dLineControl2";
+        fixed3dLineControl2.Size = new Size(609, 15);
+        fixed3dLineControl2.TabIndex = 26;
+        fixed3dLineControl2.Text = "fixed3dLineControl2";
+        // 
+        // fixed3dLineControl3
+        // 
+        fixed3dLineControl3.Location = new Point(132, 273);
+        fixed3dLineControl3.Name = "fixed3dLineControl3";
+        fixed3dLineControl3.Size = new Size(589, 15);
+        fixed3dLineControl3.TabIndex = 27;
+        fixed3dLineControl3.Text = "fixed3dLineControl3";
+        // 
+        // label10
+        // 
+        label10.AutoSize = true;
+        label10.Font = new Font("Yu Gothic UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 128);
+        label10.Location = new Point(12, 425);
+        label10.Margin = new Padding(3, 6, 3, 6);
+        label10.Name = "label10";
+        label10.Size = new Size(40, 15);
+        label10.TabIndex = 28;
+        label10.Text = "About";
+        // 
+        // fixed3dLineControl4
+        // 
+        fixed3dLineControl4.Location = new Point(58, 425);
+        fixed3dLineControl4.Name = "fixed3dLineControl4";
+        fixed3dLineControl4.Size = new Size(662, 15);
+        fixed3dLineControl4.TabIndex = 29;
+        fixed3dLineControl4.Text = "fixed3dLineControl4";
+        // 
         // SettingsForm
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(560, 292);
+        ClientSize = new Size(733, 535);
+        Controls.Add(fixed3dLineControl4);
+        Controls.Add(label10);
+        Controls.Add(fixed3dLineControl3);
+        Controls.Add(fixed3dLineControl2);
+        Controls.Add(fixed3dLineControl1);
+        Controls.Add(label9);
+        Controls.Add(label8);
+        Controls.Add(label7);
+        Controls.Add(labelAppVersion);
+        Controls.Add(label6);
+        Controls.Add(labelJsonVersion);
+        Controls.Add(label5);
+        Controls.Add(buttonConfigDirBrowse);
+        Controls.Add(textBoxConfigDir);
+        Controls.Add(label4);
+        Controls.Add(checkBoxStartup);
+        Controls.Add(checkBoxToastNotification);
+        Controls.Add(buttonLogDirBrowse);
         Controls.Add(buttonSave);
         Controls.Add(textBoxDiscordWebhookUrl);
         Controls.Add(label3);
@@ -120,7 +332,7 @@ partial class SettingsForm
         Controls.Add(label1);
         FormBorderStyle = FormBorderStyle.Fixed3D;
         Icon = (Icon)resources.GetObject("$this.Icon");
-        Margin = new Padding(2, 2, 2, 2);
+        Margin = new Padding(2);
         MaximizeBox = false;
         Name = "SettingsForm";
         Text = "RNGNewAuraNotifier Settings";
@@ -140,4 +352,23 @@ partial class SettingsForm
     private System.Windows.Forms.Label label3;
     private System.Windows.Forms.TextBox textBoxDiscordWebhookUrl;
     private System.Windows.Forms.Button buttonSave;
+    private Button buttonLogDirBrowse;
+    private CheckBox checkBoxToastNotification;
+    private CheckBox checkBoxStartup;
+    private Label label4;
+    private TextBox textBoxConfigDir;
+    private Button buttonConfigDirBrowse;
+    private Label label5;
+    private Label labelJsonVersion;
+    private FolderBrowserDialog folderBrowserDialog;
+    private Label label6;
+    private Label labelAppVersion;
+    private Label label7;
+    private Label label8;
+    private Label label9;
+    private Controls.Fixed3DLineControl fixed3dLineControl1;
+    private Controls.Fixed3DLineControl fixed3dLineControl2;
+    private Controls.Fixed3DLineControl fixed3dLineControl3;
+    private Label label10;
+    private Controls.Fixed3DLineControl fixed3dLineControl4;
 }

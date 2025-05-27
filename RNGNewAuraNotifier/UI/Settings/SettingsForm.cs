@@ -1,4 +1,6 @@
+using RNGNewAuraNotifier.Core;
 using RNGNewAuraNotifier.Core.Config;
+using RNGNewAuraNotifier.Core.Json;
 using RNGNewAuraNotifier.Core.Notification;
 using Timer = System.Windows.Forms.Timer;
 
@@ -37,6 +39,16 @@ internal partial class SettingsForm : Form
     /// </summary>
     private void OnLoad(object sender, EventArgs e)
     {
+        // フォーム内のテキストボックスは、フォーカスされたときに全選択する
+        foreach (TextBox tb in Controls.OfType<TextBox>())
+        {
+            tb.Enter += TextBox_Enter;
+        }
+
+        // JSONのバージョン情報を取得
+        labelJsonVersion.Text = JsonData.GetVersion();
+        labelAppVersion.Text = AppConstants.AppVersionString;
+
         // 設定ファイルから値を読み込む
         textBoxLogDir.Text = AppConfig.LogDir;
         if (string.IsNullOrWhiteSpace(textBoxLogDir.Text))
@@ -119,4 +131,39 @@ internal partial class SettingsForm : Form
     /// フォームが閉じられたときの処理
     /// </summary>
     private void OnFormClosed(object sender, FormClosedEventArgs e) => _timer.Dispose();
+
+    /// <summary>
+    /// テキストボックスにフォーカスが当たった時、中身の文字列を全選択する
+    /// </summary>
+    private void TextBox_Enter(object? sender, EventArgs e)
+    {
+        if (sender is TextBox textBox)
+        {
+            BeginInvoke(new Action(textBox.SelectAll));
+        }
+    }
+
+    /// <summary>
+    /// ログディレクトリの参照ボタンがクリックされたときの処理
+    /// </summary>
+    private void ButtonLogDirBrowse_Click(object sender, EventArgs e)
+    {
+        folderBrowserDialog.SelectedPath = AppConfig.LogDir;
+
+        if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+        {
+            textBoxLogDir.Text = folderBrowserDialog.SelectedPath;
+        }
+    }
+
+    /// <summary>
+    /// コンフィグディレクトリの参照ボタンがクリックされたときの処理
+    /// </summary>
+    private void ButtonConfigDirBrowse_Click(object sender, EventArgs e)
+    {
+        if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+        {
+            textBoxConfigDir.Text = folderBrowserDialog.SelectedPath;
+        }
+    }
 }
