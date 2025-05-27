@@ -17,7 +17,7 @@ internal static class DiscordNotificationService
     /// <param name="title">メッセージのタイトル</param>
     /// <param name="fields">メッセージのフィールド群</param>
     /// <param name="vrchatUser">VRChatのユーザー情報</param>
-    /// <returns>Task</returns>
+    /// <returns>DiscordのWebhookを使用してメッセージを送信する非同期操作を表すタスク</returns>
     public static async Task NotifyAsync(string title, List<(string Name, string Value, bool Inline)>? fields, VRChatUser? vrchatUser)
     {
         var url = AppConfig.DiscordWebhookUrl;
