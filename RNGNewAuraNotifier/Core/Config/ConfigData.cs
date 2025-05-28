@@ -1,6 +1,5 @@
 using System.Reflection;
 using System.Text.Json.Serialization;
-using Newtonsoft.Json;
 
 namespace RNGNewAuraNotifier.Core.Config;
 

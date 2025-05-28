@@ -31,4 +31,9 @@ internal static class AppConstants
     /// GitHub リポジトリ名
     /// </summary>
     public const string GitHubRepoName = "RNGNewAuraNotifier";
+
+    /// <summary>
+    /// Windowsスタートアップのレジストリキーのパス
+    /// </summary>
+    public const string StartupKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Run";
 }
