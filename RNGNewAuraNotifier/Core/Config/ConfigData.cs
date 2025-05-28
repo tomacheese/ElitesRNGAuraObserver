@@ -1,4 +1,6 @@
+using System.Reflection;
 using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace RNGNewAuraNotifier.Core.Config;
 
@@ -40,4 +42,29 @@ internal class ConfigData
     /// </summary>
     [JsonPropertyName("configDir")]
     public string ConfigDir { get; set; } = Environment.ExpandEnvironmentVariables(@$"%USERPROFILE%\AppData\Local\{AppConstants.AppName}");
+
+    /// <summary>
+    /// 2つのオブジェクトの全てのパブリックインスタンスプロパティの値が等しいかどうかを比較します。
+    /// </summary>
+    /// <typeparam name="T">比較するオブジェクトの型</typeparam>
+    /// <param name="obj1">比較対象の1つ目のオブジェクト</param>
+    /// <param name="obj2">比較対象の2つ目のオブジェクト</param>
+    /// <returns>全てのプロパティが等しければtrue、そうでなければfalse</returns>
+    public static bool AreEqual<T>(T obj1, T obj2)
+    {
+        if (obj1 == null || obj2 == null)
+            return obj1 == null && obj2 == null;
+
+        Type type = typeof(T);
+        foreach (PropertyInfo prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+        {
+            var val1 = prop.GetValue(obj1);
+            var val2 = prop.GetValue(obj2);
+
+            if (!Equals(val1, val2))
+                return false;
+        }
+
+        return true;
+    }
 }

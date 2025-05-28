@@ -92,6 +92,7 @@ partial class SettingsForm
         textBoxLogDir.Margin = new Padding(2);
         textBoxLogDir.Multiline = true;
         textBoxLogDir.Name = "textBoxLogDir";
+        textBoxLogDir.PlaceholderText = "Enter the path to your VRChat log file";
         textBoxLogDir.Size = new Size(474, 23);
         textBoxLogDir.TabIndex = 3;
         // 
@@ -111,6 +112,7 @@ partial class SettingsForm
         textBoxDiscordWebhookUrl.Margin = new Padding(2);
         textBoxDiscordWebhookUrl.Multiline = true;
         textBoxDiscordWebhookUrl.Name = "textBoxDiscordWebhookUrl";
+        textBoxDiscordWebhookUrl.PlaceholderText = "Paste your Discord Webhook URL here";
         textBoxDiscordWebhookUrl.Size = new Size(474, 69);
         textBoxDiscordWebhookUrl.TabIndex = 5;
         // 
@@ -171,6 +173,7 @@ partial class SettingsForm
         textBoxConfigDir.Location = new Point(162, 363);
         textBoxConfigDir.Margin = new Padding(3, 6, 3, 3);
         textBoxConfigDir.Name = "textBoxConfigDir";
+        textBoxConfigDir.PlaceholderText = "Enter the path to the config file";
         textBoxConfigDir.Size = new Size(474, 23);
         textBoxConfigDir.TabIndex = 14;
         // 
