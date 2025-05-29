@@ -8,12 +8,17 @@ namespace RNGNewAuraNotifier.Core.Config;
 internal class RegistryManager
 {
     /// <summary>
+    /// Windowsスタートアップに登録する際のレジストリキーのパス
+    /// </summary>
+    public const string StartupKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Run";
+
+    /// <summary>
     /// アプリケーションをWindowsのスタートアップに登録するかどうかを設定します。
     /// </summary>
     /// <param name="enableStartup">設定の有効/無効</param>
     public static void SetStartup(bool enableStartup)
     {
-        using RegistryKey? key = Registry.CurrentUser.OpenSubKey(AppConstants.StartupKeyPath, true);
+        using RegistryKey? key = Registry.CurrentUser.OpenSubKey(StartupKeyPath, true);
         if (enableStartup)
         {
             var exePath = Application.ExecutablePath;
@@ -31,7 +36,7 @@ internal class RegistryManager
     /// <param name="enableStartup">設定の有効/無効</param>
     public static void EnsureStartupRegistration(bool enableStartup)
     {
-        using RegistryKey? key = Registry.CurrentUser.OpenSubKey(AppConstants.StartupKeyPath, true);
+        using RegistryKey? key = Registry.CurrentUser.OpenSubKey(StartupKeyPath, true);
         var value = key!.GetValue(AppConstants.AppName);
         var currentExePath = $"\"{Application.ExecutablePath}\"";
 
