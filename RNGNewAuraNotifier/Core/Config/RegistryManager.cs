@@ -34,21 +34,28 @@ internal class RegistryManager
     /// アプリケーションがWindowsのスタートアップに登録されているかどうかを確認し、必要に応じて登録します。
     /// </summary>
     /// <param name="enableStartup">設定の有効/無効</param>
-    public static void EnsureStartupRegistration(bool enableStartup)
+    public static void EnsureStartupRegistration()
     {
         using RegistryKey? key = Registry.CurrentUser.OpenSubKey(StartupKeyPath, true);
         var value = key!.GetValue(AppConstants.AppName);
         var currentExePath = $"\"{Application.ExecutablePath}\"";
 
-        if (enableStartup || value == null || value.ToString() != currentExePath)
+        if (value == null || value.ToString() != currentExePath)
         {
             // 値が存在しない or パスが違う → 再登録
             key.SetValue(AppConstants.AppName, currentExePath);
         }
-        else if (!enableStartup)
-        {
-            // スタートアップを無効にする場合は削除
-            key.DeleteValue(AppConstants.AppName, false);
-        }
+    }
+
+    /// <summary>
+    /// スタートアップにアプリケーションが登録されているかどうかを確認します。
+    /// </summary>
+    /// <returns>登録されていれば true、そうでなければ false</returns>
+    public static bool IsStartupRegistered()
+    {
+        using RegistryKey? key = Registry.CurrentUser.OpenSubKey(StartupKeyPath, false);
+        if (key == null) return false;
+        var value = key.GetValue(AppConstants.AppName);
+        return value != null;
     }
 }

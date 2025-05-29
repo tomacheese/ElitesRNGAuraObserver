@@ -9,18 +9,25 @@ namespace RNGNewAuraNotifier.Core.Config;
 /// <remarks>JSON形式でシリアライズされる</remarks>
 internal class ConfigData
 {
-    /// <summary>
-    /// VRChatのログディレクトリのパス
-    /// </summary>
-    /// <remarks>デフォルトは %USERPROFILE%\AppData\LocalLow\VRChat\VRChat</remarks>
-    [JsonPropertyName("logDir")]
-    public string LogDir { get; set; } = Environment.ExpandEnvironmentVariables(@"%USERPROFILE%\AppData\LocalLow\VRChat\VRChat");
+    private string _discordWebhookUrl = string.Empty;
 
     /// <summary>
     /// DiscordのWebhook URL
     /// </summary>
     [JsonPropertyName("discordWebhookUrl")]
-    public string DiscordWebhookUrl { get; set; } = string.Empty;
+    public string DiscordWebhookUrl
+    {
+        get => _discordWebhookUrl;
+        set
+        {
+            if (!string.IsNullOrEmpty(value) && !IsValidUrl(value))
+            {
+                throw new ArgumentException("AppUrl must start with 'http://' or 'https://'.");
+            }
+
+            _discordWebhookUrl = value;
+        }
+    }
 
     /// <summary>
     /// トースト通知の有効/無効
@@ -30,17 +37,15 @@ internal class ConfigData
     public bool ToastNotification { get; set; } = true;
 
     /// <summary>
-    /// Windowsスタートアップの有効/無効
+    /// URLが有効な値であるかチェックする
     /// </summary>
-    /// <remarks>デフォルトは false(無効)</remarks>
-    [JsonPropertyName("windowsStartup")]
-    public bool WindowsStartup { get; set; } = false;
-
-    /// <summary>
-    /// 設定ファイルのディレクトリのパス
-    /// </summary>
-    [JsonPropertyName("configDir")]
-    public string ConfigDir { get; set; } = Environment.ExpandEnvironmentVariables(@$"%USERPROFILE%\AppData\Local\{AppConstants.AppName}");
+    /// <param name="url">チェック対象のURL文字列</param>
+    /// <returns>true: 有効, false: 無効</returns>
+    private static bool IsValidUrl(string url)
+    {
+        return url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+               url.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
+    }
 
     /// <summary>
     /// 2つのオブジェクトの全てのパブリックインスタンスプロパティの値が等しいかどうかを比較します。

@@ -20,16 +20,6 @@ internal partial class SettingsForm : Form
     };
 
     /// <summary>
-    /// 最後に保存したログディレクトリ
-    /// </summary>
-    private string _lastSavedLogDir = string.Empty;
-
-    /// <summary>
-    /// 最後に保存したDiscordのWebhook URL
-    /// </summary>
-    private string _lastSavedDiscordWebhookUrl = string.Empty;
-
-    /// <summary>
     /// コンストラクタ
     /// </summary>
     public SettingsForm() => InitializeComponent();
@@ -39,6 +29,9 @@ internal partial class SettingsForm : Form
     /// </summary>
     private void OnLoad(object sender, EventArgs e)
     {
+        ActiveControl = null;
+        ConfigData configData = AppConfig.Instance;
+
         // フォーム内のテキストボックスは、フォーカスされたときに全選択する
         foreach (TextBox tb in Controls.OfType<TextBox>())
         {
@@ -49,14 +42,13 @@ internal partial class SettingsForm : Form
         labelJsonVersion.Text = JsonData.GetVersion();
         labelAppVersion.Text = AppConstants.AppVersionString;
 
-        // 設定ファイルから値を読み込む
-        textBoxLogDir.Text = AppConfig.LogDir;
-        if (string.IsNullOrWhiteSpace(textBoxLogDir.Text))
-        {
-            textBoxLogDir.Text = Program.GetController()?.GetLogDirectory() ?? string.Empty;
-        }
+        // 設定値を反映
+        textBoxDiscordWebhookUrl.Text = configData.DiscordWebhookUrl;
+        checkBoxToastNotification.Checked = configData.ToastNotification;
+        textBoxConfigDir.Text = AppConfig.GetConfigDirectoryPath();
 
-        textBoxDiscordWebhookUrl.Text = AppConfig.DiscordWebhookUrl;
+        // Windowsのスタートアップに登録されているかどうかをチェック
+        checkBoxStartup.Checked = RegistryManager.IsStartupRegistered();
 
         // 1秒ごとに監視対象パスの更新を行う
         _timer.Tick += (s, args) =>
@@ -64,9 +56,6 @@ internal partial class SettingsForm : Form
             textBoxWatchingFilePath.Text = Program.GetController()?.GetLastReadFilePath() ?? string.Empty;
         };
         _timer.Start();
-
-        _lastSavedLogDir = textBoxLogDir.Text.Trim();
-        _lastSavedDiscordWebhookUrl = textBoxDiscordWebhookUrl.Text.Trim();
     }
 
     /// <summary>
@@ -77,13 +66,13 @@ internal partial class SettingsForm : Form
     {
         try
         {
-            AppConfig.LogDir = textBoxLogDir.Text;
-            AppConfig.DiscordWebhookUrl = textBoxDiscordWebhookUrl.Text;
+            AppConfig.SaveConfigDirectoryPath(textBoxConfigDir.Text.Trim());
 
-            Program.RestartController(textBoxLogDir.Text);
-
-            _lastSavedLogDir = textBoxLogDir.Text;
-            _lastSavedDiscordWebhookUrl = textBoxDiscordWebhookUrl.Text;
+            ConfigData configData = AppConfig.Instance;
+            configData.DiscordWebhookUrl = textBoxDiscordWebhookUrl.Text;
+            configData.ToastNotification = checkBoxToastNotification.Checked;
+            AppConfig.Save();
+            Program.RestartController(configData);
 
             UwpNotificationService.Notify("Settings Saved", "Settings have been saved successfully.");
             return true;
@@ -92,6 +81,10 @@ internal partial class SettingsForm : Form
         {
             MessageBox.Show($"Error saving settings: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
+        }
+        finally
+        {
+            RegistryManager.SetStartup(checkBoxStartup.Checked);
         }
     }
 
@@ -106,8 +99,14 @@ internal partial class SettingsForm : Form
     /// </summary>
     private void OnFormClosing(object sender, FormClosingEventArgs e)
     {
-        var changed = _lastSavedLogDir != textBoxLogDir.Text.Trim() || _lastSavedDiscordWebhookUrl != textBoxDiscordWebhookUrl.Text.Trim();
-        if (!changed)
+        ConfigData configData = AppConfig.Instance;
+        var changedConfigData = new ConfigData
+        {
+            DiscordWebhookUrl = textBoxDiscordWebhookUrl.Text.Trim(),
+            ToastNotification = checkBoxToastNotification.Checked,
+        };
+
+        if (ConfigData.AreEqual(configData, changedConfigData))
         {
             return;
         }
@@ -144,26 +143,31 @@ internal partial class SettingsForm : Form
     }
 
     /// <summary>
-    /// ログディレクトリの参照ボタンがクリックされたときの処理
-    /// </summary>
-    private void ButtonLogDirBrowse_Click(object sender, EventArgs e)
-    {
-        folderBrowserDialog.SelectedPath = AppConfig.LogDir;
-
-        if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-        {
-            textBoxLogDir.Text = folderBrowserDialog.SelectedPath;
-        }
-    }
-
-    /// <summary>
     /// コンフィグディレクトリの参照ボタンがクリックされたときの処理
     /// </summary>
     private void ButtonConfigDirBrowse_Click(object sender, EventArgs e)
     {
+        folderBrowserDialog.SelectedPath = textBoxConfigDir.Text.Trim();
+
         if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
         {
             textBoxConfigDir.Text = folderBrowserDialog.SelectedPath;
         }
+    }
+
+    /// <summary>
+    /// テスト送信ボタンがクリックされたときの処理
+    /// </summary>
+    private void ButtonSendTest_Click(object sender, EventArgs e)
+    {
+        Task.Run(async () =>
+        {
+            await DiscordNotificationService.NotifyAsync(
+                discordWebhookUrl: textBoxDiscordWebhookUrl.Text,
+                title: "**Test Message**",
+                message: "This is a test message.",
+                vrchatUser: null
+            ).ConfigureAwait(false);
+        }).Wait();
     }
 }

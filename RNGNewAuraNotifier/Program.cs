@@ -55,10 +55,8 @@ internal static partial class Program
         Console.WriteLine("Program.Main");
 
         ApplicationConfiguration.Initialize();
-        // ログディレクトリの存在を確認し、存在しない場合はデフォルト値にリセット
-        CheckExistsLogDirectory();
-
-        _controller = new RNGNewAuraController(AppConfig.LogDir);
+        ConfigData configData = AppConfig.Instance;
+        _controller = new RNGNewAuraController(configData);
         _controller.Start();
 
         Application.ApplicationExit += (s, e) =>
@@ -117,28 +115,6 @@ internal static partial class Program
                     return;
                 }
             }).Wait();
-        }
-    }
-
-    /// <summary>
-    /// ログディレクトリの存在を確認し、存在しない場合はデフォルト値にリセットするメソッド
-    /// </summary>
-    private static void CheckExistsLogDirectory()
-    {
-        // ログディレクトリのパス対象が存在しない場合はメッセージを出してリセットする
-        if (!Directory.Exists(AppConfig.LogDir))
-        {
-            MessageBox.Show(
-                string.Join("\n", new List<string>()
-                {
-                    "The log directory does not exist.",
-                    "Log directory settings return to default value.",
-                }),
-                "Error",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-
-            AppConfig.LogDir = AppConstants.VRChatDefaultLogDirectory;
         }
     }
 
@@ -240,11 +216,11 @@ internal static partial class Program
     /// <summary>
     /// RNGNewAuraControllerを再起動する
     /// </summary>
-    /// <param name="logDirectory">ログディレクトリのパス</param>
-    public static void RestartController(string? logDirectory)
+    /// <param name="configData">アプリケーション設定</param>
+    public static void RestartController(ConfigData configData)
     {
         _controller?.Dispose();
-        _controller = new RNGNewAuraController(logDirectory);
+        _controller = new RNGNewAuraController(configData);
         _controller.Start();
     }
 }

@@ -17,7 +17,7 @@ internal class JsonUpdateService(string owner, string repo)
     public async Task FetchMasterJsonAsync()
     {
         var url = new Uri($"https://raw.githubusercontent.com/{_owner}/{_repo}/master/{_repo}/Resources/Auras.json");
-        var saveDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RNGNewAuraNotifier", "Aura.json");
+        var saveDir = Path.Combine(AppConstants.ApplicationConfigDirectory, "Aura.json");
 
         // ディレクトリが存在しない場合は作成
         var dir = Path.GetDirectoryName(saveDir);
