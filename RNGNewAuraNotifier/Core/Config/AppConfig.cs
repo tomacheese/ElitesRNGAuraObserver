@@ -60,6 +60,7 @@ internal class AppConfig
             // 規定値以外の場合は config.path を作成
             File.WriteAllText(filePath, configPath);
         }
+
         _configDir = configPath;
     }
 

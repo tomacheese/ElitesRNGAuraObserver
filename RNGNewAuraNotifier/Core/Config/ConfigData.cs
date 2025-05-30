@@ -36,7 +36,6 @@ internal class ConfigData
     [JsonPropertyName("toastNotification")]
     public bool ToastNotification { get; set; } = true;
 
-
     /// <summary>
     /// VRChatのログディレクトリ
     /// </summary>
