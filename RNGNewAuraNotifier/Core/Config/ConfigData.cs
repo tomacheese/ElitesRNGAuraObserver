@@ -36,6 +36,19 @@ internal class ConfigData
     [JsonPropertyName("toastNotification")]
     public bool ToastNotification { get; set; } = true;
 
+
+    /// <summary>
+    /// VRChatのログディレクトリ
+    /// </summary>
+    [JsonPropertyName("logDir")]
+    public string LogDir { get; set; } = AppConstants.VRChatLogDirectory;
+
+    /// <summary>
+    /// Aura.jsonのパス
+    /// </summary>
+    [JsonPropertyName("auraJsonDir")]
+    public string AuraJsonDir { get; set; } = AppConstants.ApplicationConfigDirectory;
+
     /// <summary>
     /// URLが有効な値であるかチェックする
     /// </summary>

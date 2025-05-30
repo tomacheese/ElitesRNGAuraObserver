@@ -54,6 +54,8 @@ internal static partial class Program
 
         Console.WriteLine("Program.Main");
 
+        CheckExistsLogDirectory();
+
         ApplicationConfiguration.Initialize();
         ConfigData configData = AppConfig.Instance;
         _controller = new RNGNewAuraController(configData);
@@ -90,6 +92,30 @@ internal static partial class Program
             AllocConsole();
             Console.SetOut(new StreamWriter(Console.OpenStandardOutput()) { AutoFlush = true });
             Console.OutputEncoding = Encoding.UTF8;
+        }
+    }
+
+    /// <summary>
+    /// ログディレクトリの存在を確認し、存在しない場合はデフォルト値にリセットするメソッド
+    /// </summary>
+    private static void CheckExistsLogDirectory()
+    {
+        ConfigData configData = AppConfig.Instance;
+        // ログディレクトリのパス対象が存在しない場合はメッセージを出してリセットする
+        if (!Directory.Exists(configData.LogDir))
+        {
+            MessageBox.Show(
+                string.Join("\n", new List<string>()
+                {
+                    "The log directory does not exist.",
+                    "Log directory settings return to default value.",
+                }),
+                "Error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+
+            configData.LogDir = AppConstants.VRChatLogDirectory;
+            AppConfig.Save();
         }
     }
 

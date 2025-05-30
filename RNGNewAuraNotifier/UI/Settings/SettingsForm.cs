@@ -48,7 +48,7 @@ internal partial class SettingsForm : Form
         textBoxConfigDir.Text = AppConfig.GetConfigDirectoryPath();
 
         // Windowsのスタートアップに登録されているかどうかをチェック
-        checkBoxStartup.Checked = RegistryManager.IsStartupRegistered();
+        checkBoxStartup.Checked = RegistryManager.IsRegisteredStartup();
 
         // 1秒ごとに監視対象パスの更新を行う
         _timer.Tick += (s, args) =>

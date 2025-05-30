@@ -7,7 +7,9 @@ namespace RNGNewAuraNotifier.Core.Config;
 /// </summary>
 internal class AppConfig
 {
-    private static string _configPath = GetConfigDirectoryPath();
+    private static string _configDir = GetConfigDirectoryPath();
+    private const string PathFileName = "config.path";
+    private const string ConfigFileName = "config.json";
     private static ConfigData _instance = new();
     private static readonly Lock _lock = new();
     private static bool _isLoaded = false;
@@ -23,7 +25,7 @@ internal class AppConfig
     /// <returns>config.jsonの保存先パス</returns>
     public static string GetConfigDirectoryPath()
     {
-        var filePath = Path.Combine(AppConstants.ApplicationConfigDirectory, "config.path");
+        var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PathFileName);
 
         if (File.Exists(filePath))
         {
@@ -42,12 +44,23 @@ internal class AppConfig
     /// <param name="configPath">config.jsonのパス</param>
     public static void SaveConfigDirectoryPath(string configPath)
     {
-        var newConfigPath = Path.Combine(configPath);
-        var configDir = AppConstants.ApplicationConfigDirectory;
-        var filePath = Path.Combine(configDir, "config.path");
-        Directory.CreateDirectory(configDir);
-        File.WriteAllText(filePath, newConfigPath);
-        _configPath = newConfigPath;
+        var appDir = AppDomain.CurrentDomain.BaseDirectory;
+        var filePath = Path.Combine(appDir, PathFileName);
+
+        if (string.Equals(configPath, AppConstants.ApplicationConfigDirectory, StringComparison.OrdinalIgnoreCase))
+        {
+            // 規定値の場合は config.path を削除
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+        }
+        else
+        {
+            // 規定値以外の場合は config.path を作成
+            File.WriteAllText(filePath, configPath);
+        }
+        _configDir = configPath;
     }
 
     /// <summary>
@@ -58,7 +71,7 @@ internal class AppConfig
         get
         {
             // configファイルが存在している状態で一度読み込まれた場合、2回目以降は再読み込みしない
-            if (File.Exists(_configPath) && !_isLoaded)
+            if (File.Exists(Path.Combine(_configDir, ConfigFileName)) && !_isLoaded)
             {
                 _instance = Load();
                 _isLoaded = true;
@@ -98,8 +111,8 @@ internal class AppConfig
     private static void Save(ConfigData config)
     {
         var json = JsonConvert.SerializeObject(config, Formatting.Indented);
-        Directory.CreateDirectory(Path.GetDirectoryName(_configPath)!);
-        File.WriteAllText(_configPath, json);
+        Directory.CreateDirectory(_configDir);
+        File.WriteAllText(Path.Combine(_configDir, ConfigFileName), json);
     }
 
     /// <summary>
@@ -107,14 +120,15 @@ internal class AppConfig
     /// </summary>
     private static ConfigData Load()
     {
-        if (!File.Exists(_configPath))
+        var configFilePath = Path.Combine(_configDir, ConfigFileName);
+        if (!File.Exists(configFilePath))
         {
             var defaultConfig = new ConfigData();
             Save(defaultConfig);
             return defaultConfig;
         }
 
-        var json = File.ReadAllText(_configPath);
+        var json = File.ReadAllText(configFilePath);
         return JsonConvert.DeserializeObject<ConfigData>(json)
                ?? new ConfigData();
     }

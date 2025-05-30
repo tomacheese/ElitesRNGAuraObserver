@@ -1,4 +1,5 @@
 using System.Text;
+using RNGNewAuraNotifier.Core.Config;
 
 namespace RNGNewAuraNotifier.Core.VRChat;
 
@@ -86,13 +87,14 @@ internal class LogWatcher(string logFileFilter) : IDisposable
     /// <returns>タスク</returns>
     private async Task MonitorLoopAsync(CancellationToken token)
     {
+        ConfigData configData = AppConfig.Instance;
         while (!token.IsCancellationRequested)
         {
             // 監視対象の最新ログファイルを取得する
             var newestLogFile = GetNewestLogFile(_logFileFilter);
             if (newestLogFile == null)
             {
-                Console.WriteLine($"No log file found in {AppConstants.VRChatLogDirectory}");
+                Console.WriteLine($"No log file found in {configData.LogDir}");
                 await Task.Delay(1000, token).ConfigureAwait(false);
                 continue;
             }
@@ -172,7 +174,8 @@ internal class LogWatcher(string logFileFilter) : IDisposable
     /// <returns>最新のログファイルのパス</returns>
     private static string? GetNewestLogFile(string logFileFilter)
     {
-        var files = Directory.GetFiles(AppConstants.VRChatLogDirectory, logFileFilter);
+        ConfigData configData = AppConfig.Instance;
+        var files = Directory.GetFiles(configData.LogDir, logFileFilter);
         return files.Length == 0 ? null : files.OrderByDescending(static f => File.GetLastWriteTime(f)).FirstOrDefault();
     }
 }

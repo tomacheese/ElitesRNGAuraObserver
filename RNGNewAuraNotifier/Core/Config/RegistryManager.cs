@@ -51,7 +51,7 @@ internal class RegistryManager
     /// スタートアップにアプリケーションが登録されているかどうかを確認します。
     /// </summary>
     /// <returns>登録されていれば true、そうでなければ false</returns>
-    public static bool IsStartupRegistered()
+    public static bool IsRegisteredStartup()
     {
         using RegistryKey? key = Registry.CurrentUser.OpenSubKey(StartupKeyPath, false);
         if (key == null) return false;

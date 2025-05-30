@@ -1,4 +1,5 @@
 using Newtonsoft.Json.Linq;
+using RNGNewAuraNotifier.Core.Config;
 
 namespace RNGNewAuraNotifier.Core.Json;
 
@@ -16,8 +17,9 @@ internal class JsonUpdateService(string owner, string repo)
     /// <returns>masterブランチのAuras.jsonが取得され、最新バージョンであればローカルに保存されたときに完了するタスク</returns>
     public async Task FetchMasterJsonAsync()
     {
+        ConfigData configData = AppConfig.Instance;
         var url = new Uri($"https://raw.githubusercontent.com/{_owner}/{_repo}/master/{_repo}/Resources/Auras.json");
-        var saveDir = Path.Combine(AppConstants.ApplicationConfigDirectory, "Aura.json");
+        var saveDir = Path.Combine(configData.AuraJsonDir, "Aura.json");
 
         // ディレクトリが存在しない場合は作成
         var dir = Path.GetDirectoryName(saveDir);

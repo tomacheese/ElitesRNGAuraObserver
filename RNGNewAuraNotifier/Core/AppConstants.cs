@@ -20,17 +20,12 @@ internal static class AppConstants
     /// <summary>
     /// VRChatのデフォルトログディレクトリのパス
     /// </summary>
-#if DEBUG
-    public static readonly string VRChatLogDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "logtest");
-#else
     public static readonly string VRChatLogDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "AppData", "LocalLow", "VRChat", "VRChat");
-#endif
 
     /// <summary>
     /// アプリケーションの設定ディレクトリのパス
     /// </summary>
-    public static readonly string ApplicationConfigDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), GitHubRepoOwner, AppName);
-
+    public static readonly string ApplicationConfigDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), GitHubRepoOwner, GitHubRepoName);
     /// <summary>
     /// GitHub リポジトリのオーナー名
     /// </summary>

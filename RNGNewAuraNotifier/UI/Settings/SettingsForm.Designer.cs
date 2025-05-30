@@ -121,9 +121,9 @@ partial class SettingsForm
         checkBoxStartup.Location = new Point(13, 303);
         checkBoxStartup.Margin = new Padding(3, 6, 3, 3);
         checkBoxStartup.Name = "checkBoxStartup";
-        checkBoxStartup.Size = new Size(161, 19);
+        checkBoxStartup.Size = new Size(165, 19);
         checkBoxStartup.TabIndex = 12;
-        checkBoxStartup.Text = "Startup at Windows setup";
+        checkBoxStartup.Text = "Start when Windows starts";
         checkBoxStartup.UseVisualStyleBackColor = true;
         // 
         // label4
