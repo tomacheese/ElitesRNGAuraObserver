@@ -26,6 +26,7 @@ internal static class AppConstants
     /// アプリケーションの設定ディレクトリのパス
     /// </summary>
     public static readonly string ApplicationConfigDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), GitHubRepoOwner, GitHubRepoName);
+
     /// <summary>
     /// GitHub リポジトリのオーナー名
     /// </summary>
