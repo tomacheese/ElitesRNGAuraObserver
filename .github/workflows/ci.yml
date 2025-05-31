@@ -20,20 +20,20 @@ jobs:
           dotnet-version: '9.0.x'
 
       - name: Restore dotnet packages
-        run: dotnet restore RNGNewAuraNotifier.sln
+        run: dotnet restore ElitesRNGAuraObserver.sln
 
       - name: Build solution
-        run: dotnet build RNGNewAuraNotifier.sln /p:Configuration=Release
+        run: dotnet build ElitesRNGAuraObserver.sln /p:Configuration=Release
 
       - name: Publish solution
-        run: dotnet publish RNGNewAuraNotifier.sln -p:PublishProfile=Publish
+        run: dotnet publish ElitesRNGAuraObserver.sln -p:PublishProfile=Publish
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: RNGNewAuraNotifier
+          name: ElitesRNGAuraObserver
           path: |
             **/bin/
 
       - name: Check code style
-        run: dotnet format RNGNewAuraNotifier.sln --verify-no-changes --severity warn
+        run: dotnet format ElitesRNGAuraObserver.sln --verify-no-changes --severity warn
