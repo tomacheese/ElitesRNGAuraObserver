@@ -48,7 +48,7 @@ internal class JsonData
     {
         ConfigData configData = AppConfig.Instance;
         // Jsonファイルの保存先
-        var jsonFilePath = Path.Combine(configData.AurasJsonDir, "Aura.json");
+        var jsonFilePath = Path.Combine(configData.AurasJsonDir, "Auras.json");
         string? jsonContent;
 
         // 1. 保存先JSONファイルが存在する場合はそれを読む

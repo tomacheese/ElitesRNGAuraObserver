@@ -4,7 +4,7 @@ using RNGNewAuraNotifier.Core.Config;
 namespace RNGNewAuraNotifier.Core.Json;
 
 /// <summary>
-/// Aura.jsonの更新を管理するクラス
+/// Auras.jsonの更新を管理するクラス
 /// </summary>
 internal class JsonUpdateService(string owner, string repo)
 {
