@@ -1,4 +1,3 @@
-using System.Windows.Forms;
 using Discord;
 using Discord.Webhook;
 using RNGNewAuraNotifier.Core.VRChat;
