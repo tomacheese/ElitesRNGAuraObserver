@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ElitesRNGAuraObserver": {
+      "commandName": "Project",
+      "commandLineArgs": "--debug --skip-update"
+    }
+  }
+}
