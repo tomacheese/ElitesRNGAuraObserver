@@ -9,7 +9,7 @@
 アクセスすると以下のように、Assets という欄があります。
 ここから `ElitesRNGAuraObserver.zip` を探し、クリックしてください。
 
-![リリースページ](/docs/assets/installation/release-page.png)
+![GitHub リリースページの画面](/docs/assets/installation/release-page.png)
 
 ## 2. ダウンロードしたファイルを展開し任意の場所に格納
 
@@ -19,7 +19,7 @@
 
 ここでは、ユーザーフォルダに `ElitesRNGAuraObserver` というフォルダを作成し、その中にペーストしました。
 
-![展開したファイルをコピー](/docs/assets/installation/copy-files.png)
+![展開したファイルをフォルダーにコピーしている様子](/docs/assets/installation/copy-files.png)
 
 ## 3. アプリケーションを起動
 
@@ -28,7 +28,7 @@
 実行すると、以下のようにタスクバーで常駐を開始します。
 アプリケーションを終了したい場合は、右クリックし `Exit` をクリックしてください。
 
-![タスクバーでのアプリ表示](/docs/assets/installation/located-taskbar.png)
+![Windows タスクバーに常駐したアプリケーションアイコン](/docs/assets/installation/located-taskbar.png)
 
 ## 4. 設定画面で設定
 
@@ -43,4 +43,4 @@
 
 | Windows トースト通知 | Discord Webhook 通知 |
 | :-: | :-: |
-| ![Windows トースト通知](/docs/assets/installation/unlocked-new-aura-toast.png) | ![Discord 通知](/docs/assets/installation/unlocked-new-aura-discord.png) |
+| ![Aura 獲得時の Windows トースト通知例](/docs/assets/installation/unlocked-new-aura-toast.png) | ![Aura 獲得時の Discord 通知例](/docs/assets/installation/unlocked-new-aura-discord.png) |

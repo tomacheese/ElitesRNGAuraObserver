@@ -6,13 +6,13 @@
 
 通知先とするチャンネルにカーソルを当て、`チャンネルの編集` をクリックします。
 
-![チャンネルの編集をクリック](/docs/assets/discord-webhook/click-edit-channel-btn.png)
+![Discord チャンネル設定画面の「チャンネルの編集」ボタン](/docs/assets/discord-webhook/click-edit-channel-btn.png)
 
 ## 2. Webhook を作成
 
 `連携サービス` をクリックし、`ウェブフックを作成` をクリックします。
 
-![ウェブフックを作成をクリック](/docs/assets/discord-webhook/create-webhook-btn.png)
+![Discord の連携サービス画面での「ウェブフックを作成」ボタン](/docs/assets/discord-webhook/create-webhook-btn.png)
 
 ## 3. Webhook の設定を行い、URL を取得
 
@@ -24,6 +24,6 @@
 
 上記の操作を実施し終えたら、`変更を保存する` をクリックします。
 
-![設定を行い、変更を保存するをクリック](/docs/assets/discord-webhook/webhook-settings.png)
+![Discord Webhook 設定画面と「変更を保存する」ボタン](/docs/assets/discord-webhook/webhook-settings.png)
 
 これらの操作で、Discord Webhook を作成し、Webhook URL をコピーすることができました。

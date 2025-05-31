@@ -2,7 +2,7 @@
 
 このページでは、Elite's RNG Aura Observer で設定可能な項目、設定画面で確認できる事項について説明しています。
 
-![設定画面](/docs/assets/installation/settings-ui.png)
+![設定画面のスクリーンショット](/docs/assets/installation/settings-ui.png)
 
 設定画面を開くには、タスクバーでアプリケーションアイコンをダブルクリックするか、右クリックして `Settings` をクリックしてください。
 
@@ -24,7 +24,7 @@ Discord Webhook URL の取得方法については、以下のページをご覧
 
 Windows トースト通知は、以下のように通知されます。
 
-![Windows トースト通知](/docs/assets/installation/unlocked-new-aura-toast.png)
+![Aura獲得時のWindowsトースト通知例](/docs/assets/installation/unlocked-new-aura-toast.png)
 
 ## Windows 起動時に起動するかどうか
 
