@@ -59,6 +59,7 @@ partial class SettingsForm
         label1.AutoSize = true;
         label1.Location = new Point(12, 46);
         label1.Margin = new Padding(2, 0, 2, 0);
+        label1.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         label1.Name = "label1";
         label1.Size = new Size(114, 15);
         label1.TabIndex = 0;
@@ -79,6 +80,7 @@ partial class SettingsForm
         label3.AutoSize = true;
         label3.Location = new Point(12, 121);
         label3.Margin = new Padding(2, 0, 2, 0);
+        label3.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         label3.Name = "label3";
         label3.Size = new Size(128, 15);
         label3.TabIndex = 4;
@@ -103,6 +105,7 @@ partial class SettingsForm
         buttonSave.TabIndex = 6;
         buttonSave.Text = "Save";
         buttonSave.UseVisualStyleBackColor = true;
+        buttonSave.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         buttonSave.Click += OnSaveButtonClicked;
         // 
         // checkBoxToastNotification
@@ -114,6 +117,7 @@ partial class SettingsForm
         checkBoxToastNotification.TabIndex = 11;
         checkBoxToastNotification.Text = "Enable Toast notification";
         checkBoxToastNotification.UseVisualStyleBackColor = true;
+        checkBoxToastNotification.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         // 
         // checkBoxStartup
         // 
@@ -125,12 +129,14 @@ partial class SettingsForm
         checkBoxStartup.TabIndex = 12;
         checkBoxStartup.Text = "Start when Windows starts";
         checkBoxStartup.UseVisualStyleBackColor = true;
+        checkBoxStartup.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         // 
         // label4
         // 
         label4.AutoSize = true;
         label4.Location = new Point(13, 344);
         label4.Margin = new Padding(2, 6, 2, 0);
+        label4.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         label4.Name = "label4";
         label4.Size = new Size(116, 15);
         label4.TabIndex = 13;
@@ -153,6 +159,7 @@ partial class SettingsForm
         buttonConfigDirBrowse.TabIndex = 15;
         buttonConfigDirBrowse.Text = "Browse...";
         buttonConfigDirBrowse.UseVisualStyleBackColor = true;
+        buttonConfigDirBrowse.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         buttonConfigDirBrowse.Click += ButtonConfigDirBrowse_Click;
         // 
         // label5
@@ -160,6 +167,7 @@ partial class SettingsForm
         label5.AutoSize = true;
         label5.Location = new Point(13, 445);
         label5.Margin = new Padding(3, 6, 3, 0);
+        label5.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         label5.Name = "label5";
         label5.Size = new Size(102, 15);
         label5.TabIndex = 18;
@@ -170,6 +178,7 @@ partial class SettingsForm
         labelJsonVersion.AutoSize = true;
         labelJsonVersion.Location = new Point(130, 445);
         labelJsonVersion.Margin = new Padding(3, 6, 3, 0);
+        labelJsonVersion.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         labelJsonVersion.Name = "labelJsonVersion";
         labelJsonVersion.Size = new Size(61, 15);
         labelJsonVersion.TabIndex = 19;
@@ -180,6 +189,7 @@ partial class SettingsForm
         label6.AutoSize = true;
         label6.Location = new Point(12, 424);
         label6.Margin = new Padding(3, 6, 3, 0);
+        label6.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         label6.Name = "label6";
         label6.Size = new Size(112, 15);
         label6.TabIndex = 20;
@@ -190,6 +200,7 @@ partial class SettingsForm
         labelAppVersion.AutoSize = true;
         labelAppVersion.Location = new Point(130, 424);
         labelAppVersion.Margin = new Padding(3, 6, 3, 0);
+        labelAppVersion.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         labelAppVersion.Name = "labelAppVersion";
         labelAppVersion.Size = new Size(31, 15);
         labelAppVersion.TabIndex = 21;
@@ -198,7 +209,7 @@ partial class SettingsForm
         // label7
         // 
         label7.AutoSize = true;
-        label7.Font = new Font("Yu Gothic UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 128);
+        label7.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         label7.Location = new Point(12, 15);
         label7.Margin = new Padding(3, 6, 3, 6);
         label7.Name = "label7";
@@ -209,7 +220,7 @@ partial class SettingsForm
         // label8
         // 
         label8.AutoSize = true;
-        label8.Font = new Font("Yu Gothic UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 128);
+        label8.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         label8.Location = new Point(13, 98);
         label8.Margin = new Padding(3, 6, 3, 6);
         label8.Name = "label8";
@@ -220,7 +231,7 @@ partial class SettingsForm
         // label9
         // 
         label9.AutoSize = true;
-        label9.Font = new Font("Yu Gothic UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 128);
+        label9.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         label9.Location = new Point(12, 251);
         label9.Margin = new Padding(3, 6, 3, 6);
         label9.Name = "label9";
@@ -257,7 +268,7 @@ partial class SettingsForm
         // label10
         // 
         label10.AutoSize = true;
-        label10.Font = new Font("Yu Gothic UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 128);
+        label10.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         label10.Location = new Point(13, 397);
         label10.Margin = new Padding(3, 6, 3, 6);
         label10.Name = "label10";
@@ -283,6 +294,7 @@ partial class SettingsForm
         buttonSendTest.TabIndex = 30;
         buttonSendTest.Text = "Send test message";
         buttonSendTest.UseVisualStyleBackColor = true;
+        buttonSendTest.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         buttonSendTest.Click += ButtonSendTest_Click;
         // 
         // SettingsForm
