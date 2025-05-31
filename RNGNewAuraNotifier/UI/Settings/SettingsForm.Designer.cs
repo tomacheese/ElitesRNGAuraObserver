@@ -295,7 +295,7 @@ partial class SettingsForm
         buttonSendTest.Text = "Send test message";
         buttonSendTest.UseVisualStyleBackColor = true;
         buttonSendTest.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
-        buttonSendTest.Click += ButtonSendTest_Click;
+        buttonSendTest.Click += SendTestMessageAsync;
         // 
         // SettingsForm
         // 

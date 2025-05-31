@@ -43,10 +43,10 @@ internal class ConfigData
     public string LogDir { get; set; } = AppConstants.VRChatLogDirectory;
 
     /// <summary>
-    /// Aura.jsonのパス
+    /// Auras.jsonのパス
     /// </summary>
-    [JsonPropertyName("auraJsonDir")]
-    public string AuraJsonDir { get; set; } = AppConstants.ApplicationConfigDirectory;
+    [JsonPropertyName("aurasJsonDir")]
+    public string AurasJsonDir { get; set; } = AppConstants.ApplicationConfigDirectory;
 
     /// <summary>
     /// URLが有効な値であるかチェックする
@@ -70,7 +70,7 @@ internal class ConfigData
             DiscordWebhookUrl = DiscordWebhookUrl,
             ToastNotification = ToastNotification,
             LogDir = LogDir,
-            AuraJsonDir = AuraJsonDir,
+            AurasJsonDir = AurasJsonDir,
         };
     }
 

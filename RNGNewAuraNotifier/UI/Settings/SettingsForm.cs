@@ -159,9 +159,9 @@ internal partial class SettingsForm : Form
     /// <summary>
     /// テスト送信ボタンがクリックされたときの処理
     /// </summary>
-    private void ButtonSendTest_Click(object sender, EventArgs e)
+    private async void SendTestMessageAsync(object sender, EventArgs e)
     {
-        Task.Run(async () =>
+        try
         {
             await DiscordNotificationService.NotifyAsync(
                 discordWebhookUrl: textBoxDiscordWebhookUrl.Text,
@@ -169,6 +169,10 @@ internal partial class SettingsForm : Form
                 vrchatUser: null,
                 message: "This is a test message."
             ).ConfigureAwait(false);
-        }).Wait();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Failed to send message: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }
