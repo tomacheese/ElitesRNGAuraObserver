@@ -15,7 +15,6 @@
     <FileVersion>0.0.0.0</FileVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <NeutralLanguage>en</NeutralLanguage>
-
     <Product>Elite's RNG Aura Observer</Product>
   </PropertyGroup>
 
