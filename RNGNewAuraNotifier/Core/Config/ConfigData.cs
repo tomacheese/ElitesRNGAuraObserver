@@ -60,6 +60,21 @@ internal class ConfigData
     }
 
     /// <summary>
+    /// 現在の設定データのクローンを作成します。
+    /// </summary>
+    /// <returns>クローンした設定データ</returns>
+    public ConfigData Clone()
+    {
+        return new ConfigData
+        {
+            DiscordWebhookUrl = DiscordWebhookUrl,
+            ToastNotification = ToastNotification,
+            LogDir = LogDir,
+            AuraJsonDir = AuraJsonDir,
+        };
+    }
+
+    /// <summary>
     /// 2つのオブジェクトの全てのパブリックインスタンスプロパティの値が等しいかどうかを比較します。
     /// </summary>
     /// <typeparam name="T">比較するオブジェクトの型</typeparam>

@@ -100,13 +100,14 @@ internal partial class SettingsForm : Form
     private void OnFormClosing(object sender, FormClosingEventArgs e)
     {
         ConfigData configData = AppConfig.Instance;
-        var changedConfigData = new ConfigData
-        {
-            DiscordWebhookUrl = textBoxDiscordWebhookUrl.Text.Trim(),
-            ToastNotification = checkBoxToastNotification.Checked,
-        };
 
-        if (ConfigData.AreEqual(configData, changedConfigData))
+        ConfigData changedConfigData = configData.Clone();
+        changedConfigData.DiscordWebhookUrl = textBoxDiscordWebhookUrl.Text;
+        changedConfigData.ToastNotification = checkBoxToastNotification.Checked;
+
+        var isConfigDirChanged = !string.Equals(AppConfig.GetConfigDirectoryPath().Trim(), textBoxConfigDir.Text.Trim(), StringComparison.OrdinalIgnoreCase);
+
+        if (ConfigData.AreEqual(configData, changedConfigData) && !isConfigDirChanged)
         {
             return;
         }

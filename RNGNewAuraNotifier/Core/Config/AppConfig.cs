@@ -7,9 +7,10 @@ namespace RNGNewAuraNotifier.Core.Config;
 /// </summary>
 internal class AppConfig
 {
-    private static string _configDir = GetConfigDirectoryPath();
     private const string PathFileName = "config.path";
     private const string ConfigFileName = "config.json";
+
+    private static string _configDir = GetConfigDirectoryPath();
     private static ConfigData _instance = new();
     private static readonly Lock _lock = new();
     private static bool _isLoaded = false;
@@ -29,7 +30,8 @@ internal class AppConfig
 
         if (File.Exists(filePath))
         {
-            return File.ReadAllText(filePath).Trim();
+            var path = File.ReadAllText(filePath).Trim();
+            return string.IsNullOrEmpty(path) ? AppConstants.ApplicationConfigDirectory : path;
         }
         else
         {
