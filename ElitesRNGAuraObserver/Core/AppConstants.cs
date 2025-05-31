@@ -10,7 +10,7 @@ internal static class AppConstants
     /// <summary>
     /// アプリケーションの表示名
     /// </summary>
-    public const string DisplayAppName = "Elite's RNGAura Observer";
+    public const string DisplayAppName = "Elite's RNG Aura Observer";
 
     /// <summary>
     /// アセンブリ名

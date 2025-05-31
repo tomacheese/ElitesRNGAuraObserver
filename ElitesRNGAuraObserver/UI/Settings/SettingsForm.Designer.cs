@@ -69,6 +69,7 @@ partial class SettingsForm
         // 
         // textBoxWatchingFilePath
         // 
+        textBoxWatchingFilePath.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         textBoxWatchingFilePath.Location = new Point(162, 43);
         textBoxWatchingFilePath.Margin = new Padding(2, 10, 2, 2);
         textBoxWatchingFilePath.Multiline = true;
@@ -90,6 +91,7 @@ partial class SettingsForm
         // 
         // textBoxDiscordWebhookUrl
         // 
+        textBoxDiscordWebhookUrl.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         textBoxDiscordWebhookUrl.Location = new Point(162, 118);
         textBoxDiscordWebhookUrl.Margin = new Padding(2);
         textBoxDiscordWebhookUrl.Multiline = true;
@@ -146,6 +148,7 @@ partial class SettingsForm
         // 
         // textBoxConfigDir
         // 
+        textBoxConfigDir.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
         textBoxConfigDir.Location = new Point(162, 341);
         textBoxConfigDir.Margin = new Padding(3, 6, 3, 3);
         textBoxConfigDir.Name = "textBoxConfigDir";
@@ -211,33 +214,33 @@ partial class SettingsForm
         // label7
         // 
         label7.AutoSize = true;
-        label7.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
-        label7.Location = new Point(12, 15);
+        label7.Font = new Font("Yu Gothic UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 128);
+        label7.Location = new Point(13, 15);
         label7.Margin = new Padding(3, 6, 3, 6);
         label7.Name = "label7";
-        label7.Size = new Size(132, 15);
+        label7.Size = new Size(134, 15);
         label7.TabIndex = 22;
         label7.Text = "Monitoring Information";
         // 
         // label8
         // 
         label8.AutoSize = true;
-        label8.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
+        label8.Font = new Font("Yu Gothic UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 128);
         label8.Location = new Point(13, 98);
         label8.Margin = new Padding(3, 6, 3, 6);
         label8.Name = "label8";
-        label8.Size = new Size(92, 15);
+        label8.Size = new Size(94, 15);
         label8.TabIndex = 23;
         label8.Text = "Discord Settings";
         // 
         // label9
         // 
         label9.AutoSize = true;
-        label9.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
+        label9.Font = new Font("Yu Gothic UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 128);
         label9.Location = new Point(12, 251);
         label9.Margin = new Padding(3, 6, 3, 6);
         label9.Name = "label9";
-        label9.Size = new Size(113, 15);
+        label9.Size = new Size(114, 15);
         label9.TabIndex = 24;
         label9.Text = "Application Settings";
         // 
@@ -270,7 +273,7 @@ partial class SettingsForm
         // label10
         // 
         label10.AutoSize = true;
-        label10.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 128);
+        label10.Font = new Font("Yu Gothic UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 128);
         label10.Location = new Point(13, 397);
         label10.Margin = new Padding(3, 6, 3, 6);
         label10.Name = "label10";
