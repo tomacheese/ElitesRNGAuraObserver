@@ -166,8 +166,8 @@ internal partial class SettingsForm : Form
             await DiscordNotificationService.NotifyAsync(
                 discordWebhookUrl: textBoxDiscordWebhookUrl.Text,
                 title: "**Test Message**",
-                message: "This is a test message.",
-                vrchatUser: null
+                vrchatUser: null,
+                message: "This is a test message."
             ).ConfigureAwait(false);
         }).Wait();
     }

@@ -22,7 +22,7 @@ internal class ConfigData
         {
             if (!string.IsNullOrEmpty(value) && !IsValidUrl(value))
             {
-                throw new ArgumentException("AppUrl must start with 'http://' or 'https://'.");
+                throw new ArgumentException("DiscordWebhookUrl must start with 'http://' or 'https://'.");
             }
 
             _discordWebhookUrl = value;

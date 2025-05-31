@@ -97,8 +97,8 @@ internal class RNGNewAuraController(ConfigData configData) : IDisposable
                 await DiscordNotificationService.NotifyAsync(
                     discordWebhookUrl: configData.DiscordWebhookUrl,
                     title: "**Unlocked New Aura!**",
-                    fields: fields,
-                    vrchatUser: _vrchatUser
+                    vrchatUser: _vrchatUser,
+                    fields: fields
                 ).ConfigureAwait(false);
             }
             catch (Exception ex)

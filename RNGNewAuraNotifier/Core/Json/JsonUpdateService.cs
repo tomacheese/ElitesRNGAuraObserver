@@ -19,7 +19,7 @@ internal class JsonUpdateService(string owner, string repo)
     {
         ConfigData configData = AppConfig.Instance;
         var url = new Uri($"https://raw.githubusercontent.com/{_owner}/{_repo}/master/{_repo}/Resources/Auras.json");
-        var saveDir = Path.Combine(configData.AuraJsonDir, "Aura.json");
+        var saveDir = Path.Combine(configData.AuraJsonDir, "Auras.json");
 
         // ディレクトリが存在しない場合は作成
         var dir = Path.GetDirectoryName(saveDir);
