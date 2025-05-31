@@ -1,9 +1,10 @@
 using Newtonsoft.Json.Linq;
+using RNGNewAuraNotifier.Core.Config;
 
 namespace RNGNewAuraNotifier.Core.Json;
 
 /// <summary>
-/// Aura.jsonの更新を管理するクラス
+/// Auras.jsonの更新を管理するクラス
 /// </summary>
 internal class JsonUpdateService(string owner, string repo)
 {
@@ -16,11 +17,12 @@ internal class JsonUpdateService(string owner, string repo)
     /// <returns>masterブランチのAuras.jsonが取得され、最新バージョンであればローカルに保存されたときに完了するタスク</returns>
     public async Task FetchMasterJsonAsync()
     {
+        ConfigData configData = AppConfig.Instance;
         var url = new Uri($"https://raw.githubusercontent.com/{_owner}/{_repo}/master/{_repo}/Resources/Auras.json");
-        var saveDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RNGNewAuraNotifier", "Aura.json");
+        var saveFilePath = Path.Combine(configData.AurasJsonDir, "Auras.json");
 
         // ディレクトリが存在しない場合は作成
-        var dir = Path.GetDirectoryName(saveDir);
+        var dir = Path.GetDirectoryName(saveFilePath);
         if (dir is not null)
         {
             Directory.CreateDirectory(dir);
@@ -44,8 +46,8 @@ internal class JsonUpdateService(string owner, string repo)
         // JSONファイルの更新チェック
         if (version is null || CheckUpdateJsonData(version))
         {
-            await File.WriteAllTextAsync(saveDir, jsonContent).ConfigureAwait(false);
-            Console.WriteLine($"Json file saved. Path: {saveDir}");
+            await File.WriteAllTextAsync(saveFilePath, jsonContent).ConfigureAwait(false);
+            Console.WriteLine($"Json file saved. Path: {saveFilePath}");
         }
     }
 

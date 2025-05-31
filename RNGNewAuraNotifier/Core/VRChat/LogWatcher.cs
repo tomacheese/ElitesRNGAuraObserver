@@ -1,4 +1,5 @@
 using System.Text;
+using RNGNewAuraNotifier.Core.Config;
 
 namespace RNGNewAuraNotifier.Core.VRChat;
 
@@ -7,7 +8,7 @@ namespace RNGNewAuraNotifier.Core.VRChat;
 /// </summary>
 /// <param name="logDirectory">ログディレクトリのパス</param>
 /// <param name="logFileFilter">ログファイルのフィルタ</param>
-internal class LogWatcher(string logDirectory, string logFileFilter) : IDisposable
+internal class LogWatcher(string logFileFilter) : IDisposable
 {
     /// <summary>
     /// 新規ログ行を検出したときに発生するイベント
@@ -20,11 +21,6 @@ internal class LogWatcher(string logDirectory, string logFileFilter) : IDisposab
     private readonly CancellationTokenSource _cts = new();
 
     /// <summary>
-    /// ログディレクトリ
-    /// </summary>
-    private readonly string _logDirectory = logDirectory;
-
-    /// <summary>
     /// ログファイルのパターンフィルタ
     /// </summary>
     private readonly string _logFileFilter = logFileFilter;
@@ -32,7 +28,7 @@ internal class LogWatcher(string logDirectory, string logFileFilter) : IDisposab
     /// <summary>
     /// 最後に読み取ったファイルのパス
     /// </summary>
-    private string _lastReadFilePath = GetNewestLogFile(logDirectory, logFileFilter) ?? string.Empty;
+    private string _lastReadFilePath = GetNewestLogFile(logFileFilter) ?? string.Empty;
 
     /// <summary>
     /// 最後に読み取った位置
@@ -91,13 +87,14 @@ internal class LogWatcher(string logDirectory, string logFileFilter) : IDisposab
     /// <returns>タスク</returns>
     private async Task MonitorLoopAsync(CancellationToken token)
     {
+        ConfigData configData = AppConfig.Instance;
         while (!token.IsCancellationRequested)
         {
             // 監視対象の最新ログファイルを取得する
-            var newestLogFile = GetNewestLogFile(_logDirectory, _logFileFilter);
+            var newestLogFile = GetNewestLogFile(_logFileFilter);
             if (newestLogFile == null)
             {
-                Console.WriteLine($"No log file found in {_logDirectory}");
+                Console.WriteLine($"No log file found in {configData.LogDir}");
                 await Task.Delay(1000, token).ConfigureAwait(false);
                 continue;
             }
@@ -173,12 +170,12 @@ internal class LogWatcher(string logDirectory, string logFileFilter) : IDisposab
     /// <summary>
     /// 指定されたディレクトリ内の最新のログファイルを取得する
     /// </summary>
-    /// <param name="logDirectory">ログディレクトリのパス</param>
     /// <param name="logFileFilter">ログファイルのフィルタ</param>
     /// <returns>最新のログファイルのパス</returns>
-    private static string? GetNewestLogFile(string logDirectory, string logFileFilter)
+    private static string? GetNewestLogFile(string logFileFilter)
     {
-        var files = Directory.GetFiles(logDirectory, logFileFilter);
+        ConfigData configData = AppConfig.Instance;
+        var files = Directory.GetFiles(configData.LogDir, logFileFilter);
         return files.Length == 0 ? null : files.OrderByDescending(static f => File.GetLastWriteTime(f)).FirstOrDefault();
     }
 }

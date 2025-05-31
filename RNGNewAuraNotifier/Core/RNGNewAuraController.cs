@@ -1,4 +1,5 @@
 using RNGNewAuraNotifier.Core.Aura;
+using RNGNewAuraNotifier.Core.Config;
 using RNGNewAuraNotifier.Core.Notification;
 using RNGNewAuraNotifier.Core.VRChat;
 
@@ -7,40 +8,22 @@ namespace RNGNewAuraNotifier.Core;
 /// <summary>
 /// VRChatのログを監視し新しいAuraの取得を検出して通知するコントローラークラス
 /// </summary>
-internal class RNGNewAuraController : IDisposable
+/// <remarks>
+/// コンストラクタ
+/// </remarks>
+/// <param name="configData">ログディレクトリのパス</param>
+/// <remarks>ログディレクトリにnullまたは空白を指定した場合は、デフォルトのVRChatログディレクトリを使用する</remarks>
+internal class RNGNewAuraController(ConfigData configData) : IDisposable
 {
-    /// <summary>
-    /// 監視対象のログディレクトリパス
-    /// </summary>
-    private readonly string _logDir;
-
     /// <summary>
     /// ログウォッチャー
     /// </summary>
-    private readonly LogWatcher _logWatcher;
+    private readonly LogWatcher _logWatcher = new("output_log_*.txt");
 
     /// <summary>
     /// ログインしているVRChatユーザーの情報
     /// </summary>
     private VRChatUser? _vrchatUser;
-
-    /// <summary>
-    /// コンストラクタ
-    /// </summary>
-    /// <param name="logDirectory">ログディレクトリのパス</param>
-    /// <remarks>ログディレクトリにnullまたは空白を指定した場合は、デフォルトのVRChatログディレクトリを使用する</remarks>
-    public RNGNewAuraController(string? logDirectory)
-    {
-        // ログディレクトリが指定されていない場合は、デフォルトのVRChatログディレクトリを使用する
-        var defaultLogDir = AppConstants.VRChatDefaultLogDirectory;
-        _logDir = logDirectory ?? defaultLogDir;
-        if (string.IsNullOrEmpty(_logDir))
-        {
-            _logDir = defaultLogDir;
-        }
-
-        _logWatcher = new LogWatcher(_logDir, "output_log_*.txt");
-    }
 
     /// <summary>
     /// ログ監視を開始する
@@ -62,12 +45,6 @@ internal class RNGNewAuraController : IDisposable
         _logWatcher.Stop();
         _logWatcher.Dispose();
     }
-
-    /// <summary>
-    /// 監視しているログディレクトリのパスを取得する
-    /// </summary>
-    /// <returns>監視しているログディレクトリのパス</returns>
-    public string GetLogDirectory() => _logDir;
 
     /// <summary>
     /// 監視しているログファイルのパスを取得する
@@ -101,7 +78,9 @@ internal class RNGNewAuraController : IDisposable
             return;
         }
 
-        UwpNotificationService.Notify("Unlocked New Aura!", $"{aura.GetNameText()}\n{aura.GetRarityString()}");
+        if (configData.ToastNotification)
+            UwpNotificationService.Notify("Unlocked New Aura!", $"{aura.GetNameText()}\n{aura.GetRarityString()}");
+
         Task.Run(async () =>
         {
             try
@@ -116,9 +95,10 @@ internal class RNGNewAuraController : IDisposable
                 };
 
                 await DiscordNotificationService.NotifyAsync(
+                    discordWebhookUrl: configData.DiscordWebhookUrl,
                     title: "**Unlocked New Aura!**",
-                    fields: fields,
-                    vrchatUser: _vrchatUser
+                    vrchatUser: _vrchatUser,
+                    fields: fields
                 ).ConfigureAwait(false);
             }
             catch (Exception ex)

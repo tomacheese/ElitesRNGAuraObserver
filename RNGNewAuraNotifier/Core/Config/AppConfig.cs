@@ -1,4 +1,4 @@
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace RNGNewAuraNotifier.Core.Config;
 
@@ -7,120 +7,132 @@ namespace RNGNewAuraNotifier.Core.Config;
 /// </summary>
 internal class AppConfig
 {
-    /// <summary>
-    /// 設定ファイルのパス
-    /// </summary>
-    /// <remarks>アプリケーションの実行ディレクトリに config.json という名前で保存される</remarks>
-    /// <example>config.json</example>
-    private static readonly string _configFilePath = Path.Combine(Environment.CurrentDirectory, "config.json");
+    private const string PathFileName = "config.path";
+    private const string ConfigFileName = "config.json";
 
-    /// <summary>
-    /// 設定データ
-    /// </summary>
-    private static ConfigData _config = new();
-
-    /// <summary>
-    /// JSONのシリアルオプション
-    /// </summary>
-    private static readonly JsonSerializerOptions _jsonSerializerOptions = new()
-    {
-        WriteIndented = true,
-    };
-
-    /// <summary>
-    /// ファイル読み書き時のロックオブジェクト
-    /// </summary>
+    private static string _configDir = GetConfigDirectoryPath();
+    private static ConfigData _instance = new();
     private static readonly Lock _lock = new();
+    private static bool _isLoaded = false;
 
     /// <summary>
-    /// 静的コンストラクタ。設定ファイルを読み込む
+    /// 設定が再読み込みされたときに発生するイベント
     /// </summary>
-    static AppConfig() => Load();
+    public static event Action<ConfigData>? ConfigReloaded;
 
     /// <summary>
-    /// 設定ファイルを読み込む
+    /// config.jsonの保存先ディレクトリを取得します。
     /// </summary>
-    private static void Load()
+    /// <returns>config.jsonの保存先パス</returns>
+    public static string GetConfigDirectoryPath()
     {
-        using (_lock.EnterScope())
+        var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PathFileName);
+
+        if (File.Exists(filePath))
         {
-            if (!File.Exists(_configFilePath))
+            var path = File.ReadAllText(filePath).Trim();
+            return string.IsNullOrEmpty(path) ? AppConstants.ApplicationConfigDirectory : path;
+        }
+        else
+        {
+            // デフォルトの設定ディレクトリを返す
+            return AppConstants.ApplicationConfigDirectory;
+        }
+    }
+
+    /// <summary>
+    /// 設定ディレクトリのパスを保存します。
+    /// </summary>
+    /// <param name="configPath">config.jsonのパス</param>
+    public static void SaveConfigDirectoryPath(string configPath)
+    {
+        var appDir = AppDomain.CurrentDomain.BaseDirectory;
+        var filePath = Path.Combine(appDir, PathFileName);
+
+        if (string.Equals(configPath, AppConstants.ApplicationConfigDirectory, StringComparison.OrdinalIgnoreCase))
+        {
+            // 規定値の場合は config.path を削除
+            if (File.Exists(filePath))
             {
-                return;
+                File.Delete(filePath);
             }
-
-            var json = File.ReadAllText(_configFilePath);
-            ConfigData config = JsonSerializer.Deserialize<ConfigData>(json) ?? throw new InvalidOperationException("Failed to deserialize config file.");
-            _config = config;
         }
-    }
-
-    /// <summary>
-    /// 設定ファイルを保存する
-    /// </summary>
-    private static void Save()
-    {
-        using (_lock.EnterScope())
+        else
         {
-            var json = JsonSerializer.Serialize(_config, _jsonSerializerOptions);
-            File.WriteAllText(_configFilePath, json);
+            // 規定値以外の場合は config.path を作成
+            File.WriteAllText(filePath, configPath);
         }
+
+        _configDir = configPath;
     }
 
     /// <summary>
-    /// VRChatのログディレクトリのパスを取得または設定するプロパティ
+    /// 設定データのインスタンスを取得します。
     /// </summary>
-    /// <remarks>空白を設定すると、デフォルトのログディレクトリ（%USERPROFILE%\AppData\LocalLow\VRChat\VRChat）が使用される</remarks>
-    public static string LogDir
+    public static ConfigData Instance
     {
         get
         {
-            Load();
-            return _config.LogDir;
-        }
-
-        set
-        {
-            var trimmedValue = value.Trim();
-            if (string.IsNullOrEmpty(trimmedValue))
+            // configファイルが存在している状態で一度読み込まれた場合、2回目以降は再読み込みしない
+            if (File.Exists(Path.Combine(_configDir, ConfigFileName)) && !_isLoaded)
             {
-                // 空白の場合はデフォルトのログディレクトリを使用する
-                _config.LogDir = AppConstants.VRChatDefaultLogDirectory;
+                _instance = Load();
+                _isLoaded = true;
             }
 
-            if (!Directory.Exists(trimmedValue))
-            {
-                // Directory.Existsは、ディレクトリが存在しない場合や、アクセス権がない場合にfalseを返す
-                throw new DirectoryNotFoundException($"The specified directory does not exist or not readable: {trimmedValue}");
-            }
-
-            _config.LogDir = trimmedValue;
-            Save();
+            return _instance!;
         }
     }
 
     /// <summary>
-    /// DiscordのWebhook URLを取得または設定するプロパティ
+    /// 設定の再読み込み
     /// </summary>
-    /// <remarks>空白を設定すると、Discordへの通知は行われない</remarks>
-    public static string DiscordWebhookUrl
+    public static void Reload()
     {
-        get
+        lock (_lock)
         {
-            Load();
-            return _config.DiscordWebhookUrl;
+            _instance = Load();
+            ConfigReloaded?.Invoke(_instance!);
+        }
+    }
+
+    /// <summary>
+    /// 設定の保存
+    /// </summary>
+    public static void Save()
+    {
+        if (_instance != null)
+        {
+            Save(_instance);
+        }
+    }
+
+    /// <summary>
+    /// 設定の保存
+    /// </summary>
+    /// <param name="config">コンフィグ情報</param>
+    private static void Save(ConfigData config)
+    {
+        var json = JsonConvert.SerializeObject(config, Formatting.Indented);
+        Directory.CreateDirectory(_configDir);
+        File.WriteAllText(Path.Combine(_configDir, ConfigFileName), json);
+    }
+
+    /// <summary>
+    /// 設定の読み込み
+    /// </summary>
+    private static ConfigData Load()
+    {
+        var configFilePath = Path.Combine(_configDir, ConfigFileName);
+        if (!File.Exists(configFilePath))
+        {
+            var defaultConfig = new ConfigData();
+            Save(defaultConfig);
+            return defaultConfig;
         }
 
-        set
-        {
-            var trimmedValue = value.Trim();
-            if (!string.IsNullOrEmpty(trimmedValue) && !trimmedValue.StartsWith("http://", StringComparison.OrdinalIgnoreCase) && !trimmedValue.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
-            {
-                throw new ArgumentException("DiscordWebhookUrl must start with http or https.");
-            }
-
-            _config.DiscordWebhookUrl = trimmedValue;
-            Save();
-        }
+        var json = File.ReadAllText(configFilePath);
+        return JsonConvert.DeserializeObject<ConfigData>(json)
+               ?? new ConfigData();
     }
 }

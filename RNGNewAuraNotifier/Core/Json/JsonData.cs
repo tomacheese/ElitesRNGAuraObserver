@@ -1,5 +1,6 @@
 using System.Text;
 using Newtonsoft.Json;
+using RNGNewAuraNotifier.Core.Config;
 using RNGNewAuraNotifier.Properties;
 
 namespace RNGNewAuraNotifier.Core.Json;
@@ -45,16 +46,17 @@ internal class JsonData
     /// <returns>JSONファイルの内容</returns>
     public static JsonData GetJsonData()
     {
+        ConfigData configData = AppConfig.Instance;
         // Jsonファイルの保存先
-        var jsonDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RNGNewAuraNotifier", "Aura.json");
+        var jsonFilePath = Path.Combine(configData.AurasJsonDir, "Auras.json");
         string? jsonContent;
 
         // 1. 保存先JSONファイルが存在する場合はそれを読む
-        if (File.Exists(jsonDir))
+        if (File.Exists(jsonFilePath))
         {
             try
             {
-                jsonContent = File.ReadAllText(jsonDir);
+                jsonContent = File.ReadAllText(jsonFilePath);
                 JsonData? jsonData = JsonConvert.DeserializeObject<JsonData>(jsonContent) ?? new JsonData();
                 return jsonData;
             }
