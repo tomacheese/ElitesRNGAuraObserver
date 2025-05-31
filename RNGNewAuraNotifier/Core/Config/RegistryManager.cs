@@ -40,7 +40,9 @@ internal class RegistryManager
         var value = key!.GetValue(AppConstants.AppName);
         var currentExePath = $"\"{Application.ExecutablePath}\"";
 
-        if (value == null || value.ToString() != currentExePath)
+        if (value == null) return;
+
+        if (value.ToString() != currentExePath)
         {
             // 値が存在しない or パスが違う → 再登録
             key.SetValue(AppConstants.AppName, currentExePath);

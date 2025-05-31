@@ -54,6 +54,7 @@ internal static partial class Program
 
         Console.WriteLine("Program.Main");
 
+        RegistryManager.EnsureStartupRegistration();
         CheckExistsLogDirectory();
 
         ApplicationConfiguration.Initialize();
