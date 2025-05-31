@@ -227,7 +227,7 @@ internal static partial class Program
         var content = $"""
             OS: {Environment.OSVersion}
             CLR: {Environment.Version}
-            App: {AppConstants.AppName} {AppConstants.AppVersionString}
+            App: {AppConstants.AssemblyName} {AppConstants.AppVersionString}
             """;
         AppendSection("Environment", content);
 

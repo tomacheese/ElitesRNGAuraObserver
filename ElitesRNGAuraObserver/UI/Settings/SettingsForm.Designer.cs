@@ -1,3 +1,5 @@
+using ElitesRNGAuraObserver.Core;
+
 namespace ElitesRNGAuraObserver.UI.Settings;
 partial class SettingsForm
 {

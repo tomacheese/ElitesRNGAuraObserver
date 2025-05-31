@@ -15,7 +15,8 @@
     <FileVersion>0.0.0.0</FileVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <NeutralLanguage>en</NeutralLanguage>
-    <AssemblyName>Elite's RNG Aura Observer</AssemblyName>
+    <AssemblyName>$(AssemblyName)</AssemblyName>
+    <Product>Elite's RNG Aura Observer</Product>
   </PropertyGroup>
 
   <ItemGroup>

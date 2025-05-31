@@ -1,3 +1,4 @@
+using ElitesRNGAuraObserver.Core;
 using ElitesRNGAuraObserver.UI.Settings;
 using Application = System.Windows.Forms.Application;
 
@@ -29,7 +30,7 @@ internal class TrayIcon : ApplicationContext
 
         _trayIcon.Icon = Properties.Resources.AppIcon;
         _trayIcon.ContextMenuStrip = contextMenu;
-        _trayIcon.Text = "ElitesRNGAuraObserver";
+        _trayIcon.Text = AppConstants.DisplayAppName;
         _trayIcon.Visible = true;
         _trayIcon.MouseClick += (sender, e) =>
         {

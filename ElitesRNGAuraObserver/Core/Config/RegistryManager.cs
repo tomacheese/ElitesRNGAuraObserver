@@ -22,11 +22,11 @@ internal class RegistryManager
         if (enableStartup)
         {
             var exePath = Application.ExecutablePath;
-            key!.SetValue(AppConstants.AppName, "\"" + exePath + "\"");
+            key!.SetValue(AppConstants.AssemblyName, "\"" + exePath + "\"");
         }
         else
         {
-            key!.DeleteValue(AppConstants.AppName, false);
+            key!.DeleteValue(AppConstants.AssemblyName, false);
         }
     }
 
@@ -37,7 +37,7 @@ internal class RegistryManager
     public static void EnsureStartupRegistration()
     {
         using RegistryKey? key = Registry.CurrentUser.OpenSubKey(StartupKeyPath, true);
-        var value = key!.GetValue(AppConstants.AppName);
+        var value = key!.GetValue(AppConstants.AssemblyName);
         var currentExePath = $"\"{Application.ExecutablePath}\"";
 
         if (value == null) return;
@@ -45,7 +45,7 @@ internal class RegistryManager
         if (value.ToString() != currentExePath)
         {
             // 値が存在しない or パスが違う → 再登録
-            key.SetValue(AppConstants.AppName, currentExePath);
+            key.SetValue(AppConstants.AssemblyName, currentExePath);
         }
     }
 
@@ -57,7 +57,7 @@ internal class RegistryManager
     {
         using RegistryKey? key = Registry.CurrentUser.OpenSubKey(StartupKeyPath, false);
         if (key == null) return false;
-        var value = key.GetValue(AppConstants.AppName);
+        var value = key.GetValue(AppConstants.AssemblyName);
         return value != null;
     }
 }

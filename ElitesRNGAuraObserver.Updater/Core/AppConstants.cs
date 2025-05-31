@@ -10,7 +10,7 @@ internal static class AppConstants
     /// <summary>
     /// アプリケーション名
     /// </summary>
-    public static readonly string AppName = Assembly.GetExecutingAssembly().GetName().Name ?? string.Empty;
+    public static readonly string AssemblyName = Assembly.GetExecutingAssembly().GetName().Name ?? string.Empty;
 
     /// <summary>
     /// アプリケーションバージョンの文字列

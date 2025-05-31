@@ -15,7 +15,8 @@
     <NeutralLanguage>en</NeutralLanguage>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
-    <AssemblyName>Elite's RNG Aura Observer Updater</AssemblyName>
+    <AssemblyName>$(AssemblyName)</AssemblyName>
+    <Product>Elite's RNG Aura Observer Updater</Product>
   </PropertyGroup>
 
   <ItemGroup>

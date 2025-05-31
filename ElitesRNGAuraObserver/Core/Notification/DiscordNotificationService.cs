@@ -30,7 +30,7 @@ internal static class DiscordNotificationService
             Title = title,
             Footer = new EmbedFooterBuilder
             {
-                Text = $"{AppConstants.AppName} {AppConstants.AppVersionString}",
+                Text = $"{AppConstants.DisplayAppName} {AppConstants.AppVersionString}",
             },
             Color = new Color(0x00, 0xFF, 0x00),
             Timestamp = DateTimeOffset.UtcNow,

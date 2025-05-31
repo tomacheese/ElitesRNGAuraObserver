@@ -8,9 +8,14 @@ namespace ElitesRNGAuraObserver.Core;
 internal static class AppConstants
 {
     /// <summary>
-    /// アプリケーション名
+    /// アプリケーションの表示名
     /// </summary>
-    public static readonly string AppName = Assembly.GetExecutingAssembly().GetName().Name ?? string.Empty;
+    public const string DisplayAppName = "Elite's RNGAura Observer";
+
+    /// <summary>
+    /// アセンブリ名
+    /// </summary>
+    public static readonly string AssemblyName = Assembly.GetExecutingAssembly().GetName().Name ?? string.Empty;
 
     /// <summary>
     /// アプリケーションバージョンの文字列
