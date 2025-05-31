@@ -9,7 +9,7 @@
 アクセスすると以下のように、Assets という欄があります。
 ここから `ElitesRNGAuraObserver.zip` を探し、クリックしてください。
 
-TODO: 画像
+![リリースページ](/docs/assets/installation/release-page.png)
 
 ## 2. ダウンロードしたファイルを展開し任意の場所に格納
 
@@ -19,7 +19,7 @@ TODO: 画像
 
 ここでは、ユーザーフォルダに `ElitesRNGAuraObserver` というフォルダを作成し、その中にペーストしました。
 
-TODO: 画像
+![展開したファイルをコピー](/docs/assets/installation/copy-files.png)
 
 ## 3. アプリケーションを起動
 
@@ -28,23 +28,19 @@ TODO: 画像
 実行すると、以下のようにタスクバーで常駐を開始します。
 アプリケーションを終了したい場合は、右クリックし `Exit` をクリックしてください。
 
-TODO: 画像
+![タスクバーでのアプリ表示](/docs/assets/installation/located-taskbar.png)
 
 ## 4. 設定画面で設定
 
 アプリケーションを起動したら、初回の設定を行います。
 タスクバーでアプリケーションアイコンをダブルクリックするか、右クリックして `Settings` をクリックしてください。設定画面が開きます。
 
-### Discord Webhook の設定
-
-### Windows トースト通知の設定
-
-### Windows 起動時の起動設定
-
-### Tips: 設定ファイルの保存先について
+設定画面での設定項目については、[アプリケーションの設定](configuration.md) をご覧ください。
 
 ## 設定完了
 
 ここまでの設定が完了すると、Windows 起動時にアプリケーションが自動的に起動し、[Elite's RNG Land](https://vrchat.com/home/world/wrld_50a4de63-927a-4d7e-b322-13d715176ef1) で Aura を獲得したときに、Windows トースト通知と Discord Webhook によって通知されます。
 
-TODO: 画像
+| Windows トースト通知 | Discord Webhook 通知 |
+| :-: | :-: |
+| ![Windows トースト通知](/docs/assets/installation/unlocked-new-aura-toast.png) | ![Discord 通知](/docs/assets/installation/unlocked-new-aura-discord.png) |
