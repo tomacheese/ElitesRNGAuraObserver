@@ -60,14 +60,14 @@ jobs:
       - name: Set version from tag
         run: |
           $version = $env:APP_VERSION
-          $versionWithRevision = ($version.Split(''.'' + ''0'')[0..3] -join ''.'')
-          (Get-Content .\ElitesRNGAuraObserver\ElitesRNGAuraObserver.csproj) -replace ''<Version>[^<]*(</Version>)'', "<Version>$version</Version>" | Set-Content .\ElitesRNGAuraObserver\ElitesRNGAuraObserver.csproj
-          (Get-Content .\ElitesRNGAuraObserver\ElitesRNGAuraObserver.csproj) -replace ''<AssemblyVersion>[^<]*</AssemblyVersion>'', "<AssemblyVersion>$versionWithRevision</AssemblyVersion>" | Set-Content .\ElitesRNGAuraObserver\ElitesRNGAuraObserver.csproj
-          (Get-Content .\ElitesRNGAuraObserver\ElitesRNGAuraObserver.csproj) -replace ''<FileVersion>[^<]*</FileVersion>'', "<FileVersion>$versionWithRevision</FileVersion>" | Set-Content .\ElitesRNGAuraObserver\ElitesRNGAuraObserver.csproj
+          $versionWithRevision = ($version.Split('.') + '0')[0..3] -join '.'
+          (Get-Content .\ElitesRNGAuraObserver\ElitesRNGAuraObserver.csproj) -replace '<Version>[^<]*(</Version>)', "<Version>$version</Version>" | Set-Content .\ElitesRNGAuraObserver\ElitesRNGAuraObserver.csproj
+          (Get-Content .\ElitesRNGAuraObserver\ElitesRNGAuraObserver.csproj) -replace '<AssemblyVersion>[^<]*</AssemblyVersion>', "<AssemblyVersion>$versionWithRevision</AssemblyVersion>" | Set-Content .\ElitesRNGAuraObserver\ElitesRNGAuraObserver.csproj
+          (Get-Content .\ElitesRNGAuraObserver\ElitesRNGAuraObserver.csproj) -replace '<FileVersion>[^<]*</FileVersion>', "<FileVersion>$versionWithRevision</FileVersion>" | Set-Content .\ElitesRNGAuraObserver\ElitesRNGAuraObserver.csproj
 
-          (Get-Content .\ElitesRNGAuraObserver.Updater\ElitesRNGAuraObserver.Updater.csproj) -replace ''<Version>[^<]*(</Version>)'', "<Version>$version</Version>" | Set-Content .\ElitesRNGAuraObserver.Updater\ElitesRNGAuraObserver.Updater.csproj
-          (Get-Content .\ElitesRNGAuraObserver.Updater\ElitesRNGAuraObserver.Updater.csproj) -replace ''<AssemblyVersion>[^<]*</AssemblyVersion>'', "<AssemblyVersion>$versionWithRevision</AssemblyVersion>" | Set-Content .\ElitesRNGAuraObserver.Updater\ElitesRNGAuraObserver.Updater.csproj
-          (Get-Content .\ElitesRNGAuraObserver.Updater\ElitesRNGAuraObserver.Updater.csproj) -replace ''<FileVersion>[^<]*</FileVersion>'', "<FileVersion>$versionWithRevision</FileVersion>" | Set-Content .\ElitesRNGAuraObserver.Updater\ElitesRNGAuraObserver.Updater.csproj
+          (Get-Content .\ElitesRNGAuraObserver.Updater\ElitesRNGAuraObserver.Updater.csproj) -replace '<Version>[^<]*(</Version>)', "<Version>$version</Version>" | Set-Content .\ElitesRNGAuraObserver.Updater\ElitesRNGAuraObserver.Updater.csproj
+          (Get-Content .\ElitesRNGAuraObserver.Updater\ElitesRNGAuraObserver.Updater.csproj) -replace '<AssemblyVersion>[^<]*</AssemblyVersion>', "<AssemblyVersion>$versionWithRevision</AssemblyVersion>" | Set-Content .\ElitesRNGAuraObserver.Updater\ElitesRNGAuraObserver.Updater.csproj
+          (Get-Content .\ElitesRNGAuraObserver.Updater\ElitesRNGAuraObserver.Updater.csproj) -replace '<FileVersion>[^<]*</FileVersion>', "<FileVersion>$versionWithRevision</FileVersion>" | Set-Content .\ElitesRNGAuraObserver.Updater\ElitesRNGAuraObserver.Updater.csproj
         shell: pwsh
         env:
           APP_VERSION: ${{ needs.bump-version.outputs.version }}
