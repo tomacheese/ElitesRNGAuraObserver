@@ -24,11 +24,11 @@ In the folder where you pasted the files, double-click `ElitesRNGAuraObserver.ex
 
 When you run it, the application will start in the task tray as shown below. To exit the application, right-click and select `Exit`.
 
-![Application icon in Windows task tray](/docs/assets/installation/located-taskbar.png)
+![Application icon in Windows task tray](/docs/assets/installation/located-tasktray.png)
 
 ## 4. Configure Settings on the Settings Screen
 
-After launching the application for the first time, configure the initial settings. Double-click the application icon in the taskbar or right-click and select `Settings` to open the settings screen.
+After launching the application for the first time, configure the initial settings. Double-click the application icon in the task tray or right-click and select `Settings` to open the settings screen.
 
 For details on each setting, see [Application Settings](configuration.md).
 
