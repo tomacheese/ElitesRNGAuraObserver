@@ -22,9 +22,9 @@ In this example, a folder named `ElitesRNGAuraObserver` was created in the user 
 
 In the folder where you pasted the files, double-click `ElitesRNGAuraObserver.exe` to run the application.
 
-When you run it, the application will start in the taskbar as shown below. To exit the application, right-click and select `Exit`.
+When you run it, the application will start in the task tray as shown below. To exit the application, right-click and select `Exit`.
 
-![Application icon in Windows taskbar](/docs/assets/installation/located-taskbar.png)
+![Application icon in Windows task tray](/docs/assets/installation/located-taskbar.png)
 
 ## 4. Configure Settings on the Settings Screen
 

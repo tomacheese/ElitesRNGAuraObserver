@@ -16,7 +16,7 @@ Click `Integrations` and then click `Create Webhook`.
 
 ## 3. Configure the Webhook and Get the URL
 
-A new webhook called `Captain Hook` will be created. Click it and configure as follows:
+A new webhook will be created. Click the newly created webhook and configure it as follows:
 
 - Set any image as the icon
 - Set any name, such as `Elite's RNG Aura Observer`, in the `Name` field

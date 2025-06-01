@@ -4,7 +4,7 @@
 
 ![設定画面のスクリーンショット](/docs/assets/installation/settings-ui.png)
 
-設定画面を開くには、タスクバーでアプリケーションアイコンをダブルクリックするか、右クリックして `Settings` をクリックしてください。
+設定画面を開くには、タスクトレイでアプリケーションアイコンをダブルクリックするか、右クリックして `Settings` をクリックしてください。
 
 ## 監視しているログファイルパス
 
@@ -20,7 +20,7 @@ Discord Webhook URL の取得方法については、以下のページをご覧
 
 ## Windows トースト通知での通知を行うかどうか
 
-`Application Settings` の `Enable Toast notification` チェックボックスにチェックをいれることで、Aura 獲得時に Windows トースト通知での通知を行うようになります。
+`Application Settings` の `Enable Toast notification` チェックボックスにチェックが入れられている場合、Aura 獲得時に Windows トースト通知での通知を行うようになります。
 
 Windows トースト通知は、以下のように通知されます。
 

@@ -25,10 +25,10 @@
 
 さきほどペーストしたフォルダで、`ElitesRNGAuraObserver.exe` をダブルクリックして実行してください。
 
-実行すると、以下のようにタスクバーで常駐を開始します。
+実行すると、以下のようにタスクトレイで常駐を開始します。
 アプリケーションを終了したい場合は、右クリックし `Exit` をクリックしてください。
 
-![Windows タスクバーに常駐したアプリケーションアイコン](/docs/assets/installation/located-taskbar.png)
+![Windows タスクトレイに常駐したアプリケーションアイコン](/docs/assets/installation/located-taskbar.png)
 
 ## 4. 設定画面で設定
 

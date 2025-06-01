@@ -4,7 +4,7 @@ This page explains the configurable items in Elite's RNG Aura Observer and what 
 
 ![Settings screen of Elite's RNG Aura Observer](/docs/assets/installation/settings-ui.png)
 
-To open the settings screen, double-click the application icon in the taskbar or right-click and select `Settings`.
+To open the settings screen, double-click the application icon in the task tray or right-click and select `Settings`.
 
 ## Monitored Log File Path
 
@@ -20,7 +20,7 @@ For how to obtain the Discord Webhook URL, please see the following page:
 
 ## Enable Windows Toast Notification
 
-By checking the `Enable Toast notification` checkbox in `Application Settings`, you will receive a Windows toast notification when an Aura is obtained.
+When the `Enable Toast Notification` checkbox in `Application Settings` is checked, Windows will display a toast notification upon acquiring Aura.
 
 The Windows toast notification will be displayed as shown below:
 
