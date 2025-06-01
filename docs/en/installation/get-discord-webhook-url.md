@@ -1,4 +1,4 @@
-# How to Get a Discord Webhook URL
+# How to get a Discord Webhook URL
 
 This page explains how to obtain a Discord Webhook URL.
 

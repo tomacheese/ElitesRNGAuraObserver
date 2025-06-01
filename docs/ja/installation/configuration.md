@@ -18,6 +18,10 @@ Discord Webhook URL の取得方法については、以下のページをご覧
 
 - [Discord Webhook URL の取得方法](get-discord-webhook-url.md)
 
+`Send test message` ボタンをクリックすることで、設定された Discord Webhook にて以下のようなメッセージが送信されます。
+
+![Discord Webhook でのテストメッセージ例](/docs/assets/installation/discord-test-message.png)
+
 ## Windows トースト通知での通知を行うかどうか
 
 `Application Settings` の `Enable Toast notification` チェックボックスにチェックが入れられている場合、Aura 獲得時に Windows トースト通知での通知を行うようになります。

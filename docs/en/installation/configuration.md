@@ -18,6 +18,10 @@ For how to obtain the Discord Webhook URL, please see the following page:
 
 - [How to get Discord Webhook URL](get-discord-webhook-url.md)
 
+Clicking the `Send test message` button will send the following message to the configured Discord Webhook.
+
+![Example of a test message with Discord Webhook](/docs/assets/installation/discord-test-message.png)
+
 ## Enable Windows Toast Notification
 
 When the `Enable Toast Notification` checkbox in `Application Settings` is checked, Windows will display a toast notification upon acquiring Aura.
