@@ -10,6 +10,7 @@ When an aura is obtained in [Elite's RNG Land](https://vrchat.com/home/world/wrl
 
 - Monitors VRChat log files and notifies you when logs indicating Aura acquisition are detected.
 - Instantly lets you know when you have acquired Aura, even when you are AFK or away from your computer.
+- Notifications are limited to Auras with effects in Elite's RNG Land, allowing you to focus on important Auras.
 - Runs in the background in the task tray, so it doesn't get in the way.
 - Includes an automatic update tool. Updates are performed automatically without requiring user intervention.
 - Various settings can be configured in the settings window without the need to edit configuration files.
