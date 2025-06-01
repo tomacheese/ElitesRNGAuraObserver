@@ -23,24 +23,6 @@ internal class JsonData
     private readonly Aura.Aura[] _auras = [];
 
     /// <summary>
-    /// 最新のJSONデータを取得する非同期メソッド
-    /// </summary>
-    /// <returns>最新のJSONデータを取得するための非同期操作を表すタスク</returns>
-    public static async Task GetLatestJsonDataAsync()
-    {
-        var jsonUpdate = new JsonUpdateService(AppConstants.GitHubRepoOwner, AppConstants.GitHubRepoName);
-
-        try
-        {
-            await jsonUpdate.FetchMasterJsonAsync().ConfigureAwait(true);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error fetching latest JSON data: {ex.Message}");
-        }
-    }
-
-    /// <summary>
     /// JSONファイルの内容を取得する
     /// </summary>
     /// <returns>JSONファイルの内容</returns>
