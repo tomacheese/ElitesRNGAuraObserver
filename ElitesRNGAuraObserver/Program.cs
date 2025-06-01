@@ -4,7 +4,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using ElitesRNGAuraObserver.Core;
 using ElitesRNGAuraObserver.Core.Config;
-using ElitesRNGAuraObserver.Core.Json;
 using ElitesRNGAuraObserver.Core.Updater;
 using ElitesRNGAuraObserver.UI.TrayIcon;
 using Microsoft.Toolkit.Uwp.Notifications;
@@ -134,7 +133,6 @@ internal static partial class Program
         {
             Task.Run(async () =>
             {
-                await JsonData.GetLatestJsonDataAsync().ConfigureAwait(false);
                 var existsUpdate = await UpdateChecker.CheckAsync().ConfigureAwait(false);
                 if (existsUpdate)
                 {
