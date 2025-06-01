@@ -75,4 +75,29 @@ internal static class UpdaterHelper
             entry.ExtractToFile(fullPath, overwrite: true);
         }
     }
+
+    /// <summary>
+    /// Digestを検証する
+    /// </summary>
+    /// <param name="filePath">検証するファイルのパス</param>
+    /// <param name="expectedDigest">期待されるダイジェスト</param>
+    /// <returns>検証に成功した場合はtrue、失敗した場合はfalse</returns>
+    public static bool VerifyDigest(string filePath, string expectedDigest)
+    {
+        if (string.IsNullOrEmpty(expectedDigest))
+        {
+            throw new ArgumentException("Expected digest cannot be null or empty.", nameof(expectedDigest));
+        }
+
+        if (!File.Exists(filePath))
+        {
+            throw new FileNotFoundException($"File not found: {filePath}");
+        }
+
+        using var sha256 = System.Security.Cryptography.SHA256.Create();
+        using FileStream stream = File.OpenRead(filePath);
+        var hash = sha256.ComputeHash(stream);
+        var actualDigest = $"sha256:{Convert.ToHexStringLower(hash)}";
+        return string.Equals(actualDigest, expectedDigest, StringComparison.OrdinalIgnoreCase);
+    }
 }

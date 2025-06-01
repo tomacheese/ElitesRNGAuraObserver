@@ -39,11 +39,15 @@ internal class GitHubReleaseService : IDisposable
         var json = await _http.GetStringAsync(url).ConfigureAwait(false);
         JObject obj = JsonConvert.DeserializeObject<JObject>(json)!;
         var tagName = obj["tag_name"]!.ToString();
-        var assetUrl = obj["assets"]!
-            .FirstOrDefault(x => x["name"]!.ToString() == assetName)?["browser_download_url"]?.ToString();
-        return string.IsNullOrEmpty(assetUrl)
-            ? throw new InvalidOperationException($"Failed to find asset: {assetName}")
-            : new ReleaseInfo(tagName, assetUrl);
+        JToken? asset = obj["assets"]!
+            .FirstOrDefault(x => x["name"]!.ToString() == assetName) ?? throw new InvalidOperationException($"Asset '{assetName}' not found in the latest release.");
+
+        var assetUrl = asset["browser_download_url"]?.ToString();
+        var assetDigest = asset["digest"]?.ToString();
+
+        return string.IsNullOrEmpty(assetUrl) || string.IsNullOrEmpty(assetDigest)
+            ? throw new InvalidOperationException($"Asset '{assetName}' does not have a valid URL or digest.")
+            : new ReleaseInfo(tagName, assetUrl, assetDigest);
     }
 
     /// <summary>

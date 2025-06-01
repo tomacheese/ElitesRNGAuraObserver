@@ -84,6 +84,13 @@ internal class Program
             var userAgent = $"{repoOwner} {repoName} ({AppConstants.AppVersionString})";
             var zipPath = await gh.DownloadWithProgressAsync(latest.AssetUrl).ConfigureAwait(false);
 
+            // ダウンロードしたファイルのチェックサム検証
+            Console.WriteLine("Verifying checksum...");
+            if (!UpdaterHelper.VerifyDigest(zipPath, latest.AssetDigest))
+            {
+                throw new InvalidOperationException("Checksum verification failed. The downloaded file may be corrupted.");
+            }
+
             // アプリ停止
             Console.WriteLine("Stopping running processes...");
             UpdaterHelper.KillProcesses(appName);
