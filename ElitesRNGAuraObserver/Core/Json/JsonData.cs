@@ -1,4 +1,5 @@
 using System.Text;
+using ElitesRNGAuraObserver.Core.Config;
 using ElitesRNGAuraObserver.Properties;
 using Newtonsoft.Json;
 
@@ -27,7 +28,28 @@ internal class JsonData
     /// <returns>JSONファイルの内容</returns>
     public static JsonData GetJsonData()
     {
-        var jsonContent = Encoding.UTF8.GetString(Resources.Auras);
+        ConfigData configData = AppConfig.Instance;
+        // Jsonファイルの保存先
+        var jsonFilePath = Path.Combine(configData.AurasJsonDir, "Auras.json");
+        string? jsonContent;
+
+        // 1. 保存先JSONファイルが存在する場合はそれを読む
+        if (File.Exists(jsonFilePath))
+        {
+            try
+            {
+                jsonContent = File.ReadAllText(jsonFilePath);
+                JsonData? jsonData = JsonConvert.DeserializeObject<JsonData>(jsonContent) ?? new JsonData();
+                return jsonData;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Could not deserialize local JSON data: {ex.Message}");
+            }
+        }
+
+        // 保存先JSONファイルが存在しない場合、またはデシリアライズに失敗した場合はResourcesから読み込む
+        jsonContent = Encoding.UTF8.GetString(Resources.Auras);
         JsonData? resourceJsonData = JsonConvert.DeserializeObject<JsonData>(jsonContent) ?? new JsonData();
         return resourceJsonData;
     }
