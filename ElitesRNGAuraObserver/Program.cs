@@ -21,6 +21,11 @@ internal static partial class Program
     private static AuraObserverController? _controller;
 
     /// <summary>
+    /// シングルインスタンス制御用のMutex
+    /// </summary>
+    private static Mutex? _singleInstanceMutex;
+
+    /// <summary>
     /// Win32 APIのAllocConsole関数をインポートして、デバッグコンソールを割り当てる
     /// </summary>
     /// <returns>割り当てに成功した場合はtrue、それ以外はfalse</returns>
@@ -35,6 +40,12 @@ internal static partial class Program
     [STAThread]
     public static void Main()
     {
+        // シングルインスタンス制御を実行
+        if (!EnsureSingleInstance())
+        {
+            return;
+        }
+
         if (ToastNotificationManagerCompat.WasCurrentProcessToastActivated())
         {
             // トースト通知から起動された場合、なにもしない
@@ -66,9 +77,64 @@ internal static partial class Program
             Console.WriteLine("Program.ApplicationExit");
             _controller?.Dispose();
             ToastNotificationManagerCompat.Uninstall();
+            ReleaseSingleInstance();
         };
 
         Application.Run(new TrayIcon());
+    }
+
+    /// <summary>
+    /// シングルインスタンス制御を確認するメソッド
+    /// </summary>
+    /// <returns>既に他のインスタンスが起動している場合はfalse、そうでなければtrue</returns>
+    private static bool EnsureSingleInstance()
+    {
+        // 実行ファイルのフルパスを取得（single-file app対応）
+        var exePath = Environment.ProcessPath ?? AppContext.BaseDirectory;
+
+        // パスをBase64エンコードしてMutex名として使用（特殊文字を回避）
+        var mutexName = $"Global\\ElitesRNGAuraObserver_{Convert.ToBase64String(Encoding.UTF8.GetBytes(exePath)).Replace('/', '_').Replace('+', '-')}";
+
+        try
+        {
+            _singleInstanceMutex = new Mutex(true, mutexName, out var createdNew);
+
+            if (!createdNew)
+            {
+                // 既に他のインスタンスが実行中
+                MessageBox.Show(
+                    "ElitesRNGAuraObserver is already running.\nOnly one instance can be run at the same time.",
+                    "Application Already Running",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return false;
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to create single instance mutex: {ex.Message}");
+            // Mutex作成に失敗した場合でもアプリケーションは起動させる
+            return true;
+        }
+    }
+
+    /// <summary>
+    /// シングルインスタンス制御用のMutexを解放するメソッド
+    /// </summary>
+    private static void ReleaseSingleInstance()
+    {
+        try
+        {
+            _singleInstanceMutex?.ReleaseMutex();
+            _singleInstanceMutex?.Dispose();
+            _singleInstanceMutex = null;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to release single instance mutex: {ex.Message}");
+        }
     }
 
     /// <summary>
