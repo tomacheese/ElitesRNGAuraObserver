@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using System.Globalization;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using ElitesRNGAuraObserver.Core;
@@ -90,16 +89,16 @@ internal static partial class Program
     /// <returns>既に他のインスタンスが起動している場合はfalse、そうでなければtrue</returns>
     private static bool EnsureSingleInstance()
     {
-        // 実行ファイルのフルパスを取得
-        var exePath = Environment.ProcessPath ?? Assembly.GetExecutingAssembly().Location;
-        
+        // 実行ファイルのフルパスを取得（single-file app対応）
+        var exePath = Environment.ProcessPath ?? AppContext.BaseDirectory;
+
         // パスをBase64エンコードしてMutex名として使用（特殊文字を回避）
         var mutexName = $"Global\\ElitesRNGAuraObserver_{Convert.ToBase64String(Encoding.UTF8.GetBytes(exePath)).Replace('/', '_').Replace('+', '-')}";
-        
+
         try
         {
-            _singleInstanceMutex = new Mutex(true, mutexName, out bool createdNew);
-            
+            _singleInstanceMutex = new Mutex(true, mutexName, out var createdNew);
+
             if (!createdNew)
             {
                 // 既に他のインスタンスが実行中
@@ -110,7 +109,7 @@ internal static partial class Program
                     MessageBoxIcon.Information);
                 return false;
             }
-            
+
             return true;
         }
         catch (Exception ex)
