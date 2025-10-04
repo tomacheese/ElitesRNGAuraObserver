@@ -1,5 +1,5 @@
 {
-  "Version": "2025.05.27",
+  "Version": "2025.10.04",
   "Auras": [
     {
       "ID": 0,
@@ -441,6 +441,244 @@
       "Rarity": 4404404,
       "Tier": 1,
       "SubText": ""
+    },
+    {
+      "ID": 63,
+      "Name": "Impeached",
+      "Rarity": 20000000,
+      "Tier": 1,
+      "SubText": ""
+    },
+    {
+      "ID": 64,
+      "Name": "Guidance",
+      "Rarity": 3210000,
+      "Tier": 1,
+      "SubText": ""
+    },
+    {
+      "ID": 65,
+      "Name": "Psychosis",
+      "Rarity": 880000,
+      "Tier": 2,
+      "SubText": ""
+    },
+    {
+      "ID": 66,
+      "Name": "Zenith",
+      "Rarity": 78900000,
+      "Tier": 1,
+      "SubText": ""
+    },
+    {
+      "ID": 67,
+      "Name": "Crimson",
+      "Rarity": 20,
+      "Tier": 5,
+      "SubText": ""
+    },
+    {
+      "ID": 68,
+      "Name": "Auburn",
+      "Rarity": 65,
+      "Tier": 5,
+      "SubText": ""
+    },
+    {
+      "ID": 69,
+      "Name": "Sunny",
+      "Rarity": 135,
+      "Tier": 5,
+      "SubText": ""
+    },
+    {
+      "ID": 70,
+      "Name": "Jade",
+      "Rarity": 240,
+      "Tier": 5,
+      "SubText": ""
+    },
+    {
+      "ID": 71,
+      "Name": "Azure",
+      "Rarity": 350,
+      "Tier": 5,
+      "SubText": ""
+    },
+    {
+      "ID": 72,
+      "Name": "Cobalt",
+      "Rarity": 475,
+      "Tier": 5,
+      "SubText": ""
+    },
+    {
+      "ID": 73,
+      "Name": "Lavender",
+      "Rarity": 650,
+      "Tier": 5,
+      "SubText": ""
+    },
+    {
+      "ID": 74,
+      "Name": "Ember",
+      "Rarity": 1350,
+      "Tier": 4,
+      "SubText": ""
+    },
+    {
+      "ID": 75,
+      "Name": "Aquatic",
+      "Rarity": 2800,
+      "Tier": 4,
+      "SubText": ""
+    },
+    {
+      "ID": 76,
+      "Name": "Poison",
+      "Rarity": 3700,
+      "Tier": 4,
+      "SubText": ""
+    },
+    {
+      "ID": 77,
+      "Name": "Shadow",
+      "Rarity": 5000,
+      "Tier": 4,
+      "SubText": ""
+    },
+    {
+      "ID": 78,
+      "Name": "Frozen",
+      "Rarity": 7500,
+      "Tier": 4,
+      "SubText": ""
+    },
+    {
+      "ID": 79,
+      "Name": "Electric",
+      "Rarity": 9000,
+      "Tier": 4,
+      "SubText": ""
+    },
+    {
+      "ID": 80,
+      "Name": "Desire",
+      "Rarity": 10000,
+      "Tier": 3,
+      "SubText": ""
+    },
+    {
+      "ID": 81,
+      "Name": "Gluttony",
+      "Rarity": 25000,
+      "Tier": 3,
+      "SubText": ""
+    },
+    {
+      "ID": 82,
+      "Name": "Greed",
+      "Rarity": 37500,
+      "Tier": 3,
+      "SubText": ""
+    },
+    {
+      "ID": 83,
+      "Name": "Sloth",
+      "Rarity": 50000,
+      "Tier": 3,
+      "SubText": ""
+    },
+    {
+      "ID": 84,
+      "Name": "Wrath",
+      "Rarity": 65000,
+      "Tier": 3,
+      "SubText": ""
+    },
+    {
+      "ID": 85,
+      "Name": "Envy",
+      "Rarity": 87500,
+      "Tier": 3,
+      "SubText": ""
+    },
+    {
+      "ID": 86,
+      "Name": "Insolence",
+      "Rarity": 99000,
+      "Tier": 3,
+      "SubText": ""
+    },
+    {
+      "ID": 87,
+      "Name": "Identity",
+      "Rarity": 16000000,
+      "Tier": 1,
+      "SubText": ""
+    },
+    {
+      "ID": 88,
+      "Name": "Betelgeuse",
+      "Rarity": 25000000,
+      "Tier": 1,
+      "SubText": ""
+    },
+    {
+      "ID": 89,
+      "Name": "Universe",
+      "Rarity": 2000000,
+      "Tier": 1,
+      "SubText": ""
+    },
+    {
+      "ID": 90,
+      "Name": "Polaris",
+      "Rarity": 85000,
+      "Tier": 3,
+      "SubText": ""
+    },
+    {
+      "ID": 91,
+      "Name": "Paranormal",
+      "Rarity": 42000,
+      "Tier": 3,
+      "SubText": "HALOWEEN EXCLUSIVE"
+    },
+    {
+      "ID": 92,
+      "Name": "Pumpkinator",
+      "Rarity": 4000000,
+      "Tier": 1,
+      "SubText": "HALOWEEN EXCLUSIVE"
+    },
+    {
+      "ID": 93,
+      "Name": "Cryptkeeper",
+      "Rarity": 7500000,
+      "Tier": 1,
+      "SubText": "HALOWEEN EXCLUSIVE"
+    },
+    {
+      "ID": 94,
+      "Name": "Bloodmoon",
+      "Rarity": 31000000,
+      "Tier": 1,
+      "SubText": "HALOWEEN EXCLUSIVE"
+    },
+    {
+      "ID": 95,
+      "Name": "Ascended",
+      "Rarity": 0,
+      "Tier": 0,
+      "SubText": "EXCLUSIVE"
+    },
+    {
+      "ID": 96,
+      "Name": "Corruption",
+      "Rarity": 0,
+      "Tier": 0,
+      "SubText": "EXCLUSIVE"
     }
   ]
 }
