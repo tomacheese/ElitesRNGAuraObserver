@@ -46,7 +46,7 @@
     {
       "ID": 6,
       "Name": "Unique",
-      "Rarity": 32,
+      "Rarity": 512,
       "Tier": 5,
       "SubText": ""
     },
@@ -60,8 +60,8 @@
     {
       "ID": 8,
       "Name": "Epic",
-      "Rarity": 64,
-      "Tier": 5,
+      "Rarity": 1024,
+      "Tier": 4,
       "SubText": ""
     },
     {
@@ -74,8 +74,8 @@
     {
       "ID": 10,
       "Name": "Legendary",
-      "Rarity": 128,
-      "Tier": 5,
+      "Rarity": 2048,
+      "Tier": 4,
       "SubText": ""
     },
     {
@@ -88,8 +88,8 @@
     {
       "ID": 12,
       "Name": "Extraordinary",
-      "Rarity": 256,
-      "Tier": 5,
+      "Rarity": 4096,
+      "Tier": 4,
       "SubText": ""
     },
     {
@@ -102,8 +102,8 @@
     {
       "ID": 14,
       "Name": "Mythical",
-      "Rarity": 512,
-      "Tier": 5,
+      "Rarity": 8192,
+      "Tier": 4,
       "SubText": ""
     },
     {
@@ -116,99 +116,99 @@
     {
       "ID": 16,
       "Name": "Platinum",
-      "Rarity": 750,
-      "Tier": 5,
+      "Rarity": 8000,
+      "Tier": 4,
       "SubText": ""
     },
     {
       "ID": 17,
       "Name": "Exotic",
-      "Rarity": 1024,
-      "Tier": 4,
-      "SubText": ""
-    },
-    {
-      "ID": 18,
-      "Name": "Diamond",
-      "Rarity": 1500,
-      "Tier": 4,
-      "SubText": ""
-    },
-    {
-      "ID": 19,
-      "Name": "Celestial",
-      "Rarity": 2048,
-      "Tier": 4,
-      "SubText": ""
-    },
-    {
-      "ID": 20,
-      "Name": "Emerald",
-      "Rarity": 3500,
-      "Tier": 4,
-      "SubText": ""
-    },
-    {
-      "ID": 21,
-      "Name": "Divine",
-      "Rarity": 4096,
-      "Tier": 4,
-      "SubText": ""
-    },
-    {
-      "ID": 22,
-      "Name": "Ruby",
-      "Rarity": 6500,
-      "Tier": 4,
-      "SubText": ""
-    },
-    {
-      "ID": 23,
-      "Name": "Radiant",
-      "Rarity": 8192,
-      "Tier": 4,
-      "SubText": ""
-    },
-    {
-      "ID": 24,
-      "Name": "Alpha",
-      "Rarity": 10000,
-      "Tier": 3,
-      "SubText": ""
-    },
-    {
-      "ID": 25,
-      "Name": "Transcendent",
-      "Rarity": 16384,
-      "Tier": 3,
-      "SubText": ""
-    },
-    {
-      "ID": 26,
-      "Name": "Beta",
       "Rarity": 20000,
       "Tier": 3,
       "SubText": ""
     },
     {
-      "ID": 27,
-      "Name": "Gamma",
-      "Rarity": 30000,
+      "ID": 18,
+      "Name": "Diamond",
+      "Rarity": 15000,
       "Tier": 3,
       "SubText": ""
     },
     {
-      "ID": 28,
-      "Name": "Delta",
+      "ID": 19,
+      "Name": "Celestial",
       "Rarity": 40000,
       "Tier": 3,
       "SubText": ""
     },
     {
+      "ID": 20,
+      "Name": "Emerald",
+      "Rarity": 35000,
+      "Tier": 3,
+      "SubText": ""
+    },
+    {
+      "ID": 21,
+      "Name": "Divine",
+      "Rarity": 77777,
+      "Tier": 3,
+      "SubText": ""
+    },
+    {
+      "ID": 22,
+      "Name": "Ruby",
+      "Rarity": 70000,
+      "Tier": 3,
+      "SubText": ""
+    },
+    {
+      "ID": 23,
+      "Name": "Radiant",
+      "Rarity": 95000,
+      "Tier": 3,
+      "SubText": ""
+    },
+    {
+      "ID": 24,
+      "Name": "Alpha",
+      "Rarity": 100000,
+      "Tier": 2,
+      "SubText": ""
+    },
+    {
+      "ID": 25,
+      "Name": "Luminescent",
+      "Rarity": 180000,
+      "Tier": 2,
+      "SubText": ""
+    },
+    {
+      "ID": 26,
+      "Name": "Beta",
+      "Rarity": 200000,
+      "Tier": 2,
+      "SubText": ""
+    },
+    {
+      "ID": 27,
+      "Name": "Gamma",
+      "Rarity": 300000,
+      "Tier": 2,
+      "SubText": ""
+    },
+    {
+      "ID": 28,
+      "Name": "Delta",
+      "Rarity": 400000,
+      "Tier": 2,
+      "SubText": ""
+    },
+    {
       "ID": 29,
       "Name": "Epsilon",
-      "Rarity": 50000,
-      "Tier": 3,
+      "Rarity": 500000,
+      "Tier": 2,
       "SubText": ""
     },
     {
@@ -221,42 +221,42 @@
     {
       "ID": 31,
       "Name": "Lambda",
-      "Rarity": 60000,
-      "Tier": 3,
+      "Rarity": 600000,
+      "Tier": 2,
       "SubText": ""
     },
     {
       "ID": 32,
       "Name": "Omicron",
-      "Rarity": 70000,
-      "Tier": 3,
+      "Rarity": 700000,
+      "Tier": 2,
       "SubText": ""
     },
     {
       "ID": 33,
       "Name": "Sigma",
-      "Rarity": 80000,
-      "Tier": 3,
+      "Rarity": 800000,
+      "Tier": 2,
       "SubText": ""
     },
     {
       "ID": 34,
       "Name": "Utopia",
-      "Rarity": 88000,
-      "Tier": 3,
+      "Rarity": 777000,
+      "Tier": 2,
       "SubText": ""
     },
     {
       "ID": 35,
       "Name": "Omega",
-      "Rarity": 90000,
-      "Tier": 3,
+      "Rarity": 900000,
+      "Tier": 2,
       "SubText": ""
     },
     {
       "ID": 36,
       "Name": "Reflective",
-      "Rarity": 100000,
+      "Rarity": 450000,
       "Tier": 2,
       "SubText": ""
     },
