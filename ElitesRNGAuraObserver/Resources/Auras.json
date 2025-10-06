@@ -1,5 +1,5 @@
 {
-  "Version": "2025.10.04",
+  "Version": "2025.10.06",
   "Auras": [
     {
       "ID": 0,
@@ -459,14 +459,14 @@
     {
       "ID": 65,
       "Name": "Psychosis",
-      "Rarity": 880000,
+      "Rarity": 550000,
       "Tier": 2,
       "SubText": ""
     },
     {
       "ID": 66,
       "Name": "Zenith",
-      "Rarity": 78900000,
+      "Rarity": 80000000,
       "Tier": 1,
       "SubText": ""
     },
@@ -648,21 +648,21 @@
     {
       "ID": 92,
       "Name": "Pumpkinator",
-      "Rarity": 4000000,
+      "Rarity": 31000000,
       "Tier": 1,
       "SubText": "HALLOWEEN EXCLUSIVE"
     },
     {
       "ID": 93,
       "Name": "Cryptkeeper",
-      "Rarity": 7500000,
+      "Rarity": 4000000,
       "Tier": 1,
       "SubText": "HALLOWEEN EXCLUSIVE"
     },
     {
       "ID": 94,
       "Name": "Bloodmoon",
-      "Rarity": 31000000,
+      "Rarity": 7500000,
       "Tier": 1,
       "SubText": "HALLOWEEN EXCLUSIVE"
     },
