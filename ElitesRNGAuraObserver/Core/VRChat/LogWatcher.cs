@@ -175,7 +175,15 @@ internal class LogWatcher(string logFileFilter) : IDisposable
     private static string? GetNewestLogFile(string logFileFilter)
     {
         ConfigData configData = AppConfig.Instance;
-        var files = Directory.GetFiles(configData.LogDir, logFileFilter);
-        return files.Length == 0 ? null : files.OrderByDescending(static f => File.GetLastWriteTime(f)).FirstOrDefault();
+        try
+        {
+            var files = Directory.GetFiles(configData.LogDir, logFileFilter);
+            return files.Length == 0 ? null : files.OrderByDescending(static f => File.GetLastWriteTime(f)).FirstOrDefault();
+        }
+        catch (Exception ex) when (ex is DirectoryNotFoundException or IOException or UnauthorizedAccessException)
+        {
+            Console.WriteLine($"Failed to enumerate log files in {configData.LogDir}: {ex.Message}");
+            return null;
+        }
     }
 }
