@@ -167,21 +167,43 @@ internal static partial class Program
     private static void CheckExistsLogDirectory()
     {
         ConfigData configData = AppConfig.Instance;
-        // ログディレクトリのパス対象が存在しない場合はメッセージを出してリセットする
+
         if (!Directory.Exists(configData.LogDir))
+        {
+            var isCustomLogDir = !string.Equals(
+                configData.LogDir,
+                AppConstants.VRChatLogDirectory,
+                StringComparison.OrdinalIgnoreCase);
+
+            if (isCustomLogDir)
+            {
+                MessageBox.Show(
+                    string.Join("\n", new List<string>()
+                    {
+                        "The log directory does not exist.",
+                        "Log directory settings return to default value.",
+                    }),
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                configData.LogDir = AppConstants.VRChatLogDirectory;
+                AppConfig.Save();
+            }
+        }
+
+        if (!Directory.Exists(AppConstants.VRChatLogDirectory))
         {
             MessageBox.Show(
                 string.Join("\n", new List<string>()
                 {
-                    "The log directory does not exist.",
-                    "Log directory settings return to default value.",
+                    "The VRChat log folder was not found in the LocalLow directory.",
+                    "Please make sure VRChat is installed and has been launched at least once.",
+                    $"Expected folder: {AppConstants.VRChatLogDirectory}",
                 }),
-                "Error",
+                "VRChat Folder Not Found",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-
-            configData.LogDir = AppConstants.VRChatLogDirectory;
-            AppConfig.Save();
         }
     }
 
