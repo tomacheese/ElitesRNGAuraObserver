@@ -181,7 +181,7 @@ internal static partial class Program
                     string.Join("\n", new List<string>()
                     {
                         "The log directory does not exist.",
-                        "Log directory settings return to default value.",
+                        "Log directory setting will return to the default value.",
                     }),
                     "Error",
                     MessageBoxButtons.OK,
