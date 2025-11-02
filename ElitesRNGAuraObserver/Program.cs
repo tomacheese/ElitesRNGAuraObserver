@@ -65,7 +65,10 @@ internal static partial class Program
         Console.WriteLine("Program.Main");
 
         RegistryManager.EnsureStartupRegistration();
-        CheckExistsLogDirectory();
+        if (!CheckExistsLogDirectory())
+        {
+            return;
+        }
 
         ApplicationConfiguration.Initialize();
         ConfigData configData = AppConfig.Instance;
@@ -164,7 +167,8 @@ internal static partial class Program
     /// <summary>
     /// ログディレクトリの存在を確認し、存在しない場合はデフォルト値にリセットするメソッド
     /// </summary>
-    private static void CheckExistsLogDirectory()
+    /// <returns>ログディレクトリが存在し、処理を継続できる場合はtrue。それ以外はfalse。</returns>
+    private static bool CheckExistsLogDirectory()
     {
         ConfigData configData = AppConfig.Instance;
 
@@ -204,7 +208,10 @@ internal static partial class Program
                 "VRChat Folder Not Found",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
+            return false;
         }
+
+        return true;
     }
 
     /// <summary>
