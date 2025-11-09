@@ -65,7 +65,10 @@ internal static partial class Program
         Console.WriteLine("Program.Main");
 
         RegistryManager.EnsureStartupRegistration();
-        CheckExistsLogDirectory();
+        if (!CheckExistsLogDirectory())
+        {
+            return;
+        }
 
         ApplicationConfiguration.Initialize();
         ConfigData configData = AppConfig.Instance;
@@ -164,25 +167,51 @@ internal static partial class Program
     /// <summary>
     /// ログディレクトリの存在を確認し、存在しない場合はデフォルト値にリセットするメソッド
     /// </summary>
-    private static void CheckExistsLogDirectory()
+    /// <returns>ログディレクトリが存在し、処理を継続できる場合はtrue。それ以外はfalse。</returns>
+    private static bool CheckExistsLogDirectory()
     {
         ConfigData configData = AppConfig.Instance;
-        // ログディレクトリのパス対象が存在しない場合はメッセージを出してリセットする
+
         if (!Directory.Exists(configData.LogDir))
+        {
+            var isCustomLogDir = !string.Equals(
+                configData.LogDir,
+                AppConstants.VRChatLogDirectory,
+                StringComparison.OrdinalIgnoreCase);
+
+            if (isCustomLogDir)
+            {
+                MessageBox.Show(
+                    string.Join("\n", new List<string>()
+                    {
+                        "The log directory does not exist.",
+                        "Log directory setting will return to the default value.",
+                    }),
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                configData.LogDir = AppConstants.VRChatLogDirectory;
+                AppConfig.Save();
+            }
+        }
+
+        if (!Directory.Exists(AppConstants.VRChatLogDirectory))
         {
             MessageBox.Show(
                 string.Join("\n", new List<string>()
                 {
-                    "The log directory does not exist.",
-                    "Log directory settings return to default value.",
+                    "The VRChat log folder was not found in the LocalLow directory.",
+                    "Please make sure VRChat is installed and has been launched at least once.",
+                    $"Expected folder: {AppConstants.VRChatLogDirectory}",
                 }),
-                "Error",
+                "VRChat Folder Not Found",
                 MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-
-            configData.LogDir = AppConstants.VRChatLogDirectory;
-            AppConfig.Save();
+                MessageBoxIcon.Error);
+            return false;
         }
+
+        return true;
     }
 
     /// <summary>
