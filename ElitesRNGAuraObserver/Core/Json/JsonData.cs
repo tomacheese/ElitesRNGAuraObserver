@@ -11,6 +11,11 @@ namespace ElitesRNGAuraObserver.Core.Json;
 /// </summary>
 internal class JsonData
 {
+    private static readonly JsonSerializerOptions _jsonOptions = new()
+    {
+        PropertyNameCaseInsensitive = true,
+    };
+
     /// <summary>
     /// JSONのバージョン情報
     /// </summary>
@@ -40,7 +45,7 @@ internal class JsonData
             try
             {
                 jsonContent = File.ReadAllText(jsonFilePath);
-                JsonData? jsonData = JsonSerializer.Deserialize<JsonData>(jsonContent) ?? new JsonData();
+                JsonData? jsonData = JsonSerializer.Deserialize<JsonData>(jsonContent, _jsonOptions) ?? new JsonData();
                 return jsonData;
             }
             catch (Exception ex)
@@ -51,7 +56,7 @@ internal class JsonData
 
         // 保存先JSONファイルが存在しない場合、またはデシリアライズに失敗した場合はResourcesから読み込む
         jsonContent = Encoding.UTF8.GetString(Resources.Auras);
-        JsonData? resourceJsonData = JsonSerializer.Deserialize<JsonData>(jsonContent) ?? new JsonData();
+        JsonData? resourceJsonData = JsonSerializer.Deserialize<JsonData>(jsonContent, _jsonOptions) ?? new JsonData();
         return resourceJsonData;
     }
 

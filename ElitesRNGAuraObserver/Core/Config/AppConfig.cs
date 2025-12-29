@@ -14,7 +14,11 @@ internal class AppConfig
     private static ConfigData _instance = new();
     private static readonly Lock _lock = new();
     private static bool _isLoaded = false;
-    private static readonly JsonSerializerOptions _jsonOptions = new() { WriteIndented = true };
+    private static readonly JsonSerializerOptions _jsonOptions = new()
+    {
+        WriteIndented = true,
+        PropertyNameCaseInsensitive = true,
+    };
 
     /// <summary>
     /// 設定が再読み込みされたときに発生するイベント
@@ -133,7 +137,7 @@ internal class AppConfig
         }
 
         var json = File.ReadAllText(configFilePath);
-        return JsonSerializer.Deserialize<ConfigData>(json)
+        return JsonSerializer.Deserialize<ConfigData>(json, _jsonOptions)
                ?? new ConfigData();
     }
 }

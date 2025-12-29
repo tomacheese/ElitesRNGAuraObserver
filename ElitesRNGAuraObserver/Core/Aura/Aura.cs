@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using ElitesRNGAuraObserver.Core.Json;
 
 namespace ElitesRNGAuraObserver.Core.Aura;
@@ -11,18 +12,21 @@ internal record Aura
     /// Aura の ID
     /// </summary>
     /// <example>60</example>
+    [JsonPropertyName("ID")]
     public int Id { get; init; }
 
     /// <summary>
     /// Aura の名前
     /// </summary>
     /// <example>Celebration</example>
+    [JsonPropertyName("Name")]
     public string? Name { get; init; }
 
     /// <summary>
     /// オーラの当選確率
     /// </summary>
     /// <example>1000000</example>
+    [JsonPropertyName("Rarity")]
     public int Rarity { get; init; }
 
     /// <summary>
@@ -39,12 +43,14 @@ internal record Aura
     /// SPECIAL枠のAura(特殊な入手条件のAuraのみ)はTier:0
     /// </remarks>
     /// <example>4</example>
+    [JsonPropertyName("Tier")]
     public int Tier { get; init; }
 
     /// <summary>
     /// オーラのサブテキスト
     /// </summary>
     /// <example>VALENTINE’S EXCLUSIVE</example>
+    [JsonPropertyName("SubText")]
     public string SubText { get; init; } = string.Empty;
 
     /// <summary>
