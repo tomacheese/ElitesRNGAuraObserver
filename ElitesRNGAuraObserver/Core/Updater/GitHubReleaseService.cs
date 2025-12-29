@@ -1,4 +1,3 @@
-using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace ElitesRNGAuraObserver.Core.Updater;
@@ -36,7 +35,7 @@ internal class GitHubReleaseService : IDisposable
     {
         var url = new Uri($"https://api.github.com/repos/{_owner}/{_repo}/releases/latest");
         var json = await _http.GetStringAsync(url).ConfigureAwait(false);
-        JsonNode? obj = JsonNode.Parse(json);
+        var obj = JsonNode.Parse(json);
         var tagName = obj?["tag_name"]?.ToString() ?? throw new InvalidOperationException("Failed to parse tag_name");
         var assetUrl = obj?["assets"]?.AsArray()
             .FirstOrDefault(x => x?["name"]?.ToString() == assetName)?["browser_download_url"]?.ToString();
