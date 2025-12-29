@@ -1,6 +1,5 @@
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using ElitesRNGAuraObserver.Core.Config;
 using ElitesRNGAuraObserver.Properties;
 
@@ -19,13 +18,11 @@ internal class JsonData
     /// <summary>
     /// JSONのバージョン情報
     /// </summary>
-    [JsonPropertyName("Version")]
     private readonly string _version = string.Empty;
 
     /// <summary>
     /// Auraの一覧
     /// </summary>
-    [JsonPropertyName("Auras")]
     private readonly Aura.Aura[] _auras = [];
 
     /// <summary>

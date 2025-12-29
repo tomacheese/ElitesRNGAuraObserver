@@ -36,10 +36,11 @@ internal class GitHubReleaseService : IDisposable
         var url = new Uri($"https://api.github.com/repos/{_owner}/{_repo}/releases/latest");
         Console.WriteLine($"GET {url}");
         var json = await _http.GetStringAsync(url).ConfigureAwait(false);
-        var obj = JsonNode.Parse(json);
-        var tagName = obj?["tag_name"]?.ToString() ?? throw new InvalidOperationException("Failed to parse tag_name");
-        JsonNode? asset = obj?["assets"]?.AsArray()
-            .FirstOrDefault(x => x?["name"]?.ToString() == assetName) ?? throw new InvalidOperationException($"Asset '{assetName}' not found in the latest release.");
+        JsonNode? obj = JsonNode.Parse(json) ?? throw new InvalidOperationException("Failed to parse GitHub release JSON.");
+        var tagName = obj["tag_name"]?.ToString() ?? throw new InvalidOperationException("Failed to parse tag_name");
+        JsonArray? assets = obj["assets"]?.AsArray() ?? throw new InvalidOperationException("Failed to parse assets from the latest release.");
+        JsonNode? asset = assets.FirstOrDefault(x => x?["name"]?.ToString() == assetName)
+            ?? throw new InvalidOperationException($"Asset '{assetName}' not found in the latest release.");
 
         var assetUrl = asset["browser_download_url"]?.ToString();
         var assetDigest = asset["digest"]?.ToString();
