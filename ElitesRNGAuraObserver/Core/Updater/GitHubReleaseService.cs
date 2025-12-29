@@ -38,7 +38,7 @@ internal class GitHubReleaseService : IDisposable
         var json = await _http.GetStringAsync(url).ConfigureAwait(false);
         JsonNode? obj = JsonNode.Parse(json);
         var tagName = obj?["tag_name"]?.ToString() ?? throw new InvalidOperationException("Failed to parse tag_name");
-        var assetUrl = obj["assets"]?.AsArray()
+        var assetUrl = obj?["assets"]?.AsArray()
             .FirstOrDefault(x => x?["name"]?.ToString() == assetName)?["browser_download_url"]?.ToString();
         return string.IsNullOrEmpty(assetUrl)
             ? throw new InvalidOperationException($"Failed to find asset: {assetName}")
