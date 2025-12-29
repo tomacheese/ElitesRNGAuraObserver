@@ -1,7 +1,8 @@
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using ElitesRNGAuraObserver.Core.Config;
 using ElitesRNGAuraObserver.Properties;
-using Newtonsoft.Json;
 
 namespace ElitesRNGAuraObserver.Core.Json;
 
@@ -13,13 +14,13 @@ internal class JsonData
     /// <summary>
     /// JSONのバージョン情報
     /// </summary>
-    [JsonProperty("Version")]
+    [JsonPropertyName("Version")]
     private readonly string _version = string.Empty;
 
     /// <summary>
     /// Auraの一覧
     /// </summary>
-    [JsonProperty("Auras")]
+    [JsonPropertyName("Auras")]
     private readonly Aura.Aura[] _auras = [];
 
     /// <summary>
@@ -39,7 +40,7 @@ internal class JsonData
             try
             {
                 jsonContent = File.ReadAllText(jsonFilePath);
-                JsonData? jsonData = JsonConvert.DeserializeObject<JsonData>(jsonContent) ?? new JsonData();
+                JsonData? jsonData = JsonSerializer.Deserialize<JsonData>(jsonContent) ?? new JsonData();
                 return jsonData;
             }
             catch (Exception ex)
@@ -50,7 +51,7 @@ internal class JsonData
 
         // 保存先JSONファイルが存在しない場合、またはデシリアライズに失敗した場合はResourcesから読み込む
         jsonContent = Encoding.UTF8.GetString(Resources.Auras);
-        JsonData? resourceJsonData = JsonConvert.DeserializeObject<JsonData>(jsonContent) ?? new JsonData();
+        JsonData? resourceJsonData = JsonSerializer.Deserialize<JsonData>(jsonContent) ?? new JsonData();
         return resourceJsonData;
     }
 
