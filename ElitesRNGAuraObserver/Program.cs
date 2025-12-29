@@ -207,7 +207,7 @@ internal static partial class Program
                 }),
                 "VRChat Folder Not Found",
                 MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
+                MessageBoxIcon.Error);
             return false;
         }
 
