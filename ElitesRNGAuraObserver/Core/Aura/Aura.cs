@@ -26,20 +26,13 @@ internal record Aura
     public int Rarity { get; init; }
 
     /// <summary>
-    /// オーラのティア
+    /// オーラのカテゴリ
     /// </summary>
     /// <remarks>
-    /// Rarityの高さによる区分け、ゲーム内の演出をもとに割り振っている。
-    ///
-    /// Rarity: ～ 999 Tier:5
-    /// Rarity: 1000 ～ 9999 Tier:4
-    /// Rarity: 10000 ～ 99999 Tier:3
-    /// Rarity: 100000 ～ 999999 Tier:2
-    /// Rarity: 1000000 ～ 9999999 Tier:1
-    /// SPECIAL枠のAura(特殊な入手条件のAuraのみ)はTier:0
+    /// JSONのカテゴリーには AuraCategory.AuraCategories に対応する数値が入る。
     /// </remarks>
-    /// <example>4</example>
-    public int Tier { get; init; }
+    /// <example>0</example>
+    public int Category { get; init; }
 
     /// <summary>
     /// オーラのサブテキスト
@@ -48,19 +41,24 @@ internal record Aura
     public string SubText { get; init; } = string.Empty;
 
     /// <summary>
+    /// Special枠のオーラかどうか
+    /// </summary>
+    public bool Special { get; init; } = false;
+
+    /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="id">Aura の ID</param>
     /// <param name="name">Aura の名前</param>
     /// <param name="rarity">オーラの当選確率</param>
-    /// <param name="tier">オーラのティア</param>
+    /// <param name="category">オーラのカテゴリ</param>
     /// <param name="subText">オーラのサブテキスト</param>
-    public Aura(int id, string? name = null, int rarity = 0, int tier = 0, string subText = "")
+    public Aura(int id, string? name = null, int rarity = 0, int category = 0, string subText = "")
     {
         Id = id;
         Name = name;
         Rarity = rarity;
-        Tier = tier;
+        Category = category;
         SubText = subText;
     }
 
