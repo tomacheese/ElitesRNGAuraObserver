@@ -29,7 +29,7 @@ internal record Aura
     /// オーラのカテゴリ
     /// </summary>
     /// <remarks>
-    /// JSONのカテゴリーには AuraCategory.AuraCategories に対応する数値が入る。
+    /// JSONのカテゴリーには対応する AuraCategory 列挙体の値が入る。
     /// </remarks>
     /// <example>0</example>
     public int Category { get; init; }
