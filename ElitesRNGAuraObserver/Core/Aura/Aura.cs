@@ -53,13 +53,15 @@ internal record Aura
     /// <param name="rarity">オーラの当選確率</param>
     /// <param name="category">オーラのカテゴリ</param>
     /// <param name="subText">オーラのサブテキスト</param>
-    public Aura(int id, string? name = null, int rarity = 0, int category = 0, string subText = "")
+    /// <param name="special">Special枠のオーラかどうか</param>
+    public Aura(int id, string? name = null, int rarity = 0, int category = 0, string subText = "", bool special = false)
     {
         Id = id;
         Name = name;
         Rarity = rarity;
         Category = category;
         SubText = subText;
+        Special = special;
     }
 
     /// <summary>
