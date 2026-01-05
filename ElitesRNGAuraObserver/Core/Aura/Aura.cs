@@ -29,7 +29,7 @@ internal record Aura
     /// オーラのカテゴリ
     /// </summary>
     /// <remarks>
-    /// JSONのカテゴリーには対応する AuraCategory 列挙体の値名（例: "Ordinary"）が入る。
+    /// JSONのカテゴリーには対応する AuraCategory 列挙体の値が入る。
     /// </remarks>
     /// <example>Ordinary</example>
     public AuraCategory Category { get; init; } = AuraCategory.Unknown;
