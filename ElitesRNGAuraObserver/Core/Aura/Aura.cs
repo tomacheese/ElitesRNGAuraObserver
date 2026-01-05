@@ -29,10 +29,10 @@ internal record Aura
     /// オーラのカテゴリ
     /// </summary>
     /// <remarks>
-    /// JSONのカテゴリーには対応する AuraCategory 列挙体の値が入る。
+    /// JSONのカテゴリーには対応する AuraCategory 列挙体の値名（例: "Ordinary"）が入る。
     /// </remarks>
-    /// <example>0</example>
-    public int Category { get; init; }
+    /// <example>Ordinary</example>
+    public AuraCategory Category { get; init; } = AuraCategory.Unknown;
 
     /// <summary>
     /// オーラのサブテキスト
@@ -49,12 +49,12 @@ internal record Aura
     /// コンストラクタ
     /// </summary>
     /// <param name="id">Aura の ID</param>
-    /// <param name="name">Aura の名前</param>
+    /// <param name="name">Aura の 名前</param>
     /// <param name="rarity">オーラの当選確率</param>
     /// <param name="category">オーラのカテゴリ</param>
     /// <param name="subText">オーラのサブテキスト</param>
     /// <param name="special">Special枠のオーラかどうか</param>
-    public Aura(int id, string? name = null, int rarity = 0, int category = 0, string subText = "", bool special = false)
+    public Aura(int id, string? name = null, int rarity = 0, AuraCategory category = AuraCategory.Unknown, string subText = "", bool special = false)
     {
         Id = id;
         Name = name;

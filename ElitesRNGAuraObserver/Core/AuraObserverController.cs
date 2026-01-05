@@ -73,7 +73,7 @@ internal class AuraObserverController(ConfigData configData) : IDisposable
         Console.WriteLine($"New Aura: {aura.Name} (#{aura.Id}) - {isFirstReading}");
 
         // 初回読み込み、または通常カテゴリのAuraは通知しない
-        if (isFirstReading || aura.Category == (int)AuraCategory.Ordinary)
+        if (isFirstReading || aura.Category == AuraCategory.Ordinary)
         {
             return;
         }
