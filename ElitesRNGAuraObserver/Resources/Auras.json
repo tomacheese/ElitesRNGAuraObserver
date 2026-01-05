@@ -1,684 +1,821 @@
 {
-  "Version": "2025.10.06",
+  "Version": "2026.01.04",
   "Auras": [
     {
       "ID": 0,
       "Name": "Common",
       "Rarity": 2,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 1,
       "Name": "Basic",
       "Rarity": 4,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 2,
       "Name": "Uncommon",
       "Rarity": 8,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 3,
       "Name": "Coal",
       "Rarity": 10,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 4,
       "Name": "Rare",
       "Rarity": 16,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 5,
       "Name": "Iron",
       "Rarity": 25,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 6,
       "Name": "Unique",
       "Rarity": 512,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 7,
       "Name": "Copper",
       "Rarity": 50,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 8,
       "Name": "Epic",
       "Rarity": 1024,
-      "Tier": 4,
+      "Category": 2,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 9,
       "Name": "Bronze",
       "Rarity": 100,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 10,
       "Name": "Legendary",
       "Rarity": 2048,
-      "Tier": 4,
+      "Category": 2,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 11,
       "Name": "Silver",
       "Rarity": 200,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 12,
       "Name": "Extraordinary",
       "Rarity": 4096,
-      "Tier": 4,
+      "Category": 2,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 13,
       "Name": "Gold",
       "Rarity": 450,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 14,
       "Name": "Mythical",
       "Rarity": 8192,
-      "Tier": 4,
+      "Category": 2,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 15,
       "Name": "Natural",
       "Rarity": 600,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 16,
       "Name": "Platinum",
       "Rarity": 8000,
-      "Tier": 4,
+      "Category": 2,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 17,
       "Name": "Exotic",
       "Rarity": 20000,
-      "Tier": 3,
+      "Category": 3,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 18,
       "Name": "Diamond",
       "Rarity": 15000,
-      "Tier": 3,
+      "Category": 3,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 19,
       "Name": "Celestial",
       "Rarity": 40000,
-      "Tier": 3,
+      "Category": 3,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 20,
       "Name": "Emerald",
       "Rarity": 35000,
-      "Tier": 3,
+      "Category": 3,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 21,
       "Name": "Divine",
       "Rarity": 77777,
-      "Tier": 3,
+      "Category": 3,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 22,
       "Name": "Ruby",
       "Rarity": 70000,
-      "Tier": 3,
+      "Category": 3,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 23,
       "Name": "Radiant",
       "Rarity": 95000,
-      "Tier": 3,
+      "Category": 3,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 24,
       "Name": "Alpha",
       "Rarity": 100000,
-      "Tier": 2,
+      "Category": 4,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 25,
       "Name": "Luminescent",
       "Rarity": 180000,
-      "Tier": 2,
+      "Category": 4,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 26,
       "Name": "Beta",
       "Rarity": 200000,
-      "Tier": 2,
+      "Category": 4,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 27,
       "Name": "Gamma",
       "Rarity": 300000,
-      "Tier": 2,
+      "Category": 4,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 28,
       "Name": "Delta",
       "Rarity": 400000,
-      "Tier": 2,
+      "Category": 4,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 29,
       "Name": "Epsilon",
       "Rarity": 500000,
-      "Tier": 2,
+      "Category": 5,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 30,
       "Name": "Tempest",
       "Rarity": 55000,
-      "Tier": 3,
+      "Category": 3,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 31,
       "Name": "Lambda",
       "Rarity": 600000,
-      "Tier": 2,
+      "Category": 5,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 32,
       "Name": "Omicron",
       "Rarity": 700000,
-      "Tier": 2,
+      "Category": 5,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 33,
       "Name": "Sigma",
       "Rarity": 800000,
-      "Tier": 2,
+      "Category": 5,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 34,
       "Name": "Utopia",
       "Rarity": 777000,
-      "Tier": 2,
+      "Category": 5,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 35,
       "Name": "Omega",
       "Rarity": 900000,
-      "Tier": 2,
+      "Category": 5,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 36,
       "Name": "Reflective",
       "Rarity": 450000,
-      "Tier": 2,
+      "Category": 5,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 37,
       "Name": "Nightfall",
       "Rarity": 240000,
-      "Tier": 2,
+      "Category": 4,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 38,
       "Name": "Solstice",
       "Rarity": 360000,
-      "Tier": 2,
+      "Category": 4,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 39,
       "Name": "Extravagant",
       "Rarity": 420000,
-      "Tier": 2,
+      "Category": 4,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 40,
       "Name": "Sugar Rush",
       "Rarity": 525000,
-      "Tier": 2,
+      "Category": 5,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 41,
       "Name": "Highroller",
       "Rarity": 600000,
-      "Tier": 2,
+      "Category": 5,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 42,
       "Name": "Resonance",
       "Rarity": 750000,
-      "Tier": 2,
+      "Category": 5,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 43,
       "Name": "Timekeeper",
       "Rarity": 870000,
-      "Tier": 2,
+      "Category": 5,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 44,
       "Name": "Euphoric",
       "Rarity": 925000,
-      "Tier": 2,
+      "Category": 5,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 45,
       "Name": "Event Horizon",
       "Rarity": 1000000,
-      "Tier": 1,
+      "Category": 6,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 46,
       "Name": "Stargazer",
       "Rarity": 0,
-      "Tier": 0,
+      "Category": 8,
+      "Special": true,
       "SubText": "UNOBTAINABLE"
     },
     {
       "ID": 47,
       "Name": "Initiate",
       "Rarity": 0,
-      "Tier": 0,
+      "Category": 8,
+      "Special": true,
       "SubText": "RELEASE EXCLUSIVE"
     },
     {
       "ID": 48,
       "Name": "Vanguard",
       "Rarity": 0,
-      "Tier": 0,
+      "Category": 8,
+      "Special": true,
       "SubText": "CONTRIBUTOR EXCLUSIVE"
     },
     {
       "ID": 49,
       "Name": "Voidborne",
       "Rarity": 0,
-      "Tier": 0,
+      "Category": 8,
+      "Special": true,
       "SubText": "INVESTOR OF THE REVOLUTION"
     },
     {
       "ID": 50,
       "Name": "Neptunian",
       "Rarity": 0,
-      "Tier": 0,
+      "Category": 8,
+      "Special": true,
       "SubText": "ELITEMENT’S MANIFESTATION"
     },
     {
       "ID": 51,
       "Name": "Cupid",
       "Rarity": 330000,
-      "Tier": 2,
+      "Category": 9,
+      "Special": true,
       "SubText": "VALENTINE’S EXCLUSIVE"
     },
     {
       "ID": 52,
       "Name": "Aurora",
       "Rarity": 7000,
-      "Tier": 4,
+      "Category": 2,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 53,
       "Name": "Moonflare",
       "Rarity": 1200000,
-      "Tier": 1,
+      "Category": 6,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 54,
       "Name": "Pixelation",
       "Rarity": 8388688,
-      "Tier": 1,
+      "Category": 6,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 55,
       "Name": "Iridescent",
       "Rarity": 32768,
-      "Tier": 3,
+      "Category": 3,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 56,
       "Name": "Omniscient",
       "Rarity": 65536,
-      "Tier": 3,
+      "Category": 3,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 57,
       "Name": "Elite",
       "Rarity": 1337,
-      "Tier": 4,
+      "Category": 2,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 58,
       "Name": "Albedo",
       "Rarity": 110000,
-      "Tier": 2,
+      "Category": 4,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 59,
       "Name": "Zero Kelvin",
       "Rarity": 273150,
-      "Tier": 2,
+      "Category": 4,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 60,
       "Name": "Celebration",
       "Rarity": 675000,
-      "Tier": 2,
+      "Category": 5,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 61,
       "Name": "Chronowarden",
       "Rarity": 12000000,
-      "Tier": 1,
+      "Category": 6,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 62,
       "Name": "Denied",
       "Rarity": 4404404,
-      "Tier": 1,
+      "Category": 6,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 63,
       "Name": "Impeached",
       "Rarity": 20000000,
-      "Tier": 1,
+      "Category": 6,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 64,
       "Name": "Guidance",
       "Rarity": 3210000,
-      "Tier": 1,
+      "Category": 6,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 65,
       "Name": "Psychosis",
       "Rarity": 550000,
-      "Tier": 2,
+      "Category": 5,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 66,
       "Name": "Zenith",
       "Rarity": 80000000,
-      "Tier": 1,
+      "Category": 7,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 67,
       "Name": "Crimson",
       "Rarity": 20,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 68,
       "Name": "Auburn",
       "Rarity": 65,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 69,
       "Name": "Sunny",
       "Rarity": 135,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 70,
       "Name": "Jade",
       "Rarity": 240,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 71,
       "Name": "Azure",
       "Rarity": 350,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 72,
       "Name": "Cobalt",
       "Rarity": 475,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 73,
       "Name": "Lavender",
       "Rarity": 650,
-      "Tier": 5,
+      "Category": 1,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 74,
       "Name": "Ember",
       "Rarity": 1350,
-      "Tier": 4,
+      "Category": 2,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 75,
       "Name": "Aquatic",
       "Rarity": 2800,
-      "Tier": 4,
+      "Category": 2,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 76,
       "Name": "Poison",
       "Rarity": 3700,
-      "Tier": 4,
+      "Category": 2,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 77,
       "Name": "Shadow",
       "Rarity": 5000,
-      "Tier": 4,
+      "Category": 2,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 78,
       "Name": "Frozen",
       "Rarity": 7500,
-      "Tier": 4,
+      "Category": 2,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 79,
       "Name": "Electric",
       "Rarity": 9000,
-      "Tier": 4,
+      "Category": 2,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 80,
       "Name": "Desire",
       "Rarity": 10000,
-      "Tier": 3,
+      "Category": 3,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 81,
       "Name": "Gluttony",
       "Rarity": 25000,
-      "Tier": 3,
+      "Category": 3,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 82,
       "Name": "Greed",
       "Rarity": 37500,
-      "Tier": 3,
+      "Category": 3,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 83,
       "Name": "Sloth",
       "Rarity": 50000,
-      "Tier": 3,
+      "Category": 3,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 84,
       "Name": "Wrath",
       "Rarity": 65000,
-      "Tier": 3,
+      "Category": 3,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 85,
       "Name": "Envy",
       "Rarity": 87500,
-      "Tier": 3,
+      "Category": 3,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 86,
       "Name": "Insolence",
       "Rarity": 99000,
-      "Tier": 3,
+      "Category": 3,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 87,
       "Name": "Identity",
       "Rarity": 16000000,
-      "Tier": 1,
+      "Category": 6,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 88,
       "Name": "Betelgeuse",
       "Rarity": 25000000,
-      "Tier": 1,
+      "Category": 6,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 89,
       "Name": "Universe",
-      "Rarity": 2000000,
-      "Tier": 1,
+      "Rarity": 2400000,
+      "Category": 6,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 90,
       "Name": "Polaris",
       "Rarity": 85000,
-      "Tier": 3,
+      "Category": 3,
+      "Special": false,
       "SubText": ""
     },
     {
       "ID": 91,
       "Name": "Paranormal",
       "Rarity": 42000,
-      "Tier": 3,
+      "Category": 10,
+      "Special": true,
       "SubText": "HALLOWEEN EXCLUSIVE"
     },
     {
       "ID": 92,
       "Name": "Pumpkinator",
       "Rarity": 31000000,
-      "Tier": 1,
+      "Category": 10,
+      "Special": true,
       "SubText": "HALLOWEEN EXCLUSIVE"
     },
     {
       "ID": 93,
       "Name": "Cryptkeeper",
       "Rarity": 4000000,
-      "Tier": 1,
+      "Category": 10,
+      "Special": true,
       "SubText": "HALLOWEEN EXCLUSIVE"
     },
     {
       "ID": 94,
       "Name": "Bloodmoon",
       "Rarity": 7500000,
-      "Tier": 1,
+      "Category": 10,
+      "Special": true,
       "SubText": "HALLOWEEN EXCLUSIVE"
     },
     {
       "ID": 95,
       "Name": "Ascended",
       "Rarity": 0,
-      "Tier": 0,
+      "Category": 8,
+      "Special": true,
       "SubText": "EXCLUSIVE"
     },
     {
       "ID": 96,
       "Name": "Corruption",
       "Rarity": 0,
-      "Tier": 0,
+      "Category": 8,
+      "Special": true,
       "SubText": "EXCLUSIVE"
+    },
+    {
+      "ID": 97,
+      "Name": "Peppermint",
+      "Rarity": 35000,
+      "Category": 11,
+      "Special": true,
+      "SubText": "CHRISTMAS EXCLUSIVE"
+    },
+    {
+      "ID": 98,
+      "Name": "Festivity",
+      "Rarity": 125000,
+      "Category": 11,
+      "Special": true,
+      "SubText": "CHRISTMAS EXCLUSIVE"
+    },
+    {
+      "ID": 99,
+      "Name": "Winterbliss",
+      "Rarity": 850000,
+      "Category": 11,
+      "Special": true,
+      "SubText": "CHRISTMAS EXCLUSIVE"
+    },
+    {
+      "ID": 100,
+      "Name": "Tannenbaum",
+      "Rarity": 1500000,
+      "Category": 11,
+      "Special": true,
+      "SubText": "CHRISTMAS EXCLUSIVE"
+    },
+    {
+      "ID": 101,
+      "Name": "Yuletide",
+      "Rarity": 5000000,
+      "Category": 11,
+      "Special": true,
+      "SubText": "CHRISTMAS EXCLUSIVE"
     }
   ]
 }
