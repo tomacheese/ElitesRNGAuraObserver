@@ -91,4 +91,6 @@
 6. PR 本文の崩れがないことを確認する。
 
 ## リポジトリ固有
-- 目的: [English](README.md) | [日本語](README-ja.md)
+- 概要: When an aura is obtained in Elite's RNG Land, a notification will be sent to Windows Toast and Discord Webhook.
+- 公開 URL: https://tomachi.booth.pm/items/6996155
+- CI 定義: `.github/workflows/` を参照
