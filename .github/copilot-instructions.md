@@ -37,3 +37,4 @@
 ## ドキュメント更新
 
 ## リポジトリ固有
+- 目的: [English](README.md) | [日本語](README-ja.md)
