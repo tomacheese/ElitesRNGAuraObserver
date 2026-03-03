@@ -64,4 +64,9 @@ internal enum AuraCategory
     /// Christmasカテゴリ
     /// </summary>
     Christmas = 11,
+
+    /// <summary>
+    /// SoulShatteringカテゴリ
+    /// </summary>
+    SoulShattering = 12,
 }

@@ -1,5 +1,5 @@
 {
-  "Version": "2026.01.04",
+  "Version": "2026.03.03",
   "Auras": [
     {
       "ID": 0,
@@ -816,6 +816,38 @@
       "Category": 11,
       "Special": true,
       "SubText": "CHRISTMAS EXCLUSIVE"
+    },
+    {
+      "ID": 102,
+      "Name": "Supernova",
+      "Rarity": 100000000,
+      "Category": 12,
+      "Special": false,
+      "SubText": ""
+    },
+    {
+      "ID": 103,
+      "Name": "Sonnet",
+      "Rarity": 850000,
+      "Category": 9,
+      "Special": true,
+      "SubText": "VALENTINE’S EXCLUSIVE"
+    },
+    {
+      "ID": 104,
+      "Name": "Lovestruck",
+      "Rarity": 2200000,
+      "Category": 9,
+      "Special": true,
+      "SubText": "VALENTINE’S EXCLUSIVE"
+    },
+    {
+      "ID": 105,
+      "Name": "Wave",
+      "Rarity": 4100000,
+      "Category": 6,
+      "Special": false,
+      "SubText": ""
     }
   ]
 }
