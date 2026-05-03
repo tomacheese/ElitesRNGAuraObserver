@@ -18,12 +18,12 @@ internal class JsonData
     /// <summary>
     /// JSONのバージョン情報
     /// </summary>
-    private readonly string _version = string.Empty;
+    public string Version { get; init; } = string.Empty;
 
     /// <summary>
     /// Auraの一覧
     /// </summary>
-    private readonly Aura.Aura[] _auras = [];
+    public Aura.Aura[] Auras { get; init; } = [];
 
     /// <summary>
     /// JSONファイルの内容を取得する
@@ -66,7 +66,7 @@ internal class JsonData
         try
         {
             JsonData jsonData = GetJsonData();
-            return jsonData._version;
+            return jsonData.Version;
         }
         catch (Exception ex)
         {
@@ -83,7 +83,7 @@ internal class JsonData
     {
         try
         {
-            Aura.Aura[] auras = GetJsonData()._auras ?? [];
+            Aura.Aura[] auras = GetJsonData().Auras ?? [];
             return auras;
         }
         catch (Exception ex)
