@@ -69,4 +69,14 @@ internal enum AuraCategory
     /// SoulShatteringカテゴリ
     /// </summary>
     SoulShattering = 12,
+
+    /// <summary>
+    /// AprilFoolsカテゴリ
+    /// </summary>
+    AprilFools = 13,
+
+    /// <summary>
+    /// Collabカテゴリ
+    /// </summary>
+    Collab = 14,
 }
