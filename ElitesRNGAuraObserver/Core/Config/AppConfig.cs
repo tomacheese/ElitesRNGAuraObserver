@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace ElitesRNGAuraObserver.Core.Config;
 
@@ -14,6 +14,11 @@ internal class AppConfig
     private static ConfigData _instance = new();
     private static readonly Lock _lock = new();
     private static bool _isLoaded = false;
+    private static readonly JsonSerializerOptions _jsonOptions = new()
+    {
+        WriteIndented = true,
+        PropertyNameCaseInsensitive = true,
+    };
 
     /// <summary>
     /// 設定が再読み込みされたときに発生するイベント
@@ -113,7 +118,7 @@ internal class AppConfig
     /// <param name="config">コンフィグ情報</param>
     private static void Save(ConfigData config)
     {
-        var json = JsonConvert.SerializeObject(config, Formatting.Indented);
+        var json = JsonSerializer.Serialize(config, _jsonOptions);
         Directory.CreateDirectory(_configDir);
         File.WriteAllText(Path.Combine(_configDir, ConfigFileName), json);
     }
@@ -132,7 +137,7 @@ internal class AppConfig
         }
 
         var json = File.ReadAllText(configFilePath);
-        return JsonConvert.DeserializeObject<ConfigData>(json)
+        return JsonSerializer.Deserialize<ConfigData>(json, _jsonOptions)
                ?? new ConfigData();
     }
 }
