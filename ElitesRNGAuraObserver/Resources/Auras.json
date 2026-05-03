@@ -1,5 +1,5 @@
 {
-  "Version": "2026.03.03",
+  "Version": "2026.05.03",
   "Auras": [
     {
       "ID": 0,
@@ -308,9 +308,9 @@
     {
       "ID": 38,
       "Name": "Solstice",
-      "Rarity": 360000,
-      "Category": 4,
-      "Special": false,
+      "Rarity": 36000,
+      "Category": 14,
+      "Special": true,
       "SubText": ""
     },
     {
@@ -848,6 +848,30 @@
       "Category": 6,
       "Special": false,
       "SubText": ""
+    },
+    {
+      "ID": 106,
+      "Name": "Particle System",
+      "Rarity": 11000,
+      "Category": 13,
+      "Special": true,
+      "SubText": "APRIL FOOLS EXCLUSIVE"
+    },
+    {
+      "ID": 107,
+      "Name": "Missing(Material)",
+      "Rarity": 101010,
+      "Category": 13,
+      "Special": true,
+      "SubText": "APRIL FOOLS EXCLUSIVE"
+    },
+    {
+      "ID": 108,
+      "Name": "Recursion",
+      "Rarity": 1010101,
+      "Category": 13,
+      "Special": true,
+      "SubText": "APRIL FOOLS EXCLUSIVE"
     }
   ]
 }
