@@ -72,8 +72,8 @@ internal class AuraObserverController(ConfigData configData) : IDisposable
     {
         Console.WriteLine($"New Aura: {aura.Name} (#{aura.Id}) - {isFirstReading}");
 
-        // 初回読み込み、またはTier5のAuraは通知しない
-        if (isFirstReading || aura.Tier == 5)
+        // 初回読み込み、または通常カテゴリのAuraは通知しない
+        if (isFirstReading || aura.Category == AuraCategory.Ordinary)
         {
             return;
         }
