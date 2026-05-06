@@ -9,15 +9,13 @@ namespace ElitesRNGAuraObserver.Core.Config;
 /// <remarks>JSON形式でシリアライズされる</remarks>
 internal class ConfigData
 {
-    private string _discordWebhookUrl = string.Empty;
-
     /// <summary>
     /// DiscordのWebhook URL
     /// </summary>
     [JsonPropertyName("discordWebhookUrl")]
     public string DiscordWebhookUrl
     {
-        get => _discordWebhookUrl;
+        get;
         set
         {
             if (!string.IsNullOrEmpty(value) && !IsValidUrl(value))
@@ -25,9 +23,9 @@ internal class ConfigData
                 throw new ArgumentException("DiscordWebhookUrl must start with 'http://' or 'https://'.");
             }
 
-            _discordWebhookUrl = value;
+            field = value;
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// トースト通知の有効/無効
