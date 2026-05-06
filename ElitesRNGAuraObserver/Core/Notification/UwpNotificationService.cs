@@ -1,4 +1,4 @@
-using CommunityToolkit.WinUI.Notifications;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace ElitesRNGAuraObserver.Core.Notification;
 
