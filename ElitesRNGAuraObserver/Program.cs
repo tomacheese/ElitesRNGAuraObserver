@@ -6,7 +6,7 @@ using ElitesRNGAuraObserver.Core;
 using ElitesRNGAuraObserver.Core.Config;
 using ElitesRNGAuraObserver.Core.Updater;
 using ElitesRNGAuraObserver.UI.TrayIcon;
-using Microsoft.Toolkit.Uwp.Notifications;
+using CommunityToolkit.WinUI.Notifications;
 
 namespace ElitesRNGAuraObserver;
 
