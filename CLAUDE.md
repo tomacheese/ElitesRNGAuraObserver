@@ -19,7 +19,7 @@ Two projects in `ElitesRNGAuraObserver.sln`:
   - `Core/VRChat/AuthenticatedDetectionService.cs`, `Core/Aura/NewAuraDetectionService.cs` — parse log lines (regex) into events.
   - `Core/Notification/UwpNotificationService.cs`, `DiscordNotificationService.cs` — toast and webhook delivery.
   - `Core/Config/` — `AppConfig` (config.json load/save), `ConfigData`, `RegistryManager` (startup registration).
-  - `Core/Aura/` — `Aura` record, `AuraCategory` enum, `JsonData` loader. Aura catalog is `Resources/Auras.json` (embedded), overridable by a local `Auras.json`.
+  - `Core/Aura/` — `Aura` record, `AuraCategory` enum. `Core/Json/JsonData.cs` is the catalog loader. Aura catalog is `Resources/Auras.json` (embedded), overridable by a local `Auras.json`.
   - `Core/Updater/` — checks GitHub releases and launches the updater.
   - `UI/` — `SettingsForm`, `TrayIcon`, custom controls.
 - `ElitesRNGAuraObserver.Updater/` — standalone self-contained (`win-x64`) console updater. Downloads the latest GitHub release asset, verifies its checksum digest, kills the running app, extracts, and relaunches.
