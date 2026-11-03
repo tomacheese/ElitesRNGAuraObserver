@@ -4,9 +4,9 @@ using ElitesRNGAuraObserver.Core.Config;
 namespace ElitesRNGAuraObserver.Core.VRChat;
 
 /// <summary>
-/// Watches the newest VRChat log file in the configured log directory
+/// VRChatのログディレクトリ内の最新のログファイルを監視するクラス
 /// </summary>
-/// <param name="logFileFilter">File name filter for the log files to watch (e.g. <c>output_log_*.txt</c>)</param>
+/// <param name="logFileFilter">監視するログファイルのファイル名フィルタ (例: <c>output_log_*.txt</c>)</param>
 internal class LogWatcher(string logFileFilter) : IDisposable
 {
     /// <summary>

@@ -47,7 +47,7 @@ internal class SemanticVersion(int major, int minor, int patch) : IComparable<Se
     /// セマンティックバージョンを比較する
     /// </summary>
     /// <param name="other">比較対象</param>
-    /// <returns>比較結果 (0: equal, negative: less than, positive: greater than)</returns>
+    /// <returns>比較結果 (0: 等しい, 負: 小さい, 正: 大きい)</returns>
     public int CompareTo(SemanticVersion? other)
     {
         return other is null
@@ -62,7 +62,7 @@ internal class SemanticVersion(int major, int minor, int patch) : IComparable<Se
     /// </summary>
     /// <param name="a">比較対象1</param>
     /// <param name="b">比較対象2</param>
-    /// <returns>比較結果 (true: a is greater than b)</returns>
+    /// <returns>比較結果 (true: a が b より大きい)</returns>
     public static bool operator >(SemanticVersion a, SemanticVersion b)
         => a.CompareTo(b) > 0;
 
@@ -71,7 +71,7 @@ internal class SemanticVersion(int major, int minor, int patch) : IComparable<Se
     /// </summary>
     /// <param name="a">比較対象1</param>
     /// <param name="b">比較対象2</param>
-    /// <returns>比較結果 (true: a is less than b)</returns>
+    /// <returns>比較結果 (true: a が b より小さい)</returns>
     public static bool operator <(SemanticVersion a, SemanticVersion b)
         => a.CompareTo(b) < 0;
 

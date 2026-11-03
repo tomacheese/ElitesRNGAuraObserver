@@ -31,7 +31,7 @@ internal class RegistryManager
     }
 
     /// <summary>
-    /// Updates the startup registry value to the current executable path if it is already registered with a different path. Does nothing when the value does not exist.
+    /// スタートアップのレジストリ値が別のパスで登録済みの場合、現在の実行ファイルのパスに更新します。値が存在しない場合は何もしません。
     /// </summary>
     public static void EnsureStartupRegistration()
     {
@@ -43,7 +43,7 @@ internal class RegistryManager
 
         if (value.ToString() != currentExePath)
         {
-            // Registered with a different path: re-register with the current path
+            // パスが違う → 現在のパスで再登録
             key.SetValue(AppConstants.AssemblyName, currentExePath);
         }
     }

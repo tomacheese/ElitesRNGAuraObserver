@@ -43,7 +43,7 @@ internal class ConfigData
     public string LogDir { get; set; } = AppConstants.VRChatLogDirectory;
 
     /// <summary>
-    /// Directory that may contain a local Auras.json overriding the embedded catalog
+    /// ローカルの Auras.json を置くディレクトリのパス。埋め込みのカタログを上書きする
     /// </summary>
     [JsonPropertyName("aurasJsonDir")]
     public string AurasJsonDir { get; set; } = AppConstants.ApplicationConfigDirectory;
