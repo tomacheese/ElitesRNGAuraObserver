@@ -2,7 +2,7 @@
 
 ## Overview
 
-Elite's RNG Aura Observer is a Windows desktop app (C# / WinForms, .NET 9) that
+Elite's RNG Aura Observer is a Windows desktop app (C# / WinForms, .NET 10) that
 watches VRChat log files and, when the player obtains an Aura in the VRChat world
 "Elite's RNG Land", sends a Windows toast notification and a Discord webhook
 message. It runs in the background from the task tray and ships with a separate
@@ -31,7 +31,7 @@ Two projects in `ElitesRNGAuraObserver.sln`:
 - `dotnet publish ElitesRNGAuraObserver.sln -p:PublishProfile=Publish` — publish single-file output to `bin/Publish/`.
 - `dotnet format ElitesRNGAuraObserver.sln --verify-no-changes --severity warn` — style check. CI runs this exact command and fails on any diff; run it before committing.
 
-Build/publish must run on Windows (`net9.0-windows10.0.17763.0`, WinForms).
+Build/publish must run on Windows (`net10.0-windows10.0.17763.0`, WinForms).
 
 ## Testing
 

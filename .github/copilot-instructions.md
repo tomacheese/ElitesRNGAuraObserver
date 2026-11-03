@@ -1,6 +1,6 @@
 # Copilot code review instructions
 
-Elite's RNG Aura Observer is a Windows-only C# / WinForms desktop app (.NET 9)
+Elite's RNG Aura Observer is a Windows-only C# / WinForms desktop app (.NET 10)
 that tails VRChat logs and sends toast + Discord webhook notifications when an
 Aura is obtained. A separate `ElitesRNGAuraObserver.Updater` project self-updates
 from GitHub releases. There is no automated test project.
