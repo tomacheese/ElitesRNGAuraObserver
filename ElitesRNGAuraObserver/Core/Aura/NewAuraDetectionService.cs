@@ -10,7 +10,7 @@ namespace ElitesRNGAuraObserver.Core.Aura;
 internal partial class NewAuraDetectionService
 {
     /// <summary>
-    /// Raised when an obtained Aura is detected. Arguments: the Aura, and whether the line comes from the initial read of the log file
+    /// Raised when an obtained Aura is detected. Arguments: the Aura, and whether the line was read while catching up from the start of the log file (first reading)
     /// </summary>
     public event Action<Aura, bool> OnDetected = (aura, isFirstReading) => { };
 
