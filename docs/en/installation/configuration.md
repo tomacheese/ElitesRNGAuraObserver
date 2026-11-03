@@ -24,7 +24,7 @@ Clicking the `Send test message` button will send the following message to the c
 
 ## Enable Windows Toast Notification
 
-When the `Enable Toast Notification` checkbox in `Application Settings` is checked, Windows will display a toast notification upon acquiring Aura.
+When the `Enable Toast notification` checkbox in `Application Settings` is checked, Windows will display a toast notification upon acquiring Aura.
 
 The Windows toast notification will be displayed as shown below:
 

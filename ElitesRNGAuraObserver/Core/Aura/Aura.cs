@@ -89,7 +89,7 @@ internal record Aura
     /// オーラの名前を取得する
     /// </summary>
     /// <remarks>
-    /// subTextがnullの場合、Nameをそのまま返す。
+    /// subTextがnullまたは空の場合、Nameをそのまま返す。
     /// subTextが存在する場合、NameとsubTextを括弧で囲んで結合する。
     /// </remarks>
     /// <example>

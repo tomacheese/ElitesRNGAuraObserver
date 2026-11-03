@@ -31,9 +31,8 @@ internal class RegistryManager
     }
 
     /// <summary>
-    /// アプリケーションがWindowsのスタートアップに登録されているかどうかを確認し、必要に応じて登録します。
+    /// Updates the startup registry value to the current executable path if it is already registered with a different path. Does nothing when the value does not exist.
     /// </summary>
-    /// <param name="enableStartup">設定の有効/無効</param>
     public static void EnsureStartupRegistration()
     {
         using RegistryKey? key = Registry.CurrentUser.OpenSubKey(StartupKeyPath, true);
@@ -44,7 +43,7 @@ internal class RegistryManager
 
         if (value.ToString() != currentExePath)
         {
-            // 値が存在しない or パスが違う → 再登録
+            // Registered with a different path: re-register with the current path
             key.SetValue(AppConstants.AssemblyName, currentExePath);
         }
     }

@@ -8,10 +8,8 @@ namespace ElitesRNGAuraObserver.Core.VRChat;
 internal partial class AuthenticatedDetectionService
 {
     /// <summary>
-    /// 新しいユーザーログインを検出したときに発生するイベント
+    /// Raised when a user login is detected. Arguments: the logged-in VRChat user, and whether the line comes from the initial read of the log file
     /// </summary>
-    /// <param name="vrchatUser">ログインしているVRChatユーザーの情報</param>
-    /// <param name="isFirstReading">初回読み込みかどうか</param>
     public event Action<VRChatUser, bool> OnDetected = (vrchatUser, isFirstReading) => { };
 
     /// <summary>

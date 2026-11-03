@@ -10,16 +10,14 @@ namespace ElitesRNGAuraObserver.Core.Aura;
 internal partial class NewAuraDetectionService
 {
     /// <summary>
-    /// 取得された Aura を検出したときに発生するイベント
+    /// Raised when an obtained Aura is detected. Arguments: the Aura, and whether the line comes from the initial read of the log file
     /// </summary>
-    /// <param name="aura">取得したAura</param>
-    /// <param name="isFirstReading">初回読み込みかどうか</param>
     public event Action<Aura, bool> OnDetected = (aura, isFirstReading) => { };
 
     /// <summary>
     /// Aura取得時のログパターン
     /// </summary>
-    /// <example>2025.04.16 18:07:07 Debug      -  [<color=green>Elite's RNG Land</color>] Successfully legitimized Aura #60.</example>
+    /// <example>2025.04.16 18:07:07 Debug      -  [&lt;color=#00EEFF&gt;Elite's RNG Land&lt;/color&gt;] [&lt;color=grey&gt;LOG&lt;/color&gt;] Successfully legitimized Aura #60.</example>
     [GeneratedRegex(@"(?<datetime>[0-9]{4}\.[0-9]{2}.[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}) (?<Level>.[A-z]+) *- *\[<color=#00EEFF>Elite's RNG Land</color>] \[<color=grey>LOG</color>] Successfully legitimized Aura #(?<AuraId>[0-9]+)\.")]
     private static partial Regex AuraLogRegex();
 
