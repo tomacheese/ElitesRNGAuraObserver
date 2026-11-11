@@ -9,7 +9,9 @@ namespace ElitesRNGAuraObserver.Core.Config;
 /// <remarks>JSON形式でシリアライズされる</remarks>
 internal class ConfigData
 {
+#pragma warning disable IDE0032
     private string _discordWebhookUrl = string.Empty;
+#pragma warning restore IDE0032
 
     /// <summary>
     /// DiscordのWebhook URL
